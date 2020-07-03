@@ -6,7 +6,7 @@ import { types } from "../store/reducer";
 export function fetchProductList() {
   return function (dispatch: any, getState: any) {
     const state: any = getState();
-    const apiToken: any = state.apiToken.token;
+    const apiToken: any = state.apiToken;
     return axios
       .get(`${envs.API_URL}/product`, {
         headers: {
@@ -32,7 +32,7 @@ export function fetchProductList() {
 export function fetchProduct(productID: string) {
   return function (dispatch: any, getState: any) {
     const state: any = getState();
-    const apiToken: any = state.apiToken.token;
+    const apiToken: any = state.apiToken;
     return axios
       .get(`${envs.API_URL}/product/${productID}`, {
         headers: {
@@ -58,7 +58,7 @@ export function fetchProduct(productID: string) {
 export function createUser(formData: { username: string; password: string }) {
   return function (dispatch: any, getState: any) {
     const state: any = getState();
-    const apiToken: any = state.apiToken.token;
+    const apiToken: any = state.apiToken;
     return axios
       .post(`${envs.API_URL}/users/add`, formData, {
         headers: {

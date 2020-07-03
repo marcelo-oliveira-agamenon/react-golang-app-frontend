@@ -65,6 +65,7 @@ export const ContainerButton = styles.div`
     flex-direction: row;
     margin-top: 80px;
     justify-content: center;
+    margin-left: 28px;
 `;
 
 export const ContainerInput = styles.div`
@@ -73,7 +74,7 @@ export const ContainerInput = styles.div`
     display: inline-block;
 `;
 
-export const Button = styles.button`
+export const ButtonAvatar = styles.button`
     font-family: Montserrat, sans-serif;
     padding: 7px 15px;
     margin-right: 35px;
@@ -86,10 +87,29 @@ export const Button = styles.button`
     cursor: pointer;
 `;
 
+export const ButtonConfirm = styles.button`
+    font-family: Montserrat, sans-serif;
+    width: 230px;
+    padding: 10px 0px;
+    margin-right: 90px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #35C14F;
+    border: none;
+    color: #fff;
+    letter-spacing: 1px;
+    box-shadow: 1px 1px 5px 1px #A0A0A0, -1px -1px 5px 1px #A0A0A0;
+    outline: none;
+    cursor: pointer;
+`;
+
 export const ButtonCancel = styles.button`
     font-family: Montserrat, sans-serif;
-    padding: 7px 15px;
+    width: 230px;
+    padding: 10px 0px;
     margin-right: 35px;
+    text-transform: uppercase;
+    font-weight: bold;
     background-color: #DC181E;
     border: none;
     color: #fff;

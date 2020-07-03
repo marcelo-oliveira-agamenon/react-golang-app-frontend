@@ -41,7 +41,7 @@ function rootReducer(
   }
   if (action.type === types.API_TOKEN) {
     return Object.assign({}, state, {
-      apiToken: action.payload,
+      apiToken: action.payload.Token,
     });
   }
   if (action.type === types.ERROR) {

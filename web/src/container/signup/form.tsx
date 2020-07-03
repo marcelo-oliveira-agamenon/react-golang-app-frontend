@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { fetchUsernameList, signup } from "../../ducks/auth";
 import {
   ContainerInput,
-  Button,
+  ButtonAvatar,
+  ButtonConfirm,
   InputFile,
   ImageAvatar,
   PrimaryContainer,
@@ -38,12 +39,12 @@ export interface props {
 }
 
 function SignUp(props: props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [error, setError] = useState("");
-  const [userExist, setUserExist] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [fullName, setFullName] = useState<string>("");
+  const [avatar, setAvatar] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [userExist, setUserExist] = useState<string>("");
   const history = useHistory();
 
   useEffect(() => {
@@ -110,9 +111,9 @@ function SignUp(props: props) {
 
   const handleChangeUsername = (username: string) => {
     const { usernameList } = props;
-    let isEqual = 0;
-    usernameList.map((user: any) => {
-      if (user.username === username) {
+    let isEqual: number = 0;
+    usernameList.map((name: string) => {
+      if (name === username) {
         isEqual++;
       }
       return null;
@@ -145,7 +146,7 @@ function SignUp(props: props) {
               value={avatar}
               onChange={(event) => setAvatar(event.target.value)}
             />
-            <Button>Adicionar Avatar</Button>
+            <ButtonAvatar>Adicionar Avatar</ButtonAvatar>
             {avatar !== "" ? <ImageAvatar src={avatar} /> : null}
           </ContainerInput>
           <UContainer>
@@ -173,7 +174,9 @@ function SignUp(props: props) {
             />
           </UContainer>
           <ContainerButton>
-            <Button onClick={() => handleSubmit()}>Cadastrar</Button>
+            <ButtonConfirm onClick={() => handleSubmit()}>
+              Cadastrar
+            </ButtonConfirm>
             <ButtonCancel onClick={() => history.push("/")}>
               Cancelar
             </ButtonCancel>

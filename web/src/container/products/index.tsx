@@ -1,7 +1,7 @@
 import React from "react";
 import { MainContainer } from "./styles";
 
-export function Product() {
+function Product() {
   return (
     <>
       <MainContainer>

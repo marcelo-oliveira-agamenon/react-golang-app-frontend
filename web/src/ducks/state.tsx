@@ -4,9 +4,7 @@ const initialState = {
   usernameList: [],
   productList: [],
   user: {},
-  apiToken: {
-    token: "",
-  },
+  apiToken: "",
   error: "",
 };
 
