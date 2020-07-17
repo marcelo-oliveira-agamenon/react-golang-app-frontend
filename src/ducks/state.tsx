@@ -4,10 +4,8 @@ const initialState = {
   loggedUser: {},
   expenseList: [],
   savingsList: {},
-  apiToken: {
-    token: ""
-  },
-  error: ""
+  apiToken: null,
+  error: null,
 };
 
 export default initialState;

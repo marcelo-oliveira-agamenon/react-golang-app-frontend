@@ -20,7 +20,7 @@ export type User = {
 //fetch a list of users from API
 export function fetchUserList() {
   const state: any = store.getState();
-  const apiToken: any = state.apiToken.token;
+  const apiToken: any = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return axios
       .get(`${envs.API_URL}/users`, {
@@ -46,7 +46,7 @@ export function fetchUserList() {
 //fetch a user from the database from the API
 export function fetchUser(userID: string) {
   const state: any = store.getState();
-  const apiToken: any = state.apiToken.token;
+  const apiToken: any = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return axios
       .get(`${envs.API_URL}/users/${userID}`, {
@@ -72,7 +72,7 @@ export function fetchUser(userID: string) {
 //add new user in the database from the API
 export function addUser(username: string, password: string) {
   const state: any = store.getState();
-  const apiToken: any = state.apiToken.token;
+  const apiToken: any = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return axios
       .post(
@@ -102,7 +102,7 @@ export function addUser(username: string, password: string) {
 //delete a user in the database from the API
 export function deleteUser(idUser: string) {
   const state: any = store.getState();
-  const apiToken: any = state.apiToken.token;
+  const apiToken: any = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return axios
       .delete(`${envs.API_URL}/users/delete/${idUser}`, {
@@ -128,7 +128,7 @@ export function deleteUser(idUser: string) {
 //update a user in the database from the API
 export function updateUser(idUser: string, username: string, password: string) {
   const state: any = store.getState();
-  const apiToken: any = state.apiToken.token;
+  const apiToken: any = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return axios
       .put(

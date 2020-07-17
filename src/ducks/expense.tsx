@@ -16,7 +16,7 @@ export type Expense = {
 //get a list of expenses per user from the API
 export function fetchExpenses(userID: string) {
   const state: any = store.getState();
-  const apiToken: any = state.apiToken.token;
+  const apiToken: any = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return axios
       .get(`${envs.API_URL}/expenses/${userID}`, {
@@ -50,7 +50,7 @@ export function addExpense(
   }
 ) {
   const state: any = store.getState();
-  const apiToken: any = state.apiToken.token;
+  const apiToken: any = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return axios
       .post(
@@ -80,7 +80,7 @@ export function addExpense(
 //delete a expense from the API
 export function deleteExpense(expenseID: string) {
   const state: any = store.getState();
-  const apiToken: any = state.apiToken.token;
+  const apiToken: any = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return axios
       .delete(`${envs.API_URL}/expenses/delete/${expenseID}`, {
@@ -114,7 +114,7 @@ export function updateExpense(
   }
 ) {
   const state: any = store.getState();
-  const apiToken: any = state.apiToken.token;
+  const apiToken: any = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return axios
       .put(

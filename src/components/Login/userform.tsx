@@ -15,7 +15,7 @@ const mapStateToProps = (state: {
 }) => {
   return {
     apiToken: state.apiToken,
-    error: state.error
+    error: state.error,
   };
 };
 
@@ -38,7 +38,7 @@ function Userform(props: props) {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    props.login(username, password).then(response => {
+    props.login(username, password).then((response) => {
       if (response !== undefined) {
         history.push("/dashboard");
       } else {
@@ -56,7 +56,7 @@ function Userform(props: props) {
         width: "18vw",
         height: "",
         padding: "2.2rem 2.5rem",
-        borderRadius: "30px"
+        borderRadius: "30px",
       }}
     >
       <form
@@ -67,7 +67,7 @@ function Userform(props: props) {
           style={{
             marginBottom: "2vh",
             fontFamily: "Roboto, sans-serif",
-            fontSize: "1.3vw"
+            fontSize: "1.3vw",
           }}
         >
           Username
@@ -75,13 +75,13 @@ function Userform(props: props) {
         <input
           type="text"
           value={username}
-          onChange={event => setUsername(event.target.value)}
+          onChange={(event) => setUsername(event.target.value)}
           style={{
             padding: "0.3rem",
             borderRadius: "3px",
             outline: "none",
             borderColor: "#707070",
-            borderWidth: "1.15px"
+            borderWidth: "1.15px",
           }}
           placeholder="Insert your username"
         />
@@ -90,7 +90,7 @@ function Userform(props: props) {
             marginBottom: "2vh",
             fontFamily: "Open Sans, sans-serif",
             fontSize: "1.3vw",
-            marginTop: "2vh"
+            marginTop: "2vh",
           }}
         >
           Password
@@ -98,13 +98,13 @@ function Userform(props: props) {
         <input
           type="password"
           value={password}
-          onChange={event => setPassword(event.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
           style={{
             padding: "0.3rem",
             borderRadius: "5px",
             outline: "none",
             borderWidth: "1.15px",
-            borderColor: "#707070"
+            borderColor: "#707070",
           }}
           placeholder="Insert your password"
         />
@@ -125,12 +125,13 @@ function Userform(props: props) {
             letterSpacing: "2px",
             fontWeight: "lighter",
             outline: "none",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         >
           Login
         </button>
       </form>
+      {console.log("a", props)}
       {props.apiToken.token === "" ? (
         <h3
           style={{
@@ -139,10 +140,10 @@ function Userform(props: props) {
             color: "#EA292D",
             fontSize: "1vw",
             margin: 0,
-            padding: 0
+            padding: 0,
           }}
         >
-          {props.error.data?.error}
+          {props.error?.data.error}
         </h3>
       ) : null}
     </div>
@@ -151,5 +152,5 @@ function Userform(props: props) {
 
 export default connect(mapStateToProps, (dispatch: any) => ({
   login: (username: string, password: string) =>
-    dispatch(login(username, password))
+    dispatch(login(username, password)),
 }))(Userform);
