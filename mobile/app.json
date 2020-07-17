@@ -1,0 +1,17 @@
+{
+  "name": "sitegolang",
+  "displayName": "sitegolang",
+  "expo": {
+    "name": "sitegolang",
+    "slug": "sitegolang",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
