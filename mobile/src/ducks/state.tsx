@@ -1,5 +1,7 @@
 const InitialState = {
-  user: "",
+  token: "",
+  loggedUser: {},
+  error: null,
 };
 
 export default InitialState;
