@@ -1,5 +1,6 @@
 const InitialState = {
   token: "",
+  userList: [],
   loggedUser: {},
   error: null,
 };

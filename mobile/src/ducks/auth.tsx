@@ -23,3 +23,32 @@ export function login(username: string, password: string) {
       });
   };
 }
+
+export function signIn(
+  username: string,
+  password: string,
+  fullname: string,
+  avatar: string
+) {
+  return function (dispatch: any) {
+    axios
+      .post(`${envs.API_URL}/signup`, {
+        username: username,
+        password: password,
+        fullname: fullname,
+        avatar: avatar,
+      })
+      .then((response) => {
+        if (response.data) {
+          return Promise.resolve(true);
+        }
+      })
+      .catch((error) => {
+        dispatch({
+          type: Types.ERROR,
+          payload: error,
+        });
+        return Promise.resolve();
+      });
+  };
+}
