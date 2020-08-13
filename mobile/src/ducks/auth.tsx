@@ -1,5 +1,5 @@
 import axios from "axios";
-import envs from "../config";
+import envs from "../config/index";
 import { Types } from "../store/reducer";
 
 export function login(username: string, password: string) {
@@ -14,11 +14,16 @@ export function login(username: string, password: string) {
           type: Types.TOKEN,
           payload: response.data.Token,
         });
+        dispatch({
+          type: Types.LOGGEDUSER,
+          payload: response.data.Data,
+        });
+        return Promise.resolve(true);
       })
       .catch((error) => {
         dispatch({
           type: Types.ERROR,
-          payload: error,
+          payload: error.response.data.ErrorMsg,
         });
       });
   };

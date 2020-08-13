@@ -6,15 +6,26 @@ import {
   TextInput,
   TouchableOpacity,
   Text,
+  ActivityIndicator,
 } from "react-native";
+import { login } from "../../ducks/auth";
+import { connect } from "react-redux";
 import LogoI from "../../assets/images/logo.png";
 
-function Login() {
+export interface props {
+  login: (username: string, password: string) => any;
+}
+
+function Login(props: props) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = () => {
-    console.log("hjbjhb");
+    setLoading(true);
+    props.login(email, password).then(() => {
+      setLoading(false);
+    });
   };
 
   return (
@@ -38,6 +49,7 @@ function Login() {
           placeholder="PASSWORD"
         />
       </View>
+      {loading ? <ActivityIndicator /> : null}
       <View style={styles.containerButton}>
         <TouchableOpacity style={styles.buttonLogin} onPress={handleSubmit}>
           <Text style={styles.textLogin}>Login</Text>
@@ -119,4 +131,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default connect(null, (dispatch: any) => ({
+  login: (username: string, password: string) =>
+    dispatch(login(username, password)),
+}))(Login);

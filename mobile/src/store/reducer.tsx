@@ -10,7 +10,7 @@ export const Types = {
 function rootReducer(
   state = InitialState,
   action: {
-    type: String;
+    type: string;
     payload: any;
   }
 ) {
