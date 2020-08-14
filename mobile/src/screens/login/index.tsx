@@ -11,9 +11,11 @@ import {
 import { login } from "../../ducks/auth";
 import { connect } from "react-redux";
 import LogoI from "../../assets/images/logo.png";
+import { normalize } from "../../util/index";
 
 export interface props {
-  login: (username: string, password: string) => any;
+  login: (username: string, password: string) => Promise<boolean>;
+  navigation: any;
 }
 
 function Login(props: props) {
@@ -23,13 +25,11 @@ function Login(props: props) {
 
   const handleSubmit = () => {
     setLoading(true);
-    props.login(email, password).then(() => {
-      setLoading(false);
-    });
+    props.login(email, password);
   };
 
   return (
-    <View>
+    <View style={styles.main}>
       <View style={styles.container}>
         <Image source={LogoI} style={styles.image} />
       </View>
@@ -56,62 +56,69 @@ function Login(props: props) {
         </TouchableOpacity>
       </View>
       <View style={styles.containerText}>
-        <Text style={styles.textSignUp}>
-          Don't have a account? <Text style={styles.textMarked}>Sign Up</Text>
-        </Text>
+        <Text style={styles.textSignUp}>Don't have a account?</Text>
+        <TouchableOpacity onPress={() => props.navigation.navigate("Signup")}>
+          <Text style={styles.textMarked}>Sign Up</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  main: {
+    display: "flex",
+    flex: 1,
+    backgroundColor: "#ffffff",
+  },
   container: {
     display: "flex",
     alignSelf: "center",
-    marginTop: -80,
+    marginTop: normalize(-70),
   },
   containerInput: {
     display: "flex",
-    paddingHorizontal: 35,
-    marginTop: -20,
+    paddingHorizontal: normalize(30),
+    marginTop: normalize(-60),
   },
   containerButton: {
     display: "flex",
-    paddingHorizontal: 35,
-    marginTop: 120,
+    paddingHorizontal: normalize(30),
+    marginTop: normalize(70),
   },
   containerText: {
     display: "flex",
     alignSelf: "center",
-    marginTop: 70,
+    flexDirection: "row",
+    marginTop: normalize(20),
   },
   image: {
-    width: 420,
-    height: 420,
+    width: normalize(350),
+    height: normalize(350),
   },
   emailInput: {
     backgroundColor: "#EFEFEF",
-    paddingHorizontal: 28,
-    paddingVertical: 15,
-    marginBottom: 20,
+    paddingHorizontal: normalize(25),
+    paddingVertical: normalize(14),
+    marginBottom: normalize(17),
     borderRadius: 6,
   },
   passwordInput: {
     backgroundColor: "#EFEFEF",
-    paddingHorizontal: 28,
-    paddingVertical: 15,
+    paddingHorizontal: normalize(25),
+    paddingVertical: normalize(14),
     borderRadius: 6,
   },
   buttonLogin: {
     backgroundColor: "rgb(89,136,255)",
     justifyContent: "center",
-    marginBottom: 20,
-    height: 60,
+    marginBottom: normalize(17),
+    height: normalize(48),
     borderRadius: 5,
   },
   textLogin: {
     fontFamily: "Ubuntu-Regular",
-    fontSize: 18,
+    fontSize: normalize(16),
     textAlign: "center",
     color: "#fff",
     fontWeight: "700",
@@ -119,13 +126,15 @@ const styles = StyleSheet.create({
   },
   textSignUp: {
     fontFamily: "Ubuntu-Regular",
-    fontSize: 18,
+    fontSize: normalize(15),
     letterSpacing: 1,
     color: "#000",
+    marginRight: normalize(8),
   },
   textMarked: {
     color: "#312F92",
     letterSpacing: 0,
+    fontSize: normalize(15),
     fontWeight: "700",
     textDecorationLine: "underline",
   },

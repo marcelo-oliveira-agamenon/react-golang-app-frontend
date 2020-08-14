@@ -7,6 +7,7 @@ INJECTED from D:\Projetos\siteGolang\frontend\mobile\android\app\src\main\Androi
 MERGED from D:\Projetos\siteGolang\frontend\mobile\android\app\src\main\AndroidManifest.xml:1:1-48:12
 MERGED from [:unimodules-react-native-adapter] D:\Projetos\siteGolang\frontend\mobile\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:expo-updates] D:\Projetos\siteGolang\frontend\mobile\node_modules\expo-updates\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-13:12
+MERGED from [:react-native-community_masked-view] D:\Projetos\siteGolang\frontend\mobile\node_modules\@react-native-community\masked-view\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-gesture-handler] D:\Projetos\siteGolang\frontend\mobile\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-reanimated] D:\Projetos\siteGolang\frontend\mobile\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-safe-area-context] D:\Projetos\siteGolang\frontend\mobile\node_modules\react-native-safe-area-context\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
@@ -313,6 +314,8 @@ MERGED from [:unimodules-react-native-adapter] D:\Projetos\siteGolang\frontend\m
 MERGED from [:unimodules-react-native-adapter] D:\Projetos\siteGolang\frontend\mobile\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:expo-updates] D:\Projetos\siteGolang\frontend\mobile\node_modules\expo-updates\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:expo-updates] D:\Projetos\siteGolang\frontend\mobile\node_modules\expo-updates\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-community_masked-view] D:\Projetos\siteGolang\frontend\mobile\node_modules\@react-native-community\masked-view\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-community_masked-view] D:\Projetos\siteGolang\frontend\mobile\node_modules\@react-native-community\masked-view\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-gesture-handler] D:\Projetos\siteGolang\frontend\mobile\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] D:\Projetos\siteGolang\frontend\mobile\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-reanimated] D:\Projetos\siteGolang\frontend\mobile\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
