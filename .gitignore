@@ -1,7 +1,16 @@
+.*
+!/.gitignore
+
 # dependencies
 /web/node_modules
 
+#android
 /mobile/node_modules
-/mobile/.idea
-/mobile/.gradle
+/mobile/android/.idea
+/mobile/android/.gradle
+/mobile/android/app/build
 /mobile/local.properties
+/mobile/build
+/mobile/yarn.lock
+mobile/android/.gradle
+mobile/android/app/build

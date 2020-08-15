@@ -18,7 +18,6 @@ export function login(username: string, password: string) {
           type: Types.LOGGEDUSER,
           payload: response.data.Data,
         });
-        console.log(response.data);
         return Promise.resolve(true);
       })
       .catch((error) => {

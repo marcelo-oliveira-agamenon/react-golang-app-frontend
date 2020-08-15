@@ -1,0 +1,73 @@
+import React, { useState, useRef } from "react";
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { RNCamera } from "react-native-camera";
+import Permissions from "react-native-permissions";
+import Icon from "react-native-vector-icons/AntDesign";
+
+interface props {
+  handleChange: (uri: string) => void;
+}
+
+const camera: React.FC = (props: props) => {
+  let camRef = useRef(null);
+  let [_, setPermission] = useState<string>("undetermined");
+
+  const handlePermission = () => {
+    Permissions.check("android.permission.CAMERA").then((resp) => {
+      setPermission(resp);
+    });
+  };
+
+  const takePicture = async function (camera: any, close?: boolean) {
+    if (close && close === true) {
+      props.handleChange("");
+    } else {
+      const options = { quality: 0.5, base64: true };
+      const data = await camera.takePictureAsync(options);
+      props.handleChange(data.uri);
+    }
+  };
+
+  return (
+    <TouchableOpacity onPress={() => handlePermission()}>
+      <RNCamera
+        ref={camRef}
+        type={RNCamera.Constants.Type.front}
+        captureAudio={false}
+        autoFocus={RNCamera.Constants.AutoFocus.on}
+        flashMode={RNCamera.Constants.FlashMode.auto}
+        style={styles.camera}
+      >
+        {({ camera }) => {
+          return (
+            <>
+              <View style={styles.container}>
+                <TouchableOpacity onPress={() => takePicture(camera, false)}>
+                  <Icon name="camera" size={30} color="#000" />
+                </TouchableOpacity>
+              </View>
+              <View>
+                <TouchableOpacity onPress={() => takePicture(camera, true)}>
+                  <Icon name="close" size={30} color="#000" />
+                </TouchableOpacity>
+              </View>
+            </>
+          );
+        }}
+      </RNCamera>
+    </TouchableOpacity>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 0,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  camera: {
+    height: 500,
+  },
+});
+
+export default camera;

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   View,
-  StyleSheet,
   Image,
   TextInput,
   TouchableOpacity,
@@ -10,11 +9,14 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { signIn } from "../../ducks/auth";
+import Camera from "../../components/camera/index";
+import { styles } from "./styles";
 import LogoI from "../../assets/images/logo.png";
-import { normalize } from "../../util/index";
+import AvatarPlaceholder from "../../assets/images/avatar.png";
+import { StackNavigationProp } from "@react-navigation/stack";
 
-export interface props {
-  navigation: any;
+interface props {
+  navigation: StackNavigationProp<any, string>;
   signIn: (
     username: string,
     password: string,
@@ -24,36 +26,93 @@ export interface props {
 }
 
 function SignIn(props: props) {
-  const [email, setEmail] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  let [email, setEmail] = useState<string>("");
+  let [name, setName] = useState<string>("");
+  let [password, setPassword] = useState<string>("");
+  let [avatar, setAvatar] = useState<string>("");
+  let [loading, setLoading] = useState<boolean>(false);
+  let [cameraOpen, setCameraOpen] = useState<boolean>(false);
+
+  let emailRef: string, passwordRef: string, nameRef: string;
+
+  const handleCamera = (uri: string) => {
+    setAvatar(uri);
+    setCameraOpen(false);
+  };
 
   const handleSubmit = () => {
     setLoading(true);
-    props.signIn(email, password, name, "");
+    props.signIn(email, password, name, avatar);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   };
 
-  return (
+  const onFocus = (type: string) => {
+    let obj: any =
+      type === "email" ? emailRef : type === "password" ? passwordRef : nameRef;
+    obj.setNativeProps({
+      style: styles.onFocusStyle,
+    });
+  };
+
+  const onBlur = (type: string) => {
+    let obj: any =
+      type === "email" ? emailRef : type === "password" ? passwordRef : nameRef;
+    obj.setNativeProps({
+      style: styles.onBlurStyle,
+    });
+  };
+
+  return cameraOpen ? (
+    <View styles={styles.containerCamera}>
+      <Camera handleChange={handleCamera} />
+    </View>
+  ) : (
     <View style={styles.main}>
       <View style={styles.container}>
         <Image source={LogoI} style={styles.image} />
+        <TouchableOpacity
+          onPress={() => setCameraOpen((setCameraOpen) => !setCameraOpen)}
+        >
+          <Text>open camera</Text>
+        </TouchableOpacity>
       </View>
-      <View></View>
+      <View style={styles.containerAvatar}>
+        <Image
+          style={styles.imageAvatar}
+          source={
+            avatar === ""
+              ? AvatarPlaceholder
+              : {
+                  uri: avatar,
+                }
+          }
+        />
+      </View>
       <View style={styles.containerInput}>
         <TextInput
+          ref={(comp) => (emailRef = comp)}
+          onFocus={() => onFocus("email")}
+          onBlur={() => onBlur("email")}
           style={styles.emailInput}
           onChangeText={(event) => setEmail(event)}
           value={email}
           placeholder="EMAIL"
         />
         <TextInput
+          ref={(comp) => (nameRef = comp)}
+          onFocus={() => onFocus("name")}
+          onBlur={() => onBlur("name")}
           style={styles.emailInput}
           onChangeText={(event) => setName(event)}
           value={name}
           placeholder="USERNAME"
         />
         <TextInput
+          ref={(comp) => (passwordRef = comp)}
+          onFocus={() => onFocus("password")}
+          onBlur={() => onBlur("password")}
           style={styles.passwordInput}
           secureTextEntry={true}
           password={true}
@@ -62,10 +121,17 @@ function SignIn(props: props) {
           placeholder="PASSWORD"
         />
       </View>
-      {loading ? <ActivityIndicator /> : null}
       <View style={styles.containerButton}>
-        <TouchableOpacity style={styles.buttonLogin} onPress={handleSubmit}>
-          <Text style={styles.textLogin}>Create Account</Text>
+        <TouchableOpacity
+          style={styles.buttonLogin}
+          onPress={handleSubmit}
+          disable={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="#ffffff" size="large" />
+          ) : (
+            <Text style={styles.textLogin}>Create Account</Text>
+          )}
         </TouchableOpacity>
       </View>
       <View style={styles.containerText}>
@@ -77,81 +143,6 @@ function SignIn(props: props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  main: {
-    display: "flex",
-    flex: 1,
-    backgroundColor: "#ffffff",
-  },
-  container: {
-    display: "flex",
-    alignSelf: "center",
-    marginTop: normalize(-85),
-  },
-  containerInput: {
-    display: "flex",
-    paddingHorizontal: normalize(30),
-    marginTop: normalize(-60),
-  },
-  containerButton: {
-    display: "flex",
-    paddingHorizontal: normalize(30),
-    marginTop: normalize(70),
-  },
-  containerText: {
-    display: "flex",
-    alignSelf: "center",
-    flexDirection: "row",
-    marginTop: normalize(20),
-  },
-  image: {
-    width: normalize(270),
-    height: normalize(270),
-  },
-  emailInput: {
-    backgroundColor: "#EFEFEF",
-    paddingHorizontal: normalize(25),
-    paddingVertical: normalize(14),
-    marginBottom: normalize(12),
-    borderRadius: 6,
-  },
-  passwordInput: {
-    backgroundColor: "#EFEFEF",
-    paddingHorizontal: normalize(25),
-    paddingVertical: normalize(14),
-    borderRadius: 6,
-  },
-  buttonLogin: {
-    backgroundColor: "rgb(89,136,255)",
-    justifyContent: "center",
-    marginBottom: normalize(17),
-    height: normalize(48),
-    borderRadius: 5,
-  },
-  textLogin: {
-    fontFamily: "Ubuntu-Regular",
-    fontSize: normalize(16),
-    textAlign: "center",
-    color: "#fff",
-    fontWeight: "700",
-    letterSpacing: 1,
-  },
-  textLoginA: {
-    fontFamily: "Ubuntu-Regular",
-    fontSize: normalize(15),
-    letterSpacing: 1,
-    color: "#000",
-    marginRight: normalize(8),
-  },
-  textMarked: {
-    color: "#312F92",
-    letterSpacing: 0,
-    fontSize: normalize(15),
-    fontWeight: "700",
-    textDecorationLine: "underline",
-  },
-});
 
 export default connect(null, (dispatch: any) => ({
   signIn: (
