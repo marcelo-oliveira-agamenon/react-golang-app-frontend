@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { RNCamera } from "react-native-camera";
 import Permissions from "react-native-permissions";
 import Icon from "react-native-vector-icons/AntDesign";
+import { SCREEN_HEIGHT, normalize } from "../../util/index";
 
 interface props {
   handleChange: (uri: string) => void;
@@ -41,14 +42,14 @@ const camera: React.FC = (props: props) => {
         {({ camera }) => {
           return (
             <>
-              <View style={styles.container}>
-                <TouchableOpacity onPress={() => takePicture(camera, false)}>
-                  <Icon name="camera" size={30} color="#000" />
+              <View style={styles.closeContainer}>
+                <TouchableOpacity onPress={() => takePicture(camera, true)}>
+                  <Icon name="close" size={40} color="#000" />
                 </TouchableOpacity>
               </View>
-              <View>
-                <TouchableOpacity onPress={() => takePicture(camera, true)}>
-                  <Icon name="close" size={30} color="#000" />
+              <View style={styles.containerShot}>
+                <TouchableOpacity onPress={() => takePicture(camera, false)}>
+                  <Icon name="camera" size={50} color="#000" />
                 </TouchableOpacity>
               </View>
             </>
@@ -60,13 +61,22 @@ const camera: React.FC = (props: props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  containerShot: {
+    marginTop: SCREEN_HEIGHT - 150,
+    alignSelf: "center",
+    backgroundColor: "#ffffff",
+    borderRadius: 35,
+    padding: normalize(8),
+  },
+  closeContainer: {
     flex: 0,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "flex-end",
+    paddingRight: normalize(8),
+    paddingTop: normalize(8),
   },
   camera: {
-    height: 500,
+    height: SCREEN_HEIGHT,
   },
 });
 

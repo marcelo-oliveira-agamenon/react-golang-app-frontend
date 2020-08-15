@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { normalize, SCREEN_HEIGHT, SCREEN_WIDTH } from "../../util/index";
+import { normalize, SCREEN_HEIGHT } from "../../util/index";
 
 export const styles = StyleSheet.create({
   main: {
@@ -10,7 +10,14 @@ export const styles = StyleSheet.create({
   container: {
     display: "flex",
     alignSelf: "center",
-    marginTop: normalize(-85),
+    marginTop:
+      SCREEN_HEIGHT > 1200
+        ? -40
+        : SCREEN_HEIGHT > 1000
+        ? -60
+        : SCREEN_HEIGHT > 800
+        ? -70
+        : -110,
   },
   containerCamera: {
     backgroundColor: "#ffffff",
@@ -19,8 +26,22 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignSelf: "center",
-    marginTop: normalize(-78),
-    marginBottom: normalize(86),
+    marginTop:
+      SCREEN_HEIGHT > 1200
+        ? -40
+        : SCREEN_HEIGHT > 1000
+        ? -70
+        : SCREEN_HEIGHT > 800
+        ? -90
+        : -110,
+    marginBottom:
+      SCREEN_HEIGHT > 1200
+        ? 150
+        : SCREEN_HEIGHT > 1000
+        ? 130
+        : SCREEN_HEIGHT > 800
+        ? 120
+        : 110,
   },
   buttonCamera: {
     display: "flex",
@@ -30,23 +51,37 @@ export const styles = StyleSheet.create({
   containerInput: {
     display: "flex",
     paddingHorizontal: normalize(30),
-    marginTop: normalize(-60),
+    marginTop:
+      SCREEN_HEIGHT > 1200
+        ? -40
+        : SCREEN_HEIGHT > 1000
+        ? -60
+        : SCREEN_HEIGHT > 800
+        ? -70
+        : -85,
   },
   containerButton: {
     display: "flex",
     paddingHorizontal: normalize(30),
-    marginTop: normalize(30),
+    marginTop:
+      SCREEN_HEIGHT > 1200
+        ? 95
+        : SCREEN_HEIGHT > 1000
+        ? 85
+        : SCREEN_HEIGHT > 800
+        ? 65
+        : 35,
   },
   containerText: {
     display: "flex",
     alignSelf: "center",
     flexDirection: "row",
-    marginTop: normalize(12),
   },
   imageAvatar: {
     width: normalize(85),
     height: normalize(85),
     marginRight: normalize(25),
+    borderRadius: 55,
   },
   image: {
     width: normalize(270),
@@ -68,7 +103,14 @@ export const styles = StyleSheet.create({
   buttonLogin: {
     backgroundColor: "rgb(89,136,255)",
     justifyContent: "center",
-    marginBottom: normalize(17),
+    marginBottom:
+      SCREEN_HEIGHT > 1200
+        ? 75
+        : SCREEN_HEIGHT > 1000
+        ? 60
+        : SCREEN_HEIGHT > 800
+        ? 45
+        : 25,
     height: normalize(48),
     borderRadius: 5,
   },

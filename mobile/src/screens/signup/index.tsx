@@ -48,20 +48,18 @@ function SignIn(props: props) {
     }, 3000);
   };
 
-  const onFocus = (type: string) => {
+  const onFocus = (type: string, isFocus: boolean) => {
     let obj: any =
       type === "email" ? emailRef : type === "password" ? passwordRef : nameRef;
-    obj.setNativeProps({
-      style: styles.onFocusStyle,
-    });
-  };
-
-  const onBlur = (type: string) => {
-    let obj: any =
-      type === "email" ? emailRef : type === "password" ? passwordRef : nameRef;
-    obj.setNativeProps({
-      style: styles.onBlurStyle,
-    });
+    if (isFocus) {
+      obj.setNativeProps({
+        style: styles.onFocusStyle,
+      });
+    } else {
+      obj.setNativeProps({
+        style: styles.onBlurStyle,
+      });
+    }
   };
 
   return cameraOpen ? (
@@ -101,8 +99,8 @@ function SignIn(props: props) {
       <View style={styles.containerInput}>
         <TextInput
           ref={(comp) => (emailRef = comp)}
-          onFocus={() => onFocus("email")}
-          onBlur={() => onBlur("email")}
+          onFocus={() => onFocus("email", true)}
+          onBlur={() => onFocus("email", false)}
           style={styles.emailInput}
           onChangeText={(event) => setEmail(event)}
           value={email}
@@ -110,8 +108,8 @@ function SignIn(props: props) {
         />
         <TextInput
           ref={(comp) => (nameRef = comp)}
-          onFocus={() => onFocus("name")}
-          onBlur={() => onBlur("name")}
+          onFocus={() => onFocus("name", true)}
+          onBlur={() => onFocus("name", false)}
           style={styles.emailInput}
           onChangeText={(event) => setName(event)}
           value={name}
@@ -119,8 +117,8 @@ function SignIn(props: props) {
         />
         <TextInput
           ref={(comp) => (passwordRef = comp)}
-          onFocus={() => onFocus("password")}
-          onBlur={() => onBlur("password")}
+          onFocus={() => onFocus("password", true)}
+          onBlur={() => onFocus("password", false)}
           style={styles.passwordInput}
           secureTextEntry={true}
           password={true}
