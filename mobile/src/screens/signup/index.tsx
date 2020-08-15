@@ -72,11 +72,6 @@ function SignIn(props: props) {
     <View style={styles.main}>
       <View style={styles.container}>
         <Image source={LogoI} style={styles.image} />
-        <TouchableOpacity
-          onPress={() => setCameraOpen((setCameraOpen) => !setCameraOpen)}
-        >
-          <Text>open camera</Text>
-        </TouchableOpacity>
       </View>
       <View style={styles.containerAvatar}>
         <Image
@@ -89,6 +84,19 @@ function SignIn(props: props) {
                 }
           }
         />
+        <View style={styles.buttonCamera}>
+          {avatar === "" ? (
+            <TouchableOpacity
+              onPress={() => setCameraOpen((setCameraOpen) => !setCameraOpen)}
+            >
+              <Text style={styles.textLoginA}>Open Camera</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity onPress={() => setAvatar("")}>
+              <Text style={styles.textLoginA}>Delete Photo</Text>
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
       <View style={styles.containerInput}>
         <TextInput

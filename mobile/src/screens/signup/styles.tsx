@@ -17,10 +17,15 @@ export const styles = StyleSheet.create({
   },
   containerAvatar: {
     display: "flex",
-    backgroundColor: "#000",
     flexDirection: "row",
-    marginTop: normalize(-70),
-    marginBottom: normalize(30),
+    alignSelf: "center",
+    marginTop: normalize(-78),
+    marginBottom: normalize(86),
+  },
+  buttonCamera: {
+    display: "flex",
+    alignSelf: "center",
+    justifyContent: "center",
   },
   containerInput: {
     display: "flex",
@@ -30,17 +35,18 @@ export const styles = StyleSheet.create({
   containerButton: {
     display: "flex",
     paddingHorizontal: normalize(30),
-    marginTop: normalize(70),
+    marginTop: normalize(30),
   },
   containerText: {
     display: "flex",
     alignSelf: "center",
     flexDirection: "row",
-    marginTop: normalize(20),
+    marginTop: normalize(12),
   },
   imageAvatar: {
-    width: normalize(80),
-    height: normalize(80),
+    width: normalize(85),
+    height: normalize(85),
+    marginRight: normalize(25),
   },
   image: {
     width: normalize(270),

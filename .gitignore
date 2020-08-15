@@ -6,11 +6,7 @@
 
 #android
 /mobile/node_modules
-/mobile/android/.idea
-/mobile/android/.gradle
-/mobile/android/app/build
-/mobile/local.properties
-/mobile/build
-/mobile/yarn.lock
+mobile/android/.idea
+mobile/yarn.lock
 mobile/android/.gradle
 mobile/android/app/build
