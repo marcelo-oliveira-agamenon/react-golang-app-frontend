@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   Text,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { login } from "../../ducks/auth";
 import { connect } from "react-redux";
@@ -50,28 +52,37 @@ function Login(props: props) {
       <View style={styles.container}>
         <Image source={LogoI} style={styles.image} />
       </View>
-      <View style={styles.containerInput}>
-        <TextInput
-          ref={(comp) => (emailRef = comp)}
-          onFocus={() => onFocus("email", true)}
-          onBlur={() => onFocus("email", false)}
-          style={styles.emailInput}
-          onChangeText={(event) => setEmail(event)}
-          value={email}
-          placeholder="EMAIL"
-        />
-        <TextInput
-          ref={(comp) => (passwordRef = comp)}
-          onFocus={() => onFocus("password", true)}
-          onBlur={() => onFocus("password", false)}
-          style={styles.passwordInput}
-          secureTextEntry={true}
-          password={true}
-          onChangeText={(event) => setPassword(event)}
-          value={password}
-          placeholder="PASSWORD"
-        />
-      </View>
+      <KeyboardAvoidingView
+        behevior={Platform.select({
+          ios: "padding",
+          android: null,
+        })}
+        style={styles.containerKeyboard}
+        enabled={true}
+      >
+        <View style={styles.containerInput}>
+          <TextInput
+            ref={(comp) => (emailRef = comp)}
+            onFocus={() => onFocus("email", true)}
+            onBlur={() => onFocus("email", false)}
+            style={styles.emailInput}
+            onChangeText={(event) => setEmail(event)}
+            value={email}
+            placeholder="EMAIL"
+          />
+          <TextInput
+            ref={(comp) => (passwordRef = comp)}
+            onFocus={() => onFocus("password", true)}
+            onBlur={() => onFocus("password", false)}
+            style={styles.passwordInput}
+            secureTextEntry={true}
+            password={true}
+            onChangeText={(event) => setPassword(event)}
+            value={password}
+            placeholder="PASSWORD"
+          />
+        </View>
+      </KeyboardAvoidingView>
       <View style={styles.containerButton}>
         <TouchableOpacity style={styles.buttonLogin} onPress={handleSubmit}>
           {loading ? (

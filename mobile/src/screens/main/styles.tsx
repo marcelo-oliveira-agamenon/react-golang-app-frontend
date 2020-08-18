@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { normalize, SCREEN_HEIGHT } from "../../util/index";
+import { normalize, responsiveHeight } from "../../util/index";
 
 export const styles = StyleSheet.create({
   main: {
@@ -10,14 +10,7 @@ export const styles = StyleSheet.create({
   container: {
     display: "flex",
     alignSelf: "center",
-    marginTop:
-      SCREEN_HEIGHT > 1200
-        ? -60
-        : SCREEN_HEIGHT > 1000
-        ? -70
-        : SCREEN_HEIGHT > 800
-        ? -80
-        : -130,
+    marginTop: responsiveHeight(-60, -70, -80, -130),
   },
   image: {
     width: normalize(390),
@@ -33,14 +26,7 @@ export const styles = StyleSheet.create({
   containerButton: {
     display: "flex",
     alignSelf: "center",
-    marginTop:
-      SCREEN_HEIGHT > 1200
-        ? 210
-        : SCREEN_HEIGHT > 1000
-        ? 200
-        : SCREEN_HEIGHT > 800
-        ? 180
-        : 140,
+    marginTop: responsiveHeight(210, 200, 180, 140),
     width: normalize(270),
   },
   buttonLogin: {

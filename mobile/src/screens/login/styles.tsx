@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { normalize, SCREEN_HEIGHT } from "../../util/index";
+import { normalize, responsiveHeight } from "../../util/index";
 
 export const styles = StyleSheet.create({
   main: {
@@ -10,51 +10,26 @@ export const styles = StyleSheet.create({
   container: {
     display: "flex",
     alignSelf: "center",
-    marginTop:
-      SCREEN_HEIGHT > 1200
-        ? -40
-        : SCREEN_HEIGHT > 1000
-        ? -60
-        : SCREEN_HEIGHT > 800
-        ? -80
-        : -120,
+    marginTop: responsiveHeight(-40, -60, -80, -120),
   },
   containerInput: {
     display: "flex",
     paddingHorizontal: normalize(30),
-    marginTop:
-      SCREEN_HEIGHT > 1200
-        ? -20
-        : SCREEN_HEIGHT > 1000
-        ? -30
-        : SCREEN_HEIGHT > 800
-        ? -40
-        : -90,
+    marginTop: responsiveHeight(-20, -30, -40, -90),
+  },
+  containerKeyboard: {
+    marginTop: 0,
   },
   containerButton: {
     display: "flex",
     paddingHorizontal: normalize(30),
-    marginTop:
-      SCREEN_HEIGHT > 1200
-        ? 150
-        : SCREEN_HEIGHT > 1000
-        ? 140
-        : SCREEN_HEIGHT > 800
-        ? 120
-        : 90,
+    marginTop: responsiveHeight(150, 140, 120, 90),
   },
   containerText: {
     display: "flex",
     alignSelf: "center",
     flexDirection: "row",
-    marginTop:
-      SCREEN_HEIGHT > 1200
-        ? 40
-        : SCREEN_HEIGHT > 1000
-        ? 35
-        : SCREEN_HEIGHT > 800
-        ? 30
-        : 20,
+    marginTop: responsiveHeight(40, 35, 30, 20),
   },
   image: {
     width: normalize(350),
