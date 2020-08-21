@@ -1,34 +1,16 @@
 import React, { useState } from "react";
 import { login } from "../../ducks/auth";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
-import {
-  MainContainer,
-  SecondContainer,
-  ThirdContainer,
-  TitleContainer,
-  UserContainer,
-  Username,
-  Input,
-  TitleSecContainer,
-  Password,
-  PasswordTitle,
-  EnterContainer,
-  EnterButton,
-  SignupContainer,
-  SignupButton,
-  MainTitleContainer,
-  TitleMain,
-} from "./styles";
+import { MainContainer, SecondContainer, InputContainer, EnterContainer } from "./styles";
+import { RouteComponentProps } from "react-router-dom";
 
-export interface props {
+export interface props extends RouteComponentProps<any> {
   login: (username: string, password: string) => Promise<void>;
 }
 
 function Login(props: props) {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const history = useHistory();
 
   function handleSubmit() {
     if (username === "" || password === "") {
@@ -36,60 +18,51 @@ function Login(props: props) {
     }
     props.login(username, password).then((response) => {
       if (response !== undefined) {
-        history.push("/dashboard");
+        props.history.push("/dashboard");
       }
     });
   }
 
   function handleSignUpClick() {
-    history.push("/signup");
+    props.history.push("/signup");
   }
 
   function handleKeyPress(key: string) {
     if (key === "Enter") {
       handleSubmit();
     }
-    return;
   }
 
   return (
     <>
       <MainContainer>
-        <MainTitleContainer>
-          <TitleMain>Bem vindo a nossa Plataforma!</TitleMain>
-        </MainTitleContainer>
         <SecondContainer>
-          <ThirdContainer>
-            <TitleContainer>
-              <UserContainer>
-                <Username>Usuário</Username>
-                <Input
-                  type="text"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                />
-              </UserContainer>
-            </TitleContainer>
-            <TitleSecContainer>
-              <Password>
-                <PasswordTitle>Senha</PasswordTitle>
-                <Input
+          <h1>Bem vindo a nossa Plataforma!</h1>
+          <div>
+            <div>
+              <InputContainer>
+                <label>Usuário</label>
+                <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+              </InputContainer>
+            </div>
+            <div>
+              <InputContainer>
+                <label>Senha</label>
+                <input
                   type="password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   onKeyPress={(event) => handleKeyPress(event.key)}
                 />
-              </Password>
-            </TitleSecContainer>
+              </InputContainer>
+            </div>
             <EnterContainer>
-              <EnterButton onClick={() => handleSubmit()}>Entrar</EnterButton>
+              <button onClick={() => handleSubmit()}>Entrar</button>
             </EnterContainer>
-            <SignupContainer>
-              <SignupButton onClick={() => handleSignUpClick()}>
-                Não cadastrado? Crie sua conta aqui
-              </SignupButton>
-            </SignupContainer>
-          </ThirdContainer>
+            <EnterContainer>
+              <h4 onClick={() => handleSignUpClick()}>Não cadastrado? Crie sua conta aqui</h4>
+            </EnterContainer>
+          </div>
         </SecondContainer>
       </MainContainer>
     </>
@@ -97,6 +70,5 @@ function Login(props: props) {
 }
 
 export default connect(null, (dispatch: any) => ({
-  login: (username: string, password: string) =>
-    dispatch(login(username, password)),
+  login: (username: string, password: string) => dispatch(login(username, password)),
 }))(Login);

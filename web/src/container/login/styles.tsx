@@ -5,126 +5,125 @@ export const MainContainer = styled.div`
   display: flex;
   align-self: center;
   height: 100vh;
-  width: 100%;
+  max-width: 100%;
+  width: auto;
   background-image: url(${ImageLogin});
   justify-content: center;
   flex-direction: column;
 `;
 
 export const SecondContainer = styled.div`
-  width: 350px;
-  height: 65vh;
-  margin-top: 7vh;
+  width: 450px;
+  height: 600px;
   background-color: #7dbef9;
-  padding-left: 1.5vw;
-  padding-right: 1.5vw;
+  padding: 16px 80px;
   align-self: center;
+  box-shadow: 0px 4px 4px 0px rgb(0, 0, 0, 0.25), 8px 0px 15px 0px rgb(0, 0, 0, 0.25);
+  animation: first 1s;
+
+  @keyframes first {
+    from {
+      margin-left: -3000px;
+    }
+    to {
+      align-self: center;
+    }
+  }
+
+  h1 {
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Montserrat;
+    letter-spacing: 3px;
+  }
+
+  div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #e4f2ff;
+    box-shadow: 0px 4px 4px 0px rgb(0, 0, 0, 0.25), 8px 0px 15px 0px rgb(0, 0, 0, 0.25);
+    padding-top: 36px;
+    padding-bottom: 10px;
+    margin-top: 28px;
+
+    div:nth-child(2) {
+      display: flex;
+      justify-content: center;
+      box-shadow: none;
+
+      div:nth-child(2) {
+        display: flex;
+        justify-content: center;
+        margin-top: 100px;
+        box-shadow: none;
+      }
+    }
+  }
 `;
 
-export const ThirdContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #e4f2ff;
-  padding-top: 2.5vh;
-  padding-bottom: 2.5vh;
-  margin-top: 3vh;
-`;
-
-export const TitleContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-export const UserContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-export const Username = styled.h3`
-  margin: 0;
-  font-family: Montserrat;
-  margin-bottom: 2vh;
-  margin-left: 0.5vw;
-  font-size: 15px;
-  text-transform: uppercase;
-`;
-
-export const Input = styled.input`
-  width: 230px;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
-  padding-right: 1vw;
-  padding-left: 1vw;
-  border-radius: 7px;
-  border-style: none;
-  outline: none;
-`;
-
-export const TitleSecContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 11vh;
-`;
-
-export const Password = styled.div`
+export const InputContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-`;
 
-export const PasswordTitle = styled.h3`
-  margin: 0;
-  font-family: Montserrat;
-  margin-bottom: 2vh;
-  margin-left: 0.5vw;
-  font-size: 15px;
-  text-transform: uppercase;
+  label {
+    font-family: Montserrat;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  input {
+    width: 260px;
+    padding: 8px 15px;
+    border-radius: 7px;
+    border-style: none;
+    outline: none;
+    border: 1.2px solid #7dbef9;
+
+    :focus {
+      box-shadow: 3px 0px 25px 0px rgb(0, 0, 0, 0.2);
+    }
+  }
 `;
 
 export const EnterContainer = styled.div`
-  margin-top: 12vh;
+  margin-top: 100px;
   display: flex;
   justify-content: center;
-`;
 
-export const EnterButton = styled.button`
-  width: 270px;
-  padding-bottom: 1vh;
-  padding-top: 1vh;
-  border-radius: 8px;
-  border-style: none;
-  outline: none;
-  font-family: Montserrat;
-  background-color: #3b3d76;
-  color: #fff;
-  font-size: 17px;
-  text-transform: uppercase;
-  cursor: pointer;
-`;
+  button:nth-child(1) {
+    width: 270px;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+    border-radius: 8px;
+    border-style: none;
+    outline: none;
+    font-family: Montserrat;
+    background-color: #3b3d76;
+    color: #fff;
+    font-size: 17px;
+    text-transform: uppercase;
+    cursor: pointer;
 
-export const SignupContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+    :hover {
+      background-color: #6164c0;
+      box-shadow: 2px 2px 25px 1px rgb(0, 0, 0, 0.24);
+    }
+  }
 
-export const SignupButton = styled.h4`
-  font-family: Montserrat;
-  font-size: 10px;
-  cursor: pointer;
-`;
+  h4 {
+    margin-top: -60px;
+    font-family: Montserrat;
+    font-size: 12px;
+    cursor: pointer;
 
-export const MainTitleContainer = styled.div`
-  align-self: center;
-  background-color: #7dbef9;
-  padding: 10px 8px;
-  margin-top: -6vh;
-  border-radius: 6px;
-`;
-
-export const TitleMain = styled.h1`
-  margin: 0;
-  text-transform: uppercase;
-  font-family: Montserrat;
-  letter-spacing: 3px;
+    :hover {
+      text-decoration: underline;
+    }
+  }
 `;

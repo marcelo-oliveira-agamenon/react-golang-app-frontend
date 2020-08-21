@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import Login from "../container/login/index";
 import Dashboard from "../container/dashboard/index";
@@ -23,12 +23,12 @@ function Routes(props: props) {
       <Switch>
         <Route path="/" exact component={Login} />
         <Route path="/signup" exact component={SignUp} />
-        {props?.loggedUser ? (
+        {Object.entries(props.loggedUser).length !== 0 ? (
           <>
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/dashboard/products" exact component={Product} />
           </>
-        ) : null}
+        ) : <Redirect to="/" />}
       </Switch>
     </BrowserRouter>
   );
