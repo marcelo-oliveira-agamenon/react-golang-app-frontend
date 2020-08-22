@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { login } from "../../ducks/auth";
-import { connect } from "react-redux";
-import { MainContainer, SecondContainer, InputContainer, EnterContainer } from "./styles";
 import { RouteComponentProps } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { MainContainer, SecondContainer, InputContainer, EnterContainer } from "./styles";
+import { Loader } from "../../components/index";
 
 export interface props extends RouteComponentProps<any> {
   login: (username: string, password: string) => Promise<void>;
@@ -11,13 +13,18 @@ export interface props extends RouteComponentProps<any> {
 function Login(props: props) {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   function handleSubmit() {
     if (username === "" || password === "") {
       return;
     }
+    setLoading(true);
     props.login(username, password).then((response) => {
       if (response !== undefined) {
+        setLoading(false);
+        setUsername("");
+        setPassword("");
         props.history.push("/dashboard");
       }
     });
@@ -42,7 +49,11 @@ function Login(props: props) {
             <div>
               <InputContainer>
                 <label>Usuário</label>
-                <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
+                />
               </InputContainer>
             </div>
             <div>
@@ -51,13 +62,21 @@ function Login(props: props) {
                 <input
                   type="password"
                   value={password}
-                  onChange={(event) => setPassword(event.target.value)}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
                   onKeyPress={(event) => handleKeyPress(event.key)}
                 />
               </InputContainer>
             </div>
             <EnterContainer>
-              <button onClick={() => handleSubmit()}>Entrar</button>
+              <button onClick={() => handleSubmit()}>
+                {loading ? (
+                  <h1>
+                    <Loader color="white" height={22} width={22} />
+                  </h1>
+                ) : (
+                  "Entrar"
+                )}
+              </button>
             </EnterContainer>
             <EnterContainer>
               <h4 onClick={() => handleSignUpClick()}>Não cadastrado? Crie sua conta aqui</h4>

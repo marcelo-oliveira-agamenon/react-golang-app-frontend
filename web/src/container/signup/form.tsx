@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUsernameList, signup } from "../../ducks/auth";
+import { RouteComponentProps } from "react-router-dom";
+import Loader from "react-loading";
 import {
-  ContainerInput,
   ButtonAvatar,
   ButtonConfirm,
-  InputFile,
   ImageAvatar,
   PrimaryContainer,
   SecondContainer,
-  HeaderContainer,
-  HeaderTitle,
   UContainer,
   ULabel,
   UInput,
@@ -27,15 +24,10 @@ const mapStateToProps = (state: { usernameList: {} }) => {
   };
 };
 
-export interface props {
+export interface props extends RouteComponentProps<any> {
   usernameList: any;
   fetchUsernameList: () => void;
-  signup: (formData: {
-    username: string;
-    password: string;
-    fullName: string;
-    avatar: string;
-  }) => Promise<any>;
+  signup: (formData: { username: string; password: string; fullName: string; avatar: string }) => Promise<any>;
 }
 
 function SignUp(props: props) {
@@ -45,7 +37,7 @@ function SignUp(props: props) {
   const [avatar, setAvatar] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [userExist, setUserExist] = useState<string>("");
-  const history = useHistory();
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     props.fetchUsernameList();
@@ -65,22 +57,13 @@ function SignUp(props: props) {
       return;
     }
 
-    if (
-      fullName.length === 0 &&
-      username.length !== 0 &&
-      password.length !== 0
-    ) {
+    if (fullName.length === 0 && username.length !== 0 && password.length !== 0) {
       setError("Preencha seu Nome completo!");
       setFullName("");
     }
 
-    if (
-      username !== "" ||
-      password !== "" ||
-      password.length >= 6 ||
-      fullName !== ""
-    ) {
-      let formdata: {
+    if (username !== "" || password !== "" || password.length >= 6 || fullName !== "") {
+      const formdata: {
         username: string;
         password: string;
         fullName: string;
@@ -91,10 +74,10 @@ function SignUp(props: props) {
         fullName: fullName,
         avatar: avatar,
       };
-
+      setLoading(true);
       props.signup(formdata).then((response) => {
         if (response === "New user add in database") {
-          history.push("/");
+          props.history.push("/");
         } else {
           setError("Algo deu errado! Por favor tente novamente");
           setUsername("");
@@ -102,11 +85,11 @@ function SignUp(props: props) {
           setFullName("");
           setAvatar("");
         }
+        setLoading(false);
       });
     } else {
       setError("Verifique os campos!");
     }
-    return;
   };
 
   const handleChangeUsername = (username: string) => {
@@ -137,49 +120,29 @@ function SignUp(props: props) {
     <>
       <PrimaryContainer>
         <SecondContainer>
-          <HeaderContainer>
-            <HeaderTitle>Crie seu usuário!</HeaderTitle>
-          </HeaderContainer>
-          <ContainerInput>
-            <InputFile
-              type="file"
-              value={avatar}
-              onChange={(event) => setAvatar(event.target.value)}
-            />
+          <div>
+            <h1>Crie seu usuário!</h1>
+          </div>
+          <div>
+            <input type="file" value={avatar} onChange={(event) => setAvatar(event.target.value)} />
             <ButtonAvatar>Adicionar Avatar</ButtonAvatar>
             {avatar !== "" ? <ImageAvatar src={avatar} /> : null}
-          </ContainerInput>
+          </div>
           <UContainer>
             <ULabel>{userExist !== "" ? userExist : "Seu usuário"}</ULabel>
-            <UInput
-              type="text"
-              value={username}
-              onChange={(event) => handleChangeUsername(event.target.value)}
-            />
+            <UInput type="text" value={username} onChange={(event) => handleChangeUsername(event.target.value)} />
           </UContainer>
           <UContainer>
             <ULabel>Sua senha (deve ter 6 caracteres ou mais)</ULabel>
-            <UInput
-              type="password"
-              value={password}
-              onChange={(event) => handlePasswordChange(event.target.value)}
-            />
+            <UInput type="password" value={password} onChange={(event) => handlePasswordChange(event.target.value)} />
           </UContainer>
           <UContainer>
             <ULabel>Seu Nome Completo</ULabel>
-            <UInput
-              type="text"
-              value={fullName}
-              onChange={(event) => setFullName(event.target.value)}
-            />
+            <UInput type="text" value={fullName} onChange={(event) => setFullName(event.target.value)} />
           </UContainer>
           <ContainerButton>
-            <ButtonConfirm onClick={() => handleSubmit()}>
-              Cadastrar
-            </ButtonConfirm>
-            <ButtonCancel onClick={() => history.push("/")}>
-              Cancelar
-            </ButtonCancel>
+            <ButtonConfirm onClick={() => handleSubmit()}>Cadastrar</ButtonConfirm>
+            <ButtonCancel onClick={() => props.history.push("/")}>Cancelar</ButtonCancel>
           </ContainerButton>
           {error !== "" ? (
             <ContainerError>
@@ -193,11 +156,7 @@ function SignUp(props: props) {
 }
 
 export default connect(mapStateToProps, (dispatch: any) => ({
-  signup: (formdata: {
-    username: string;
-    password: string;
-    fullName: string;
-    avatar: string;
-  }) => dispatch(signup(formdata)),
+  signup: (formdata: { username: string; password: string; fullName: string; avatar: string }) =>
+    dispatch(signup(formdata)),
   fetchUsernameList: () => dispatch(fetchUsernameList()),
 }))(SignUp);

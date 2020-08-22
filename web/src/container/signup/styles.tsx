@@ -14,22 +14,36 @@ export const SecondContainer = styles.div`
     background-color: #fff;
     margin-top: 5vh;
     box-shadow: 5px 5px 10px 12px #6DA3FF;
-`;
 
-export const HeaderContainer = styles.div`
-    width: auto;
-    background-color: #312F92;
-    display: flex;
-    align-self: flex-start;
-    padding: 8px 0;
-`;
+    div:nth-child(1) {
+        width: auto;
+        background-color: #312F92;
+        display: flex;
+        align-self: flex-start;
+        padding: 8px 0;
 
-export const HeaderTitle = styles.h2`
-    color: #fff;
+        h1 {
+            color: #fff;
     font-family: Montserrat, sans-serif;
     margin-left: 2vw;
     font-size: 19px;
     letter-spacing: 2px;
+        }
+    }
+
+    div:nth-child(2) {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+
+        input {
+            font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+        }
+    }
 `;
 
 export const UContainer = styles.div`
@@ -66,12 +80,6 @@ export const ContainerButton = styles.div`
     margin-top: 80px;
     justify-content: center;
     margin-left: 28px;
-`;
-
-export const ContainerInput = styles.div`
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
 `;
 
 export const ButtonAvatar = styles.button`

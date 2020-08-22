@@ -30,6 +30,40 @@ export const SecondContainer = styled.div`
     }
   }
 
+  @media (max-width: 650px) {
+    height: 550px;
+    width: 350px;
+    padding: 18px 50px;
+
+    h1 {
+      font-size: 20px;
+    }
+
+    div:nth-child(2) {
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 450px) {
+    width: 280px;
+    padding: 18px 20px;
+
+    h1 {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 320px) {
+    width: 220px;
+    height: 480px;
+    padding: 8px 10px;
+
+    h1 {
+      font-size: 17px;
+    }
+  }
+
   h1 {
     margin: 0;
     text-align: center;
@@ -75,6 +109,10 @@ export const InputContainer = styled.div`
     font-size: 15px;
     font-weight: 600;
     text-transform: uppercase;
+
+    @media (max-width: 450px) {
+      font-size: 10px;
+    }
   }
 
   input {
@@ -88,6 +126,16 @@ export const InputContainer = styled.div`
     :focus {
       box-shadow: 3px 0px 25px 0px rgb(0, 0, 0, 0.2);
     }
+
+    @media (max-width: 450px) {
+      width: 180px;
+      padding: 5px 10px;
+    }
+
+    @media (max-width: 320px) {
+      width: 150px;
+      padding: 5px 8px;
+    }
   }
 `;
 
@@ -96,10 +144,23 @@ export const EnterContainer = styled.div`
   display: flex;
   justify-content: center;
 
+  @media (max-width: 650px) {
+    margin-top: 80px;
+  }
+
+  @media (max-width: 320px) {
+    margin-top: 65px;
+  }
+
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+
   button:nth-child(1) {
     width: 270px;
-    padding-bottom: 1vh;
-    padding-top: 1vh;
+    padding-bottom: 8px;
+    padding-top: 8px;
     border-radius: 8px;
     border-style: none;
     outline: none;
@@ -114,6 +175,18 @@ export const EnterContainer = styled.div`
       background-color: #6164c0;
       box-shadow: 2px 2px 25px 1px rgb(0, 0, 0, 0.24);
     }
+
+    @media (max-width: 450px) {
+      width: 200px;
+      font-size: 15px;
+    }
+
+    @media (max-width: 320px) {
+      width: 170px;
+      font-size: 11px;
+      padding-bottom: 4px;
+      padding-top: 4px;
+    }
   }
 
   h4 {
@@ -124,6 +197,10 @@ export const EnterContainer = styled.div`
 
     :hover {
       text-decoration: underline;
+    }
+
+    @media (max-width: 450px) {
+      font-size: 10px;
     }
   }
 `;
