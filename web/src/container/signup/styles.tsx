@@ -13,7 +13,17 @@ export const SecondContainer = styles.div`
     height: 88vh;
     background-color: #fff;
     margin-top: 5vh;
-    box-shadow: 5px 5px 10px 12px #6DA3FF;
+    box-shadow: 5px 5px 10px 18px #6DA3FF;
+    animation: first 1s;
+
+    @keyframes first {
+        from {
+          margin-left: -3000px;
+        }
+        to {
+          margin-left: 0px;
+        }
+      }
 
     div:nth-child(1) {
         width: auto;
@@ -34,7 +44,10 @@ export const SecondContainer = styles.div`
     div:nth-child(2) {
         position: relative;
         overflow: hidden;
-        display: inline-block;
+        display: flex;
+        margin-bottom: 60px;
+        margin-top: 20px;
+        justify-content: center;
 
         input {
             font-size: 100px;
@@ -42,6 +55,27 @@ export const SecondContainer = styles.div`
     left: 0;
     top: 0;
     opacity: 0;
+        }
+
+        button {
+            font-family: Montserrat, sans-serif;
+    padding: 7px 15px;
+    margin-left: 30px;
+    height: 35px;
+    align-self: center;
+    background-color: #35C14F;
+    border: none;
+    color: #fff;
+    letter-spacing: 1px;
+    box-shadow: 1px 1px 5px 1px #A0A0A0, -1px -1px 5px 1px #A0A0A0;
+    outline: none;
+    cursor: pointer;
+        }
+
+        img {
+            width: 100px;
+    height: 100px;
+    border-radius: 15px;
         }
     }
 `;
@@ -51,16 +85,16 @@ export const UContainer = styles.div`
     display: flex;
     flex-direction: column;
     margin-top: 30px;
-`;
 
-export const ULabel = styles.h5`
-    font-family: Montserrat, sans-serif;
+    label {
+        font-family: Montserrat, sans-serif;
     margin-left: 100px;
+    font-weight: 600;
     color: userExist !== "" ? "#DC181E" : "#000";
-`;
+    }
 
-export const UInput = styles.input`
-    width: 550px;
+    input {
+        width: 550px;
     margin-left: 100px;
     padding: 10px 0;
     outline: none;
@@ -71,6 +105,7 @@ export const UInput = styles.input`
     border-color: #000;
     padding-left: 15px;
     font-size: 15px;
+    }
 `;
 
 export const ContainerButton = styles.div`
@@ -80,23 +115,9 @@ export const ContainerButton = styles.div`
     margin-top: 80px;
     justify-content: center;
     margin-left: 28px;
-`;
 
-export const ButtonAvatar = styles.button`
-    font-family: Montserrat, sans-serif;
-    padding: 7px 15px;
-    margin-right: 35px;
-    background-color: #35C14F;
-    border: none;
-    color: #fff;
-    letter-spacing: 1px;
-    box-shadow: 1px 1px 5px 1px #A0A0A0, -1px -1px 5px 1px #A0A0A0;
-    outline: none;
-    cursor: pointer;
-`;
-
-export const ButtonConfirm = styles.button`
-    font-family: Montserrat, sans-serif;
+    button:nth-child(1) {
+        font-family: Montserrat, sans-serif;
     width: 230px;
     padding: 10px 0px;
     margin-right: 90px;
@@ -109,10 +130,10 @@ export const ButtonConfirm = styles.button`
     box-shadow: 1px 1px 5px 1px #A0A0A0, -1px -1px 5px 1px #A0A0A0;
     outline: none;
     cursor: pointer;
-`;
+    }
 
-export const ButtonCancel = styles.button`
-    font-family: Montserrat, sans-serif;
+    button:nth-child(2) {
+        font-family: Montserrat, sans-serif;
     width: 230px;
     padding: 10px 0px;
     margin-right: 35px;
@@ -125,32 +146,5 @@ export const ButtonCancel = styles.button`
     box-shadow: 1px 1px 5px 1px #A0A0A0, -1px -1px 5px 1px #A0A0A0;
     outline: none;
     cursor: pointer;
-`;
-
-export const ContainerError = styles.div`
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-    background-color: #DC181E;
-`;
-
-export const ErrorTitle = styles.h4`
-    font-family: Montserrat, sans-serif;
-    font-size: 18px;
-    letter-spacing: 2px;
-    color: #fff;
-`;
-
-export const InputFile = styles.input`
-    font-size: 100px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-`;
-
-export const ImageAvatar = styles.img`
-    width: 100px;
-    height: 100px;
-    border-radius: 15px;
+    }
 `;

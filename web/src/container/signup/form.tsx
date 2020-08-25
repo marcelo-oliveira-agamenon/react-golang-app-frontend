@@ -2,21 +2,10 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchUsernameList, signup } from "../../ducks/auth";
 import { RouteComponentProps } from "react-router-dom";
-import Loader from "react-loading";
-import {
-  ButtonAvatar,
-  ButtonConfirm,
-  ImageAvatar,
-  PrimaryContainer,
-  SecondContainer,
-  UContainer,
-  ULabel,
-  UInput,
-  ContainerButton,
-  ButtonCancel,
-  ContainerError,
-  ErrorTitle,
-} from "./styles";
+
+import { PrimaryContainer, SecondContainer, UContainer, ContainerButton } from "./styles";
+import { Loader } from "../../components/index";
+import ImageAvatar from "../../assets/avatar/avataaars.png";
 
 const mapStateToProps = (state: { usernameList: {} }) => {
   return {
@@ -34,7 +23,7 @@ function SignUp(props: props) {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [fullName, setFullName] = useState<string>("");
-  const [avatar, setAvatar] = useState<string>("");
+  const [avatar, setAvatar] = useState("");
   const [error, setError] = useState<string>("");
   const [userExist, setUserExist] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -116,6 +105,11 @@ function SignUp(props: props) {
     setPassword(password);
   };
 
+  const handleFileImage = (event: any) => {
+    const image = URL.createObjectURL(event.target.files[0]);
+    setAvatar(image);
+  };
+
   return (
     <>
       <PrimaryContainer>
@@ -124,31 +118,44 @@ function SignUp(props: props) {
             <h1>Crie seu usuário!</h1>
           </div>
           <div>
-            <input type="file" value={avatar} onChange={(event) => setAvatar(event.target.value)} />
-            <ButtonAvatar>Adicionar Avatar</ButtonAvatar>
-            {avatar !== "" ? <ImageAvatar src={avatar} /> : null}
+            <img src={avatar.length === 0 ? ImageAvatar : avatar} alt="" />
+            <input
+              id="inputfile"
+              type="file"
+              value={avatar}
+              onChange={(event: any) => handleFileImage(event)}
+              accept="image/jpg/png/jpeg"
+            />
+            <button onClick={() => document.getElementById("inputfile")?.click()}>Adicionar Avatar</button>
           </div>
           <UContainer>
-            <ULabel>{userExist !== "" ? userExist : "Seu usuário"}</ULabel>
-            <UInput type="text" value={username} onChange={(event) => handleChangeUsername(event.target.value)} />
+            <label>{userExist !== "" ? userExist : "Seu usuário"}</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleChangeUsername(event.target.value)}
+            />
           </UContainer>
           <UContainer>
-            <ULabel>Sua senha (deve ter 6 caracteres ou mais)</ULabel>
-            <UInput type="password" value={password} onChange={(event) => handlePasswordChange(event.target.value)} />
+            <label>Sua senha (deve ter 6 caracteres ou mais)</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(event.target.value)}
+            />
           </UContainer>
           <UContainer>
-            <ULabel>Seu Nome Completo</ULabel>
-            <UInput type="text" value={fullName} onChange={(event) => setFullName(event.target.value)} />
+            <label>Seu Nome Completo</label>
+            <input
+              type="text"
+              value={fullName}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFullName(event.target.value)}
+            />
           </UContainer>
           <ContainerButton>
-            <ButtonConfirm onClick={() => handleSubmit()}>Cadastrar</ButtonConfirm>
-            <ButtonCancel onClick={() => props.history.push("/")}>Cancelar</ButtonCancel>
+            <button onClick={() => handleSubmit()}>Cadastrar</button>
+            <button onClick={() => props.history.push("/")}>Cancelar</button>
           </ContainerButton>
-          {error !== "" ? (
-            <ContainerError>
-              <ErrorTitle>{error}</ErrorTitle>
-            </ContainerError>
-          ) : null}
         </SecondContainer>
       </PrimaryContainer>
     </>
