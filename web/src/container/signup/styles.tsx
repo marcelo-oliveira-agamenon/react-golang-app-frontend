@@ -1,4 +1,4 @@
-import styles from "styled-components";
+import styles from 'styled-components'
 
 export const PrimaryContainer = styles.div`
     height: 100vh;
@@ -6,7 +6,7 @@ export const PrimaryContainer = styles.div`
     background-color: #7DBEF9;
     display: flex;
     justify-content: center;
-`;
+`
 
 export const SecondContainer = styles.div`
     width: 770px;
@@ -78,7 +78,7 @@ export const SecondContainer = styles.div`
     border-radius: 15px;
         }
     }
-`;
+`
 
 export const UContainer = styles.div`
     width: auto;
@@ -106,7 +106,7 @@ export const UContainer = styles.div`
     padding-left: 15px;
     font-size: 15px;
     }
-`;
+`
 
 export const ContainerButton = styles.div`
     width: auto;
@@ -130,6 +130,11 @@ export const ContainerButton = styles.div`
     box-shadow: 1px 1px 5px 1px #A0A0A0, -1px -1px 5px 1px #A0A0A0;
     outline: none;
     cursor: pointer;
+
+    h1 {
+        display: flex;
+        justify-content: center;
+    }
     }
 
     button:nth-child(2) {
@@ -147,4 +152,4 @@ export const ContainerButton = styles.div`
     outline: none;
     cursor: pointer;
     }
-`;
+`
