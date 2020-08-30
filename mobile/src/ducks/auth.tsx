@@ -4,7 +4,7 @@ import { Types } from "../store/reducer";
 
 export function login(username: string, password: string) {
   return function (dispatch: any) {
-    axios
+    return axios
       .post(`${envs.API_URL}/login`, {
         username: username,
         password: password,
@@ -25,6 +25,7 @@ export function login(username: string, password: string) {
           type: Types.ERROR,
           payload: error.response.data.ErrorMsg,
         });
+        return Promise.resolve(false);
       });
   };
 }
@@ -36,7 +37,7 @@ export function signIn(
   avatar: string
 ) {
   return function (dispatch: any) {
-    axios
+    return axios
       .post(`${envs.API_URL}/signup`, {
         username: username,
         password: password,
@@ -53,7 +54,7 @@ export function signIn(
           type: Types.ERROR,
           payload: error,
         });
-        return Promise.resolve();
+        return Promise.resolve(false);
       });
   };
 }

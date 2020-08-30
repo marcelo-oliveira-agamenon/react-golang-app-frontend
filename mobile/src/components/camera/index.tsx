@@ -9,7 +9,7 @@ interface props {
   handleChange: (uri: string) => void;
 }
 
-const camera: React.FC = (props: props) => {
+const camera: React.FC<props> = ({handleChange}) => {
   let camRef = useRef(null);
   let [_, setPermission] = useState<string>("undetermined");
 
@@ -21,11 +21,11 @@ const camera: React.FC = (props: props) => {
 
   const takePicture = async function (camera: any, close?: boolean) {
     if (close && close === true) {
-      props.handleChange("");
+      handleChange("");
     } else {
       const options = { quality: 0.5, base64: true };
       const data = await camera.takePictureAsync(options);
-      props.handleChange(data.uri);
+      handleChange(data.uri);
     }
   };
 

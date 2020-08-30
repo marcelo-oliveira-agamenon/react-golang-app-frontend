@@ -14,6 +14,7 @@ import { styles } from "./styles";
 import LogoI from "../../assets/images/logo.png";
 import AvatarPlaceholder from "../../assets/images/avatar.png";
 import { StackNavigationProp } from "@react-navigation/stack";
+import Toast from "../../components/toast/index"
 
 interface props {
   navigation: StackNavigationProp<any, string>;
@@ -41,11 +42,20 @@ function SignIn(props: props) {
   };
 
   const handleSubmit = () => {
+    if (email === "" || name === "" || password === "" || avatar === "") {
+      Toast({message: "Please fill all the fields", time: 1500})
+      return 
+    }
+
     setLoading(true);
-    props.signIn(email, password, name, avatar);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+    props.signIn(email, password, name, avatar).then(res => {
+      if (res) {
+        props.navigation.navigate("Login")
+      } else {
+        Toast({message: "Error creating user", time: 1500})
+      }
+      setLoading(false)
+    });
   };
 
   const onFocus = (type: string, isFocus: boolean) => {
@@ -63,7 +73,7 @@ function SignIn(props: props) {
   };
 
   return cameraOpen ? (
-    <View styles={styles.containerCamera}>
+    <View style={styles.containerCamera}>
       <Camera handleChange={handleCamera} />
     </View>
   ) : (
@@ -131,7 +141,7 @@ function SignIn(props: props) {
         <TouchableOpacity
           style={styles.buttonLogin}
           onPress={handleSubmit}
-          disable={loading}
+          disabled={loading}
         >
           {loading ? (
             <ActivityIndicator color="#ffffff" size="large" />
@@ -142,7 +152,7 @@ function SignIn(props: props) {
       </View>
       <View style={styles.containerText}>
         <Text style={styles.textLoginA}>Already have a account?</Text>
-        <TouchableOpacity onPress={() => props.navigation.navigate("Login")}>
+        <TouchableOpacity onPress={() => props.navigation.navigate("Login")} disabled={loading}>
           <Text style={styles.textMarked}>Login</Text>
         </TouchableOpacity>
       </View>

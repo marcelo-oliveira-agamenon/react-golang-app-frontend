@@ -8,7 +8,7 @@ export function getUserList() {
   const state: any = Store.getState();
   const apiToken: string = "Bearer " + state.token;
   return function (dispatch: any) {
-    axios
+    return axios
       .get(`${envs.API_URL}/users`, {
         headers: {
           Authorization: apiToken,
@@ -39,7 +39,7 @@ export function addUser(
   const state: any = Store.getState();
   const apiToken: string = "Bearer " + state.token;
   return function (dispatch: any) {
-    axios
+    return axios
       .post(
         `${envs.API_URL}/users/add`,
         {

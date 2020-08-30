@@ -13,6 +13,7 @@ import { login } from "../../ducks/auth";
 import { connect } from "react-redux";
 import { styles } from "./styles";
 import LogoI from "../../assets/images/logo.png";
+import Toast from "../../components/toast/index"
 import { StackNavigationProp } from "@react-navigation/stack";
 
 interface props {
@@ -27,11 +28,20 @@ function Login(props: props) {
   let emailRef: string, passwordRef: string;
 
   const handleSubmit = () => {
+    if(email === "" || password === "") {
+      Toast({message: "Empty email or password", time: 1500})
+      return
+    }
+
     setLoading(true);
-    props.login(email, password);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+    props.login(email, password).then(res => {
+      if(res) {
+        props.navigation.navigate("Dashboard")       
+      } else {
+        Toast({message: "Email or password invalid", time: 1500})
+      }
+      setLoading(false)
+    });
   };
 
   const onFocus = (type: string, isFocus: boolean) => {
@@ -52,14 +62,14 @@ function Login(props: props) {
       <View style={styles.container}>
         <Image source={LogoI} style={styles.image} />
       </View>
-      <KeyboardAvoidingView
+      {/* <KeyboardAvoidingView
         behevior={Platform.select({
           ios: "padding",
           android: null,
         })}
         style={styles.containerKeyboard}
         enabled={true}
-      >
+      > */}
         <View style={styles.containerInput}>
           <TextInput
             ref={(comp) => (emailRef = comp)}
@@ -82,9 +92,9 @@ function Login(props: props) {
             placeholder="PASSWORD"
           />
         </View>
-      </KeyboardAvoidingView>
+      {/* </KeyboardAvoidingView> */}
       <View style={styles.containerButton}>
-        <TouchableOpacity style={styles.buttonLogin} onPress={handleSubmit}>
+        <TouchableOpacity style={styles.buttonLogin} onPress={handleSubmit} disabled={loading}>
           {loading ? (
             <ActivityIndicator color="#ffffff" size="large" />
           ) : (
@@ -94,7 +104,7 @@ function Login(props: props) {
       </View>
       <View style={styles.containerText}>
         <Text style={styles.textSignUp}>Don't have a account?</Text>
-        <TouchableOpacity onPress={() => props.navigation.navigate("Signup")}>
+        <TouchableOpacity onPress={() => props.navigation.navigate("Signup")} disabled={loading}>
           <Text style={styles.textMarked}>Sign Up</Text>
         </TouchableOpacity>
       </View>
