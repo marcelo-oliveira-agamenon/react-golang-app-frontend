@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Image,
-  TextInput,
   TouchableOpacity,
   Text,
   ActivityIndicator,
@@ -13,7 +12,8 @@ import { login } from "../../ducks/auth";
 import { connect } from "react-redux";
 import { styles } from "./styles";
 import LogoI from "../../assets/images/logo.png";
-import Toast from "../../components/toast/index"
+import Toast from "../../components/toast/index";
+import Input from "../../components/input/index";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 interface props {
@@ -25,7 +25,6 @@ function Login(props: props) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  let emailRef: string, passwordRef: string;
 
   const handleSubmit = () => {
     if(email === "" || password === "") {
@@ -44,21 +43,9 @@ function Login(props: props) {
     });
   };
 
-  const onFocus = (type: string, isFocus: boolean) => {
-    let obj: any = type === "email" ? emailRef : passwordRef;
-    if (isFocus) {
-      obj.setNativeProps({
-        style: styles.onFocusStyle,
-      });
-    } else {
-      obj.setNativeProps({
-        style: styles.onBlurStyle,
-      });
-    }
-  };
-
   return (
     <View style={styles.main}>
+      {console.log(email, password)}
       <View style={styles.container}>
         <Image source={LogoI} style={styles.image} />
       </View>
@@ -71,26 +58,8 @@ function Login(props: props) {
         enabled={true}
       > */}
         <View style={styles.containerInput}>
-          <TextInput
-            ref={(comp) => (emailRef = comp)}
-            onFocus={() => onFocus("email", true)}
-            onBlur={() => onFocus("email", false)}
-            style={styles.emailInput}
-            onChangeText={(event) => setEmail(event)}
-            value={email}
-            placeholder="EMAIL"
-          />
-          <TextInput
-            ref={(comp) => (passwordRef = comp)}
-            onFocus={() => onFocus("password", true)}
-            onBlur={() => onFocus("password", false)}
-            style={styles.passwordInput}
-            secureTextEntry={true}
-            password={true}
-            onChangeText={(event) => setPassword(event)}
-            value={password}
-            placeholder="PASSWORD"
-          />
+          <Input value={email} placeholder={"EMAIL"} onChange={(event) => setEmail(event)} style={styles.emailInput} isPassword={false} focusStyle={styles.onFocusStyle} blurStyle={styles.onBlurStyle} />
+          <Input value={password} placeholder={"PASSWORD"} onChange={(event) => setPassword(event)} style={styles.passwordInput} isPassword={true} focusStyle={styles.onFocusStyle} blurStyle={styles.onBlurStyle} />
         </View>
       {/* </KeyboardAvoidingView> */}
       <View style={styles.containerButton}>

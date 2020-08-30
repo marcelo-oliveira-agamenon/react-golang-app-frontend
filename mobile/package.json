@@ -34,6 +34,7 @@
   "devDependencies": {
     "@babel/core": "~7.9.0",
     "@types/react-native": "^0.63.11",
+    "@types/react-redux": "^7.1.9",
     "babel-jest": "~25.2.6",
     "jest": "~25.2.6",
     "react-test-renderer": "~16.9.0"
