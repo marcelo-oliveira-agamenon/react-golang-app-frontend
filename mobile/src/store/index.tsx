@@ -1,5 +1,19 @@
-import { createStore, compose, applyMiddleware } from "redux";
+import { createStore, compose, applyMiddleware, Store } from "redux";
 import thunk from "redux-thunk";
-import rootReducer from "./reducer";
+import rootReducer, { Types } from "./reducer";
+import { persistStore, persistReducer, PersistConfig } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-export const Store = createStore(rootReducer, compose(applyMiddleware(thunk)));
+const persistConfig: PersistConfig<any, any, any, any> = {
+	key: "authInfo",
+	storage: storage,
+	whitelist: [Types.LOGGEDUSER, Types.TOKEN],
+};
+
+const persistedReducer: any = persistReducer(persistConfig, rootReducer);
+
+export const store: Store = createStore(
+	persistedReducer,
+	compose(applyMiddleware(thunk))
+);
+export const persistedStore: any = persistStore(store);

@@ -1,15 +1,18 @@
 import React from "react";
 import { registerRootComponent } from "expo";
 import { Provider } from "react-redux";
-import { Store } from "./src/store/index";
+import { store, persistedStore } from "./src/store/index";
+import { PersistGate } from "redux-persist/integration/react";
 import App from "./src/App";
 
 const Main = () => {
-  return (
-    <Provider store={Store}>
-      <App />
-    </Provider>
-  );
+	return (
+		<PersistGate persistor={persistedStore}>
+			<Provider store={store}>
+				<App />
+			</Provider>
+		</PersistGate>
+	);
 };
 
 registerRootComponent(Main);
