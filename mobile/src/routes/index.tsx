@@ -16,7 +16,11 @@ const mapStateToProps = (state: { loggedUser: object }) => {
 	};
 };
 
-function Routes() {
+interface props {
+	loggedUser: any;
+}
+
+function Routes(props: props) {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator
@@ -24,10 +28,15 @@ function Routes() {
 					headerShown: false,
 				}}
 			>
-				<Stack.Screen name="Main" component={MainScreen} />
-				<Stack.Screen name="Login" component={LoginScreen} />
-				<Stack.Screen name="Signup" component={SignupScreen} />
-				<Stack.Screen name="Dashboard" component={DashboardScreen} />
+				{props.loggedUser?.userID !== undefined ? (
+					<Stack.Screen name="Dashboard" component={DashboardScreen} />
+				) : (
+					<>
+						<Stack.Screen name="Main" component={MainScreen} />
+						<Stack.Screen name="Login" component={LoginScreen} />
+						<Stack.Screen name="Signup" component={SignupScreen} />
+					</>
+				)}
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

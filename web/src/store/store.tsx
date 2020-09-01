@@ -5,9 +5,9 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: "authInfo",
-  storage: storage,
-  whitelist: [types.API_TOKEN, types.LOGGED_USER],
+	key: "authInfo",
+	storage: storage,
+	whitelist: [types.API_TOKEN, types.LOGGED_USER],
 };
 const pReducer: any = persistReducer(persistConfig, rootReducer);
 

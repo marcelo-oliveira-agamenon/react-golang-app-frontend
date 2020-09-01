@@ -2,11 +2,11 @@ import { createStore, compose, applyMiddleware, Store } from "redux";
 import thunk from "redux-thunk";
 import rootReducer, { Types } from "./reducer";
 import { persistStore, persistReducer, PersistConfig } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const persistConfig: PersistConfig<any, any, any, any> = {
 	key: "authInfo",
-	storage: storage,
+	storage: AsyncStorage,
 	whitelist: [Types.LOGGEDUSER, Types.TOKEN],
 };
 

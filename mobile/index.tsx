@@ -7,7 +7,7 @@ import App from "./src/App";
 
 const Main = () => {
 	return (
-		<PersistGate persistor={persistedStore}>
+		<PersistGate persistor={persistedStore} loading={false}>
 			<Provider store={store}>
 				<App />
 			</Provider>
