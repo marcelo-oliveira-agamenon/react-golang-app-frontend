@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { login } from "../../ducks/auth";
 import { RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
+import { useToasts } from "react-toast-notifications";
 
 import { MainContainer, SecondContainer, InputContainer, EnterContainer } from "./styles";
 import { Loader } from "../../components/index";
@@ -14,9 +15,11 @@ function Login(props: props) {
 	const [username, setUsername] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 	const [loading, setLoading] = useState<boolean>(false);
+	const { addToast } = useToasts();
 
 	function handleSubmit() {
 		if (username === "" || password === "") {
+			addToast("Por favor, preencha os campos de Usuário e Senha", { appearance: "error" });
 			return;
 		}
 		setLoading(true);

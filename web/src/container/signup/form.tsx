@@ -2,15 +2,10 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchUsernameList, signup } from "../../ducks/auth";
 import { RouteComponentProps } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 
 import { PrimaryContainer, SecondContainer, UContainer, ContainerButton } from "./styles";
 import ImageAvatar from "../../assets/avatar/avataaars.png";
-
-const mapStateToProps = (state: { usernameList: {} }) => {
-	return {
-		usernameList: state.usernameList,
-	};
-};
 
 interface props extends RouteComponentProps<any> {
 	usernameList: any;
@@ -23,33 +18,15 @@ function SignUp(props: props) {
 	const [password, setPassword] = useState<string>("");
 	const [fullName, setFullName] = useState<string>("");
 	const [avatar, setAvatar] = useState<string>("");
-	const [error, setError] = useState<string>("");
 	const [userExist, setUserExist] = useState<string>("");
 	const [loading, setLoading] = useState<boolean>(false);
+	const { addToast } = useToasts();
 
 	useEffect(() => {
 		props.fetchUsernameList();
-	}, []);
+	}, [props]);
 
 	const handleSubmit = () => {
-		if (password.length < 6 && username.length !== 0) {
-			setError("Senha deve ter 6 digitos ou mais!");
-			setPassword("");
-			return;
-		}
-
-		if (username.length === 0 && password.length !== 0) {
-			setError("Preencha o campo usuário!");
-			setUsername("");
-			setPassword("");
-			return;
-		}
-
-		if (fullName.length === 0 && username.length !== 0 && password.length !== 0) {
-			setError("Preencha seu Nome completo!");
-			setFullName("");
-		}
-
 		if (username !== "" || password !== "" || password.length >= 6 || fullName !== "") {
 			const formdata: {
 				username: string;
@@ -67,7 +44,7 @@ function SignUp(props: props) {
 				if (response === "New user add in database") {
 					props.history.push("/");
 				} else {
-					setError("Algo deu errado! Por favor tente novamente");
+					addToast("Algo deu errado! Por favor tente novamente", { appearance: "error" });
 					setUsername("");
 					setPassword("");
 					setFullName("");
@@ -76,7 +53,7 @@ function SignUp(props: props) {
 				setLoading(false);
 			});
 		} else {
-			setError("Verifique os campos!");
+			addToast("Algo deu errado! Por favor preencha todos os campos", { appearance: "error" });
 		}
 	};
 
@@ -97,15 +74,8 @@ function SignUp(props: props) {
 		setUsername(username);
 	};
 
-	const handlePasswordChange = (password: string) => {
-		if (password.length === 1) {
-			setError("");
-		}
-		setPassword(password);
-	};
-
 	const handleFileImage = (event: any) => {
-		const image = URL.createObjectURL(event.target.files[0]);
+		const image: string = URL.createObjectURL(event.target.files[0]);
 		setAvatar(image);
 	};
 
@@ -121,7 +91,6 @@ function SignUp(props: props) {
 						<input
 							id="inputfile"
 							type="file"
-							value={avatar}
 							onChange={(event: any) => handleFileImage(event)}
 							accept="image/jpg/png/jpeg"
 						/>
@@ -140,7 +109,7 @@ function SignUp(props: props) {
 						<input
 							type="password"
 							value={password}
-							onChange={(event: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(event.target.value)}
+							onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
 						/>
 					</UContainer>
 					<UContainer>
@@ -161,8 +130,15 @@ function SignUp(props: props) {
 	);
 }
 
-export default connect(mapStateToProps, (dispatch: any) => ({
-	signup: (formdata: { username: string; password: string; fullName: string; avatar: string }) =>
-		dispatch(signup(formdata)),
-	fetchUsernameList: () => dispatch(fetchUsernameList()),
-}))(SignUp);
+export default connect(
+	(state: { usernameList: {} }) => {
+		return {
+			usernameList: state.usernameList,
+		};
+	},
+	(dispatch: any) => ({
+		signup: (formdata: { username: string; password: string; fullName: string; avatar: string }) =>
+			dispatch(signup(formdata)),
+		fetchUsernameList: () => dispatch(fetchUsernameList()),
+	})
+)(SignUp);

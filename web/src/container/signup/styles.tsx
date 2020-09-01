@@ -112,7 +112,7 @@ export const SecondContainer = styled.div`
 		img {
 			width: 100px;
 			height: 100px;
-			border-radius: 15px;
+			border-radius: 60px;
 			@media (max-width: 400px) {
 				width: 50px;
 				height: 50px;
