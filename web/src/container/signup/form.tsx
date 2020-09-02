@@ -24,7 +24,7 @@ function SignUp(props: props) {
 
 	useEffect(() => {
 		props.fetchUsernameList();
-	}, [props]);
+	}, []);
 
 	const handleSubmit = () => {
 		if (username !== "" || password !== "" || password.length >= 6 || fullName !== "") {

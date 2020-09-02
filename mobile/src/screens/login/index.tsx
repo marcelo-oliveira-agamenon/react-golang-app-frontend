@@ -24,6 +24,7 @@ interface props {
 function Login(props: props) {
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
+	const [enabled, setEnabled] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const handleSubmit = () => {
@@ -45,60 +46,57 @@ function Login(props: props) {
 
 	return (
 		<View style={styles.main}>
-			<View style={styles.container}>
-				<Image source={LogoI} style={styles.image} />
-			</View>
-			{/* <KeyboardAvoidingView
-        behevior={Platform.select({
-          ios: "padding",
-          android: null,
-        })}
-        style={styles.containerKeyboard}
-        enabled={true}
-      > */}
-			<View style={styles.containerInput}>
-				<Input
-					value={email}
-					placeholder={"EMAIL"}
-					onChange={(event) => setEmail(event)}
-					style={styles.emailInput}
-					isPassword={false}
-					focusStyle={styles.onFocusStyle}
-					blurStyle={styles.onBlurStyle}
-				/>
-				<Input
-					value={password}
-					placeholder={"PASSWORD"}
-					onChange={(event) => setPassword(event)}
-					style={styles.passwordInput}
-					isPassword={true}
-					focusStyle={styles.onFocusStyle}
-					blurStyle={styles.onBlurStyle}
-				/>
-			</View>
-			{/* </KeyboardAvoidingView> */}
-			<View style={styles.containerButton}>
-				<TouchableOpacity
-					style={styles.buttonLogin}
-					onPress={handleSubmit}
-					disabled={loading}
-				>
-					{loading ? (
-						<ActivityIndicator color="#ffffff" size="large" />
-					) : (
-						<Text style={styles.textLogin}>Login</Text>
-					)}
-				</TouchableOpacity>
-			</View>
-			<View style={styles.containerText}>
-				<Text style={styles.textSignUp}>Don't have a account?</Text>
-				<TouchableOpacity
-					onPress={() => props.navigation.navigate("Signup")}
-					disabled={loading}
-				>
-					<Text style={styles.textMarked}>Sign Up</Text>
-				</TouchableOpacity>
-			</View>
+			<KeyboardAvoidingView behavior={"position"} enabled={enabled}>
+				<View>
+					<View style={styles.container}>
+						<Image source={LogoI} style={styles.image} />
+					</View>
+					<View style={styles.containerInput}>
+						<Input
+							value={email}
+							placeholder={"EMAIL"}
+							onChange={(event) => setEmail(event)}
+							keyboardView={() => setEnabled((enabled) => !enabled)}
+							style={styles.emailInput}
+							isPassword={false}
+							focusStyle={styles.onFocusStyle}
+							blurStyle={styles.onBlurStyle}
+						/>
+						<Input
+							value={password}
+							placeholder={"PASSWORD"}
+							onChange={(event) => setPassword(event)}
+							keyboardView={() => setEnabled((enabled) => !enabled)}
+							style={styles.passwordInput}
+							isPassword={true}
+							focusStyle={styles.onFocusStyle}
+							blurStyle={styles.onBlurStyle}
+						/>
+					</View>
+					<View style={styles.containerButton}>
+						<TouchableOpacity
+							style={styles.buttonLogin}
+							onPress={handleSubmit}
+							disabled={loading}
+						>
+							{loading ? (
+								<ActivityIndicator color="#ffffff" size="large" />
+							) : (
+								<Text style={styles.textLogin}>Login</Text>
+							)}
+						</TouchableOpacity>
+					</View>
+					<View style={styles.containerText}>
+						<Text style={styles.textSignUp}>Don't have a account?</Text>
+						<TouchableOpacity
+							onPress={() => props.navigation.navigate("Signup")}
+							disabled={loading}
+						>
+							<Text style={styles.textMarked}>Sign Up</Text>
+						</TouchableOpacity>
+					</View>
+				</View>
+			</KeyboardAvoidingView>
 		</View>
 	);
 }
