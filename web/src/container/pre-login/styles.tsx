@@ -22,6 +22,18 @@ export const Card = styled.div`
   height: 590px;
   background-color: white;
   box-shadow: -4px 4px 10px rgb(0, 0, 0, 0.25);
+  animation: intro 1.5s;
+
+  @keyframes intro {
+    from {
+      transform: rotate(-55deg);
+      width: 900px;
+      height: 500px;
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
 
   img {
     margin-top: 50px;
@@ -63,8 +75,7 @@ export const Box = styled.div`
   h1 {
     font-family: "Montserrat SemiBold";
     text-transform: uppercase;
-    font-size: 39px;
-    padding: 0 30px;
+    font-size: 42px;
     text-align: center;
     color: white;
     margin-top: 20px;
@@ -143,21 +154,45 @@ export const Box = styled.div`
   }
 `;
 
-export const Inputcomp = styled.div`
-  label {
-    font-family: "Montserrat SemiBold";
-    text-transform: uppercase;
-    color: white;
+export const Btncomp = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  background-color: white;
+  height: 48px;
+  width: 320px;
+  margin: 25px 0;
+  align-items: center;
+  border-radius: 22px;
+  box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
+  cursor: pointer;
+
+  @media (max-width: 400px) {
+    width: 90%;
   }
 
-  input[type="email"],
-  input[type="password"] {
-    outline: none;
-    border-style: none;
+  :hover {
+    animation: hover 3s;
+  }
+
+  @keyframes hover {
+    from {
+      margin-left: 15px;
+    }
+  }
+
+  h4 {
     font-family: "Montserrat Regular";
-    width: 300px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  svg {
+    width: 30px;
     height: 30px;
-    border-radius: 30px;
-    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
+  }
+
+  path {
+    color: black;
   }
 `;

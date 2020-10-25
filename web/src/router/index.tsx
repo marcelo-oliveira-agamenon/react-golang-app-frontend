@@ -1,39 +1,20 @@
 import React from "react";
-import { connect } from "react-redux";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import Login from "../container/login/index";
-import Dashboard from "../container/dashboard/index";
-import SignUp from "../container/signup/form";
-import Product from "../container/products/index";
+import PreLogin from "../container/pre-login";
+import Login from "../container/login";
+import Signup from "../container/signup";
 
-const mapStateToProps = (state: { loggedUser: {} }) => {
-	return {
-		loggedUser: state.loggedUser,
-	};
-};
-
-export interface props {
-	loggedUser?: any;
+function Routes() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/prelogin" component={PreLogin} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
-function Routes(props: props) {
-	return (
-		<BrowserRouter>
-			<Switch>
-				<Route path="/" exact component={Login} />
-				<Route path="/signup" exact component={SignUp} />
-				{Object.entries(props.loggedUser).length !== 0 ? (
-					<>
-						<Route path="/dashboard" exact component={Dashboard} />
-						<Route path="/dashboard/products" exact component={Product} />
-					</>
-				) : (
-					<Redirect to="/" />
-				)}
-			</Switch>
-		</BrowserRouter>
-	);
-}
-
-export default connect(mapStateToProps, null)(Routes);
+export default Routes;
