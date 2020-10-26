@@ -81,6 +81,7 @@ export const Box = styled.div`
     margin-top: 20px;
     font-weight: 200;
     margin-bottom: 100px;
+    letter-spacing: 1px;
   }
 
   p {
@@ -90,6 +91,7 @@ export const Box = styled.div`
     color: white;
     font-weight: 200;
     text-transform: capitalize;
+    letter-spacing: 1px;
   }
 
   span {
@@ -185,6 +187,7 @@ export const Btncomp = styled.div`
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 300;
+    letter-spacing: 1px;
   }
 
   svg {

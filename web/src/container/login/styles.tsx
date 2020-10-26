@@ -56,48 +56,43 @@ export const Box = styled.div`
   width: 80%;
   height: 100%;
 
-  img {
-    display: none;
-  }
-
   h1 {
     font-family: "Montserrat SemiBold";
     text-transform: uppercase;
-    font-size: 39px;
-    padding: 0 30px;
+    font-size: 30px;
+    padding: 0 60px;
     text-align: center;
     color: white;
     margin-top: 20px;
     font-weight: 200;
-    margin-bottom: 100px;
+    margin-bottom: 60px;
+    letter-spacing: 1px;
   }
 
   p {
     font-family: "Montserrat Regular";
-    font-size: 20px;
-    margin-top: 120px;
+    font-size: 16px;
+    margin-top: 32px;
     color: white;
     font-weight: 200;
     text-transform: capitalize;
+    letter-spacing: 1px;
   }
 
   span {
     font-family: "Montserrat SemiBold";
     color: #312f92;
     font-weight: 600;
+    margin-bottom: 100px;
+
     cursor: pointer;
 
     :hover {
-      font-size: 20.5px;
       text-decoration: underline;
     }
   }
 
   @media (max-width: 1000px) {
-    h1 {
-      font-size: 35px;
-    }
-
     p {
       font-size: 15px;
     }
@@ -116,48 +111,130 @@ export const Box = styled.div`
       }
     }
 
-    img {
-      display: initial;
-      width: auto;
-      height: 30%;
-    }
-
     h1 {
       font-size: 28px;
       padding: 0 70px;
       margin-top: 40px;
-      margin-bottom: 30px;
-    }
-
-    p {
-      margin-top: 50px;
+      margin-bottom: 60px;
     }
   }
 
   @media (max-width: 400px) {
-    h1 {
-      margin-left: 0;
-      margin-right: 0;
-      padding: 0;
+    p {
+      padding: 0 30px;
+      text-align: center;
     }
   }
 `;
 
 export const Inputcomp = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  p {
+    font-family: "Montserrat Light";
+    font-size: 10px;
+    margin: 0;
+    margin-right: -25px;
+    text-transform: uppercase;
+  }
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+
+    div {
+      display: flex;
+      align-items: baseline;
+
+      @media (max-width: 400px) {
+        flex-direction: column;
+      }
+    }
+  }
+
   label {
+    font-size: 14px;
     font-family: "Montserrat SemiBold";
     text-transform: uppercase;
     color: white;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    margin-left: 15px;
   }
 
-  input[type="email"],
-  input[type="password"] {
+  input[type="email"] {
+    padding: 0 12px;
+    font-size: 16px;
     outline: none;
     border-style: none;
     font-family: "Montserrat Regular";
-    width: 300px;
-    height: 30px;
+    width: 375px;
+    height: 35px;
     border-radius: 30px;
     box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
+    margin-bottom: 30px;
+
+    @media (max-width: 400px) {
+      width: 100%;
+    }
+  }
+
+  input[type="password"],
+  input[type="text"] {
+    padding: 0 12px;
+    font-size: 16px;
+    outline: none;
+    border-style: none;
+    font-family: "Montserrat Regular";
+    width: 375px;
+    height: 35px;
+    border-radius: 30px;
+    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
+    margin-bottom: 15px;
+
+    @media (max-width: 400px) {
+      width: 100%;
+    }
+  }
+
+  input:focus {
+    box-shadow: 3px 3px 10px rgb(0, 0, 0, 0.25);
+  }
+
+  span {
+    font-family: "Montserrat SemiBold";
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-left: 17px;
+
+    :hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+export const BtnLogin = styled.button`
+  width: 380px;
+  height: 55px;
+  border-radius: 18px;
+  background-color: #312f92;
+  color: white;
+  text-transform: uppercase;
+  font-family: "Montserrat SemiBold";
+  font-size: 18px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  border-style: none;
+  outline: none;
+
+  :hover {
+    box-shadow: 2px 2px 4px rgb(49, 47, 146, 0.6);
+  }
+
+  @media (max-width: 400px) {
+    width: 95%;
   }
 `;
