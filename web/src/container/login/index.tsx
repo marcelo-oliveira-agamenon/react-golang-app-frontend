@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Checkbox, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { login } from "../../ducks/auth";
+import { useToasts } from "react-toast-notifications";
 
 import { Container, Overlay, Card, Box, Inputcomp, BtnLogin } from "./styles";
 import Logo from "../../assets/icons/logo.png";
@@ -17,19 +18,32 @@ function Login(props: props) {
   const [pass, setPass] = useState<string>("");
   const [show, setShow] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const { addToast } = useToasts();
 
   const handleLogin = () => {
+    if (email === "" || pass === "") {
+      addToast("Preencha os Campos!", {
+        appearance: "error",
+        autoDismiss: true,
+      });
+      return;
+    }
+
     setLoading(true);
     props
       .login(email, pass)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        props.history.push("/home");
+        setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        addToast(err, {
+          appearance: "error",
+          autoDismiss: true,
+        });
+        setPass("");
+        setLoading(false);
       });
-
-    setLoading(false);
   };
 
   return (
@@ -73,7 +87,13 @@ function Login(props: props) {
               {loading ? (
                 <Spin
                   indicator={
-                    <LoadingOutlined style={{ fontSize: 30, color: "white" }} />
+                    <LoadingOutlined
+                      style={{
+                        fontSize: 30,
+                        color: "white",
+                        marginTop: "10px",
+                      }}
+                    />
                   }
                 />
               ) : (

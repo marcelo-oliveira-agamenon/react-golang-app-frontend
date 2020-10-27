@@ -3,50 +3,36 @@ import envs from "../config";
 import { types } from "../store/reducer";
 
 //Login function
-export function login(username: string, password: string) {
+export function login(email: string, password: string) {
   return function (dispatch: any) {
     return axios
       .post(`${envs.API_URL}/v1/login`, {
-        username: username,
+        email: email,
         password: password,
       })
       .then((response) => {
         dispatch({
           type: types.API_TOKEN,
-          payload: response.data.Token,
+          payload: response.data.token,
         });
         dispatch({
           type: types.LOGGED_USER,
-          payload: response.data.Data,
+          payload: response.data.user,
         });
-        return Promise.resolve<object>(response.data?.Data);
+        return Promise.resolve<boolean>(true);
       })
       .catch((error) => {
         dispatch({
           type: types.ERROR,
           payload: error,
         });
-        return Promise.reject<boolean>(false);
-      });
-  };
-}
-
-//Fetch username list from api without token
-export function fetchUsernameList() {
-  return function (dispatch: any) {
-    return axios
-      .get(`${envs.API_URL}/signup/usernameList`)
-      .then((response) => {
-        dispatch({
-          type: types.USERNAME_LIST,
-          payload: response.data.Data,
-        });
-      })
-      .catch((error) => {
-        dispatch({
-          type: types.ERROR,
-          payload: error,
-        });
+        let msg =
+          error.response.data === "Wrong password"
+            ? "Senha incorreta"
+            : error.response.data === "No user with this email"
+            ? "Nenhum usuário com este email"
+            : "Erro inesperado!";
+        return Promise.reject<string>(msg);
       });
   };
 }

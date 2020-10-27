@@ -7,12 +7,12 @@ import { store, pStore } from "./store/store";
 import { ToastProvider } from "react-toast-notifications";
 
 ReactDOM.render(
-	<Provider store={store}>
-		<PersistGate loading={null} persistor={pStore}>
-			<ToastProvider autoDismiss={true} autoDismissTimeout={4000}>
-				<App />
-			</ToastProvider>
-		</PersistGate>
-	</Provider>,
-	document.getElementById("root")
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={pStore}>
+      <ToastProvider autoDismiss={true} autoDismissTimeout={3000}>
+        <App />
+      </ToastProvider>
+    </PersistGate>
+  </Provider>,
+  document.getElementById("root")
 );

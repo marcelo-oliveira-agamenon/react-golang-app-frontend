@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import PreLogin from "../container/pre-login";
 import Login from "../container/login";
@@ -9,6 +9,7 @@ function Routes() {
   return (
     <BrowserRouter>
       <Switch>
+        <Redirect exact from="/" to="/prelogin" />
         <Route path="/prelogin" component={PreLogin} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
