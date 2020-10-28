@@ -1,12 +1,11 @@
-import axios from "axios";
-import envs from "../config";
+import api from "../config/axiosConfig";
 import { types } from "../store/reducer";
 
 //Login function
 export function login(email: string, password: string) {
   return function (dispatch: any) {
-    return axios
-      .post(`${envs.API_URL}/v1/login`, {
+    return api
+      .post(`/v1/login`, {
         email: email,
         password: password,
       })
@@ -38,18 +37,26 @@ export function login(email: string, password: string) {
 }
 
 //Add user in the api without token
-export function signup(formData: { username: string; password: string }) {
+export function signup(form: FormData) {
+  console.log("w", form.get("name"));
   return function (dispatch: any) {
-    return axios
-      .post(`${envs.API_URL}/signup`, formData)
+    return api
+      .post(`/v1/signUp`, form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((response) => {
-        return Promise.resolve(response.data.Message);
+        console.log("aa", response);
+        return Promise.resolve(true);
       })
       .catch((error) => {
         dispatch({
           type: types.ERROR,
           payload: error,
         });
+        console.log(error.response);
+        return Promise.reject(error.response.data);
       });
   };
 }

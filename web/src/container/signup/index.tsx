@@ -1,20 +1,83 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { signup } from "../../ducks/auth";
 import { RouteComponentProps } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
-import { Container, Card, InputCont } from "./styles";
+import { Container, Card, InputCont, ImgContainer } from "./styles";
 import ImageAvatar from "../../assets/avatar/avataaars.png";
 
-interface props extends RouteComponentProps<any> {}
+interface props extends RouteComponentProps<any> {
+  signup: (form: FormData) => Promise<any>;
+}
 
 function SignUp(props: props) {
+  const { addToast } = useToasts();
   const [email, setEmail] = useState<string>("");
   const [pass, setPass] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [date, setDate] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
   const [gender, setGender] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [avatar, setAvatar] = useState<string>("");
-  const [loading, setLoading] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleSubmit = () => {
+    setLoading(true);
+    if (email === "") {
+      addToast("Preencha os campos!", {
+        appearance: "error",
+        autoDismiss: true,
+      });
+      return;
+    }
+
+    let form = new FormData();
+    form.set("email", email);
+    form.set("password", pass);
+    form.set("name", name);
+    form.set("birthday", date);
+    form.set("phone", phone);
+    form.set("gender", gender);
+    form.set("address", address);
+    if (avatar !== "") {
+      form.append("avatar", avatar);
+    }
+
+    props
+      .signup(form)
+      .then(() => {
+        addToast("sucesso", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+        setLoading(false);
+      })
+      .catch((err) => {
+        addToast(err, {
+          appearance: "error",
+          autoDismiss: true,
+        });
+        setLoading(false);
+      });
+  };
+
+  const phoneMask = (value: string) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/(\d{2})(\d)/, "($1) $2")
+      .replace(/(\d{5})(\d)/, "$1-$2");
+  };
+
+  const handleImage = (event: any) => {
+    if (event.target.files.length > 0) {
+      let image = URL.createObjectURL(event.target.files[0]);
+      setAvatar(image);
+    }
+  };
 
   return (
     <Container>
@@ -52,6 +115,17 @@ function SignUp(props: props) {
             </InputCont>
 
             <InputCont>
+              <label htmlFor="phone">telefone</label>
+              <input
+                id="phone"
+                type="text"
+                value={phone}
+                maxLength={15}
+                onChange={(e) => setPhone(phoneMask(e.target.value))}
+              />
+            </InputCont>
+
+            <InputCont>
               <label htmlFor="date">data de nascimento</label>
               <input
                 id="date"
@@ -83,16 +157,58 @@ function SignUp(props: props) {
             </InputCont>
           </div>
 
-          <div>
-            <h3>adsassd</h3>
-          </div>
+          <ImgContainer>
+            <section>
+              <img src={avatar !== "" ? avatar : ImageAvatar} alt="avatar" />
+              <input
+                type="file"
+                id="fileHandle"
+                accept="image/jpg/png/jpeg"
+                onChange={(e) => handleImage(e)}
+              />
+            </section>
+            <div>
+              <button
+                onClick={() => document.getElementById("fileHandle")?.click()}
+              >
+                adicionar imagem
+              </button>
+              <button className="remove-btn" onClick={() => setAvatar("")}>
+                remover imagem
+              </button>
+            </div>
+          </ImgContainer>
         </section>
-        <div>
-          <button>clique aqui</button>
+
+        <div className="btn-main">
+          <button
+            className="remove-btn"
+            onClick={() => props.history.push("/prelogin")}
+          >
+            cancelar
+          </button>
+          <button disabled={loading} onClick={() => handleSubmit()}>
+            {loading ? (
+              <Spin
+                indicator={
+                  <LoadingOutlined
+                    style={{
+                      fontSize: 16,
+                      color: "white",
+                    }}
+                  />
+                }
+              />
+            ) : (
+              "cadastrar"
+            )}
+          </button>
         </div>
       </Card>
     </Container>
   );
 }
 
-export default SignUp;
+export default connect(null, {
+  signup,
+})(SignUp);

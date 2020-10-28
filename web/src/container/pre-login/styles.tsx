@@ -101,7 +101,6 @@ export const Box = styled.div`
     cursor: pointer;
 
     :hover {
-      font-size: 20.5px;
       text-decoration: underline;
     }
   }
