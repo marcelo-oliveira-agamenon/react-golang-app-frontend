@@ -12,6 +12,11 @@ export default createGlobalStyle`
     }
 
     @font-face {
+        font-family: "Montserrat Medium";
+        src: url(${require("../assets/fonts/Montserrat/Montserrat-Medium.ttf")});
+    }
+
+    @font-face {
         font-family: "Montserrat Bold";
         src: url(${require("../assets/fonts/Montserrat/Montserrat-Bold.ttf")});
     }

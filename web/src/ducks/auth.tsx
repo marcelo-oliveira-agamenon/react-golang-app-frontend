@@ -38,7 +38,6 @@ export function login(email: string, password: string) {
 
 //Add user in the api without token
 export function signup(form: FormData) {
-  console.log("w", form.get("name"));
   return function (dispatch: any) {
     return api
       .post(`/v1/signUp`, form, {

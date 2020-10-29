@@ -7,6 +7,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
 import { Container, Card, InputCont, ImgContainer } from "./styles";
+import MdSucess from "../../components/modalSuccessSignup";
 import ImageAvatar from "../../assets/avatar/avataaars.png";
 
 interface props extends RouteComponentProps<any> {
@@ -23,15 +24,27 @@ function SignUp(props: props) {
   const [gender, setGender] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [avatar, setAvatar] = useState<string>("");
+  const [file, setFile] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
 
   const handleSubmit = () => {
     setLoading(true);
-    if (email === "") {
+    if (
+      email === "" ||
+      pass === "" ||
+      name === "" ||
+      date === "" ||
+      phone === "" ||
+      gender === "" ||
+      address === "" ||
+      avatar === ""
+    ) {
       addToast("Preencha os campos!", {
         appearance: "error",
         autoDismiss: true,
       });
+      setLoading(false);
       return;
     }
 
@@ -44,17 +57,14 @@ function SignUp(props: props) {
     form.set("gender", gender);
     form.set("address", address);
     if (avatar !== "") {
-      form.append("avatar", avatar);
+      form.append("avatar", file);
     }
 
     props
       .signup(form)
       .then(() => {
-        addToast("sucesso", {
-          appearance: "success",
-          autoDismiss: true,
-        });
         setLoading(false);
+        setShow(true);
       })
       .catch((err) => {
         addToast(err, {
@@ -74,6 +84,7 @@ function SignUp(props: props) {
 
   const handleImage = (event: any) => {
     if (event.target.files.length > 0) {
+      setFile(event.target.files[0]);
       let image = URL.createObjectURL(event.target.files[0]);
       setAvatar(image);
     }
@@ -82,6 +93,7 @@ function SignUp(props: props) {
   return (
     <Container>
       <Card>
+        <MdSucess visible={show} />
         <section>
           <div>
             <InputCont>
