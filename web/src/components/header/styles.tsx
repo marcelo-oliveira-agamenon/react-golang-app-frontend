@@ -24,6 +24,12 @@ export const Avatar = styled.div`
     font-family: "Montserrat Medium";
     font-size: 19px;
     text-transform: uppercase;
-    margin-right: 25px;
+  }
+
+  img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin: 0 14px;
   }
 `;

@@ -46,7 +46,6 @@ export function signup(form: FormData) {
         },
       })
       .then((response) => {
-        console.log("aa", response);
         return Promise.resolve(true);
       })
       .catch((error) => {
@@ -54,7 +53,6 @@ export function signup(form: FormData) {
           type: types.ERROR,
           payload: error,
         });
-        console.log(error.response);
         return Promise.reject(error.response.data);
       });
   };
