@@ -12,7 +12,7 @@ export const Banner = styled.div`
 
   div {
     width: 100%;
-    padding-top: 50px;
+    padding-top: 60px;
   }
 
   img {
@@ -24,29 +24,37 @@ export const Banner = styled.div`
 `;
 
 export const ContSearch = styled.div`
-  margin-top: 100px;
+  margin-top: 130px;
   display: flex;
   justify-content: center;
 `;
 
 export const PromotionComp = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 800px;
-  height: 200px;
-  margin-top: 150px;
-  margin-bottom: 250px;
+  justify-content: center;
 
-  h1 {
-    font-family: "Montserrat SemiBold";
-    letter-spacing: 1px;
-    font-size: 16px;
-    color: white;
-    text-transform: uppercase;
-  }
-
-  div {
+  .component {
     display: flex;
-    background-color: white;
+    flex-direction: column;
+    width: 1200px;
+    height: 200px;
+    margin-top: 150px;
+    margin-bottom: 30px;
+
+    h1 {
+      font-family: "Montserrat SemiBold";
+      letter-spacing: 1px;
+      font-size: 18px;
+      color: white;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .product {
+      display: flex;
+      background-color: white;
+      border-radius: 5px;
+      padding: 10px 15px;
+    }
   }
 `;

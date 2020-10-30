@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { MenuOutlined } from "@ant-design/icons";
+import { User } from "../../ducks/auth";
 
 import { Container, Avatar as Icon } from "./styles";
 
@@ -19,7 +20,7 @@ const header: React.FC = (props: any) => {
   );
 };
 
-export default connect((state: { loggedUser: {} }) => {
+export default connect((state: { loggedUser: User }) => {
   return {
     loggedUser: state.loggedUser,
   };

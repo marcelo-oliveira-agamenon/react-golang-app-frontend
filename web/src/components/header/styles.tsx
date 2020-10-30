@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   position: fixed;
   background: white;
-  height: 50px;
+  height: 60px;
   width: 100%;
 
   .anticon {

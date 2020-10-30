@@ -1,6 +1,25 @@
 import api from "../config/axiosConfig";
 import { types } from "../store/reducer";
 
+export type User = {
+  Address: string;
+  Avatar: string;
+  Birthday: string;
+  CreatedAt: string;
+  DeletedAt: {
+    Time: string;
+    Valid: boolean;
+  };
+  Email: string;
+  FacebookID: string;
+  Gender: string;
+  ID: string;
+  Name: string;
+  Password: string;
+  Phone: string;
+  UpdatedAt: string;
+};
+
 //Login function
 export function login(email: string, password: string) {
   return function (dispatch: any) {
@@ -18,6 +37,7 @@ export function login(email: string, password: string) {
           type: types.LOGGED_USER,
           payload: response.data.user,
         });
+        console.log(response.data);
         return Promise.resolve<boolean>(true);
       })
       .catch((error) => {

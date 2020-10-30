@@ -1,19 +1,29 @@
 import React from "react";
+import { RouteComponentProps } from "react-router-dom";
+import { Product } from "../../ducks/product";
 
 import { Container } from "./styles";
 
 interface props {
-  product: any;
+  product: Product;
+  props: RouteComponentProps<any>;
 }
 
-const product: React.FC<props> = ({ product }) => {
+const product: React.FC<props> = ({ product, props }) => {
   return (
-    <Container>
+    <Container
+      onClick={() =>
+        props.history.push({
+          pathname: "/product",
+          state: product,
+        })
+      }
+    >
       <img src={product.Photos[0]} alt="product" />
-      <div>
-        <h1>{product.Name}</h1>
-        <h1>R$ {parseFloat(product.Value).toFixed(2).replace(".", ",")}</h1>
-      </div>
+      <section>
+        <h2>{product.Name}</h2>
+        <h2>R$ {product.Value.toFixed(2).replace(".", ",")}</h2>
+      </section>
       <p>{product.Description}</p>
     </Container>
   );

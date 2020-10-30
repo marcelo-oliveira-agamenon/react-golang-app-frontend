@@ -3,17 +3,19 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 230px;
+  width: 220px;
   height: 240px;
   border: 1.5px solid black;
   border-radius: 8px;
   margin-right: 17px;
   align-items: center;
+  cursor: pointer;
 
-  div {
+  section {
+    display: flex;
     gap: 18px;
 
-    h1 {
+    h2 {
       color: black;
       font-family: "Montserrat Regular";
       font-size: 14px;

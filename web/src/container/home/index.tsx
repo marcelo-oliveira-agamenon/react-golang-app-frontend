@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getPromotions } from "../../ducks/product";
+import { RouteComponentProps } from "react-router-dom";
+import { getPromotions, getRecents, Product } from "../../ducks/product";
 
 import Header from "../../components/header";
 import SearchBar from "../../components/searchbar";
-import Product from "../../components/product";
+import ProductComp from "../../components/product";
+import Footer from "../../components/footer";
 import { Container, Banner, ContSearch, PromotionComp } from "./styles";
 import BannerImg from "../../assets/image/banner_home.jpg";
 
-interface props {
+interface props extends RouteComponentProps<any> {
   getPromotions: () => Promise<any>;
+  getRecents: () => Promise<any>;
 }
 
 function Home(props: props) {
-  const [promotions, setPromotions] = useState<Array<any>>();
+  const [promotions, setPromotions] = useState<Array<Product>>();
+  const [recents, setRecents] = useState<Array<Product>>();
 
   useEffect(() => {
     props.getPromotions().then((res) => {
       setPromotions(res);
+    });
+    props.getRecents().then((res) => {
+      setRecents(res);
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -25,7 +32,6 @@ function Home(props: props) {
 
   return (
     <Container>
-      {console.log(promotions)}
       <Header />
       <Banner>
         <div></div>
@@ -36,17 +42,37 @@ function Home(props: props) {
       </ContSearch>
 
       <PromotionComp>
-        <h1>em promoção</h1>
-        <div>
-          {promotions?.map((product) => {
-            return <Product key={product.ID} product={product} />;
-          })}
+        <div className="component">
+          <h1>em promoção</h1>
+          <div className="product">
+            {promotions?.map((product) => {
+              return (
+                <ProductComp key={product.ID} product={product} props={props} />
+              );
+            })}
+          </div>
         </div>
       </PromotionComp>
+
+      <PromotionComp>
+        <div className="component">
+          <h1>recentes</h1>
+          <div className="product">
+            {recents?.map((product) => {
+              return (
+                <ProductComp key={product.ID} product={product} props={props} />
+              );
+            })}
+          </div>
+        </div>
+      </PromotionComp>
+
+      <Footer />
     </Container>
   );
 }
 
 export default connect(null, {
   getPromotions,
+  getRecents,
 })(Home);
