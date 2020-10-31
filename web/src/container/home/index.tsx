@@ -38,7 +38,7 @@ function Home(props: props) {
         <img src={BannerImg} alt="banner" />
       </Banner>
       <ContSearch>
-        <SearchBar />
+        <SearchBar {...props} />
       </ContSearch>
 
       <PromotionComp>
@@ -47,7 +47,7 @@ function Home(props: props) {
           <div className="product">
             {promotions?.map((product) => {
               return (
-                <ProductComp key={product.ID} product={product} props={props} />
+                <ProductComp key={product.ID} product={product} {...props} />
               );
             })}
           </div>
@@ -60,7 +60,7 @@ function Home(props: props) {
           <div className="product">
             {recents?.map((product) => {
               return (
-                <ProductComp key={product.ID} product={product} props={props} />
+                <ProductComp key={product.ID} product={product} {...props} />
               );
             })}
           </div>

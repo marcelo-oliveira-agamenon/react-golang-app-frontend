@@ -1,22 +1,33 @@
 import React, { useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { SearchOutlined } from "@ant-design/icons";
 
 import { Container } from "./styles";
 
-function Searchbar() {
+interface props extends RouteComponentProps<any> {}
+
+function Searchbar(props: props) {
   const [search, setSearch] = useState<string>("");
-  const handleChange = (value: string) => {
-    setSearch(value);
+  const handleChange = () => {
+    props.history.push({
+      pathname: "/search",
+      state: search,
+    });
   };
 
   return (
     <Container>
       <h1>busque pelos melhores produtos!</h1>
       <div>
-        <SearchOutlined />
+        <SearchOutlined onClick={() => handleChange()} />
         <input
           value={search}
-          onChange={(event) => handleChange(event.target.value)}
+          onChange={(event) => setSearch(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleChange();
+            }
+          }}
         />
       </div>
     </Container>

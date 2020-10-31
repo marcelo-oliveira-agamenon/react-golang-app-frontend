@@ -4,16 +4,15 @@ import { Product } from "../../ducks/product";
 
 import { Container } from "./styles";
 
-interface props {
+interface props extends RouteComponentProps<any> {
   product: Product;
-  props: RouteComponentProps<any>;
 }
 
-const product: React.FC<props> = ({ product, props }) => {
+const product: React.FC<props> = ({ product, history }) => {
   return (
     <Container
       onClick={() =>
-        props.history.push({
+        history.push({
           pathname: "/product",
           state: product,
         })
