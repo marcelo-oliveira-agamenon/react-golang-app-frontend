@@ -79,6 +79,11 @@ function Login(props: props) {
                 type={show ? "text" : "password"}
                 value={pass}
                 onChange={(e) => setPass(e.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    handleLogin();
+                  }
+                }}
               />
               <span>esqueceu sua senha?</span>
             </Inputcomp>
