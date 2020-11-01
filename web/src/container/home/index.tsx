@@ -32,7 +32,7 @@ function Home(props: props) {
 
   return (
     <Container>
-      <Header />
+      <Header {...props} />
       <Banner>
         <div></div>
         <img src={BannerImg} alt="banner" />

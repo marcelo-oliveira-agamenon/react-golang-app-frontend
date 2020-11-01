@@ -13,7 +13,34 @@ export const ContSearch = styled.div`
 `;
 
 export const ProductSearch = styled.div`
-  margin: 60px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
   min-height: 300px;
   height: 100%;
+
+  h1 {
+    align-self: flex-start;
+    font-family: "Montserrat Bold";
+    color: white;
+    font-size: 20px;
+    margin-bottom: 50px;
+    margin-left: 240px;
+  }
+
+  .center {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-gap: 50px;
+    justify-content: center;
+
+    .content {
+      display: flex;
+      background-color: white;
+      justify-content: center;
+      align-items: center;
+      height: 260px;
+    }
+  }
 `;

@@ -4,6 +4,7 @@ export enum types {
   LOGGED_USER = "loggedUser",
   API_TOKEN = "apiToken",
   ERROR = "error",
+  LOGOUT = "logout",
 }
 
 function rootReducer(
@@ -18,6 +19,12 @@ function rootReducer(
   if (action.type === types.API_TOKEN) {
     return Object.assign({}, state, {
       apiToken: action.payload,
+    });
+  }
+  if (action.type === types.LOGOUT) {
+    return Object.assign({}, state, {
+      loggedUser: "",
+      apiToken: "",
     });
   }
   if (action.type === types.ERROR) {

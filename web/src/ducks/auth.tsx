@@ -77,3 +77,15 @@ export function signup(form: FormData) {
       });
   };
 }
+
+export function logout(props: any) {
+  console.log("dasdsa", props);
+  return function (dispatch: any) {
+    console.log("ffff", props);
+    props.history.push("/prelogin");
+    return dispatch({
+      type: types.LOGOUT,
+      payload: "",
+    });
+  };
+}
