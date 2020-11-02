@@ -56,6 +56,11 @@ export const PromotionComp = styled.div`
       gap: 17px;
       border-radius: 5px;
       padding: 10px 15px;
+
+      .anticon {
+        color: #312f92;
+        font-size: 45px;
+      }
     }
   }
 `;

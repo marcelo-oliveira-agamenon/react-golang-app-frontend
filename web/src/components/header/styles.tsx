@@ -8,6 +8,7 @@ export const Container = styled.div`
   background: white;
   height: 60px;
   width: 100%;
+  z-index: 9;
 
   .anticon {
     margin-left: 15px;

@@ -56,7 +56,7 @@ function Header(props: props) {
               <ShoppingCartOutlined />
               <h1>carrinho</h1>
             </div>
-            <div>
+            <div onClick={() => props.history.push("/myProfile")}>
               <UserOutlined />
               <h1>meu perfil</h1>
             </div>

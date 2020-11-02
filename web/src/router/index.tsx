@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { verifyLoggedUser } from "../ducks/auth";
 
@@ -8,6 +8,8 @@ import Signup from "../container/signup";
 import ResetPassword from "../container/reset-password";
 import Home from "../container/home";
 import Search from "../container/search-page";
+import MyProfile from "../container/my-profile";
+import Product from "../container/product-page";
 
 function Routes() {
   return (
@@ -20,6 +22,8 @@ function Routes() {
         <Route path="/signup" component={Signup} />
         <ProtectedRoute path="/home" component={Home} />
         <ProtectedRoute path="/search" component={Search} />
+        <ProtectedRoute path="/myProfile" component={MyProfile} />
+        <ProtectedRoute path="/product" component={Product} />
       </Switch>
     </BrowserRouter>
   );

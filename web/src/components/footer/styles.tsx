@@ -16,7 +16,7 @@ export const Container = styled.div`
 
   h1 {
     align-self: center;
-    width: 450px;
+    width: 500px;
     text-align: center;
     font-family: "Montserrat Regular";
     font-size: 22px;

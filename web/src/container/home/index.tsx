@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { getPromotions, getRecents, Product } from "../../ducks/product";
+import { LoadingOutlined } from "@ant-design/icons";
 
 import Header from "../../components/header";
 import SearchBar from "../../components/searchbar";
@@ -18,14 +19,24 @@ interface props extends RouteComponentProps<any> {
 function Home(props: props) {
   const [promotions, setPromotions] = useState<Array<Product>>();
   const [recents, setRecents] = useState<Array<Product>>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    props.getPromotions().then((res) => {
-      setPromotions(res);
-    });
-    props.getRecents().then((res) => {
-      setRecents(res);
-    });
+    setLoading(true);
+    props
+      .getPromotions()
+      .then((res) => {
+        setPromotions(res);
+        setLoading(false);
+      })
+      .catch((err) => {});
+    props
+      .getRecents()
+      .then((res) => {
+        setRecents(res);
+        setLoading(false);
+      })
+      .catch((err) => {});
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -45,11 +56,15 @@ function Home(props: props) {
         <div className="component">
           <h1>em promoção</h1>
           <div className="product">
-            {promotions?.map((product) => {
-              return (
-                <ProductComp key={product.ID} product={product} {...props} />
-              );
-            })}
+            {loading ? (
+              <LoadingOutlined />
+            ) : (
+              promotions?.map((product) => {
+                return (
+                  <ProductComp key={product.ID} product={product} {...props} />
+                );
+              })
+            )}
           </div>
         </div>
       </PromotionComp>
@@ -58,11 +73,15 @@ function Home(props: props) {
         <div className="component">
           <h1>recentes</h1>
           <div className="product">
-            {recents?.map((product) => {
-              return (
-                <ProductComp key={product.ID} product={product} {...props} />
-              );
-            })}
+            {loading ? (
+              <LoadingOutlined />
+            ) : (
+              recents?.map((product) => {
+                return (
+                  <ProductComp key={product.ID} product={product} {...props} />
+                );
+              })
+            )}
           </div>
         </div>
       </PromotionComp>
