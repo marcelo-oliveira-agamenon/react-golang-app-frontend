@@ -139,17 +139,34 @@ export const Inputcomp = styled.div`
     text-transform: uppercase;
   }
 
-  > div {
+  .input-component {
+    height: 40px;
     display: flex;
     justify-content: space-between;
     align-content: center;
 
-    div {
+    span {
+      margin-bottom: 0;
+      margin-left: -10px;
+    }
+
+    .show-password {
       display: flex;
       align-items: baseline;
 
       @media (max-width: 400px) {
         flex-direction: column;
+        justify-content: center;
+
+        p {
+          padding: 0;
+          margin: 0;
+          margin-top: -10px;
+        }
+
+        span {
+          margin-left: 0;
+        }
       }
     }
   }

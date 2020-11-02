@@ -159,9 +159,9 @@ export const Btncomp = styled.div`
   display: flex;
   justify-content: space-evenly;
   background-color: white;
-  height: 48px;
+  height: 56px;
   width: 320px;
-  margin: 25px 0;
+  margin: 8px 0;
   align-items: center;
   border-radius: 22px;
   box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
@@ -187,6 +187,7 @@ export const Btncomp = styled.div`
     font-size: 14px;
     font-weight: 300;
     letter-spacing: 1px;
+    margin-top: 6px;
   }
 
   svg {

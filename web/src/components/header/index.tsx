@@ -25,7 +25,6 @@ function Header(props: props) {
 
   return (
     <>
-      {console.log("aa", props)}
       <DrawerMenu>
         <Drawer
           visible={showDrawer}
