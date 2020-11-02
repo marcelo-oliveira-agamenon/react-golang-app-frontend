@@ -26,19 +26,35 @@ function SearchPage(props: props) {
 
   return (
     <Container>
-      <Header />
+      <Header {...props} />
       <ContSearch>
         <SearchBar {...props} />
       </ContSearch>
       <ProductSearch>
-        <h1>buscando por: {props.location.state}</h1>
-        {search?.map((product) => {
-          return (
-            <div key={product.ID}>
-              <ProductComp {...props} product={product} />
-            </div>
-          );
-        })}
+        <h1>BUSCANDO POR: "{props.location.state}"</h1>
+        <div className="center">
+          {search?.map((product) => {
+            return (
+              <div key={product.ID} className="content">
+                <ProductComp {...props} product={product} />
+              </div>
+            );
+          })}
+          {search?.map((product) => {
+            return (
+              <div key={product.ID} className="content">
+                <ProductComp {...props} product={product} />
+              </div>
+            );
+          })}
+          {search?.map((product) => {
+            return (
+              <div key={product.ID} className="content">
+                <ProductComp {...props} product={product} />
+              </div>
+            );
+          })}
+        </div>
       </ProductSearch>
       <Footer />
     </Container>

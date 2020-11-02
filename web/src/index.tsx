@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, pStore } from "./store/store";
 import { ToastProvider } from "react-toast-notifications";
+import "antd/dist/antd.css";
 
 ReactDOM.render(
   <Provider store={store}>

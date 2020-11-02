@@ -7,7 +7,6 @@ export const Container = styled.div`
   height: 240px;
   border: 1.5px solid black;
   border-radius: 8px;
-  margin-right: 17px;
   align-items: center;
   cursor: pointer;
 

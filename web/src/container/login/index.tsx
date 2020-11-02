@@ -64,14 +64,14 @@ function Login(props: props) {
             </Inputcomp>
 
             <Inputcomp>
-              <div>
+              <div className="input-component">
                 <label htmlFor="password">password</label>
-                <div>
-                  <p>exibir senha</p>
+                <div className="show-password">
                   <Checkbox
                     checked={show}
                     onChange={() => setShow((show) => !show)}
                   />
+                  <p>exibir senha</p>
                 </div>
               </div>
               <input

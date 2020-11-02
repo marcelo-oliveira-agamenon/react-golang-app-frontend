@@ -1,5 +1,7 @@
+import { RouteComponentProps } from "react-router-dom";
 import api from "../config/axiosConfig";
 import { types } from "../store/reducer";
+import { store } from "../store/store";
 
 export type User = {
   Address: string;
@@ -37,7 +39,6 @@ export function login(email: string, password: string) {
           type: types.LOGGED_USER,
           payload: response.data.user,
         });
-        console.log(response.data);
         return Promise.resolve<boolean>(true);
       })
       .catch((error) => {
@@ -76,4 +77,23 @@ export function signup(form: FormData) {
         return Promise.reject(error.response.data);
       });
   };
+}
+
+//Remove token and user logged, redirect to login screen
+export function logout(props: RouteComponentProps) {
+  return function (dispatch: any) {
+    props.history.push("/prelogin");
+    return dispatch({
+      type: types.LOGOUT,
+      payload: "",
+    });
+  };
+}
+
+//Verify if a user is logged in
+export function verifyLoggedUser() {
+  const data: any = store.getState();
+  const main = data.loggedUser;
+
+  return main;
 }

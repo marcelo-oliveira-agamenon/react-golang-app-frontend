@@ -93,7 +93,7 @@ function SignUp(props: props) {
   return (
     <Container>
       <Card>
-        <MdSucess visible={show} />
+        <MdSucess visible={show} {...props} />
         <section>
           <div>
             <InputCont>
