@@ -95,3 +95,27 @@ export function searchProduct(value: string) {
       });
   };
 }
+
+//Search product by name function
+export function getAllProducts() {
+  const state: any = store.getState();
+  const token = "Bearer " + state.apiToken;
+  return function (dispatch: any) {
+    return api
+      .get(`/v1/product`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        dispatch({
+          type: types.ERROR,
+          payload: error,
+        });
+        return Promise.reject<boolean>(false);
+      });
+  };
+}
