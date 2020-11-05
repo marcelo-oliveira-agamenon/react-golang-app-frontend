@@ -43,7 +43,7 @@ function Productpage(props: props) {
       <BoxProduct>
         <div className="container-product">
           <div className="data-img-product">
-            <div>
+            <div className="btn-imagem">
               <img src={state.Photos[0]} alt="product" />
               <div>
                 <ShareAltOutlined />
@@ -54,18 +54,19 @@ function Productpage(props: props) {
                 <h1>adicionar aos favoritos</h1>
               </div>
             </div>
-            <div>
+            <div className="data-text">
               <h1>{state.Name}</h1>
               <Rate value={3} disabled />
               <p>{state.Description}</p>
-              <div>
-                <span>R$ {state.Value}</span>
+              <div className="price">
+                <span>R$ {state.Value.toFixed(2).replace(".", ",")}</span>
                 {state.HasShipping ? null : <button>frete grátis</button>}
               </div>
               <button
                 onClick={() =>
                   props.history.push({ pathname: "/cart", state: state })
                 }
+                className="buy-button"
               >
                 <ShoppingCartOutlined />
                 <span>comprar</span>
@@ -73,7 +74,7 @@ function Productpage(props: props) {
             </div>
           </div>
 
-          <div>
+          <div className="details-class">
             <h1>detalhes técnicos</h1>
             <p>{state.TecnicalDetails}</p>
           </div>
@@ -81,13 +82,15 @@ function Productpage(props: props) {
       </BoxProduct>
 
       <Products>
-        <h1>outros produtos</h1>
-        <div className="product-comp">
-          {products.map((product) => {
-            return (
-              <ProductComp key={product.ID} product={product} {...props} />
-            );
-          })}
+        <div className="component">
+          <h1>outros produtos</h1>
+          <div className="product-comp">
+            {products.map((product) => {
+              return (
+                <ProductComp key={product.ID} product={product} {...props} />
+              );
+            })}
+          </div>
         </div>
       </Products>
       <Footer />
