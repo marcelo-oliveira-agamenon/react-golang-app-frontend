@@ -10,6 +10,7 @@ import Home from "../container/home";
 import Search from "../container/search-page";
 import MyProfile from "../container/my-profile";
 import Product from "../container/product-page";
+import Cart from "../container/cart";
 
 function Routes() {
   return (
@@ -24,6 +25,7 @@ function Routes() {
         <ProtectedRoute path="/search" component={Search} />
         <ProtectedRoute path="/myProfile" component={MyProfile} />
         <ProtectedRoute path="/product" component={Product} />
+        <ProtectedRoute path="/cart" component={Cart} />
       </Switch>
     </BrowserRouter>
   );
