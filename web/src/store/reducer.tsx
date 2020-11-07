@@ -3,6 +3,7 @@ import initialState from "../ducks/state";
 export enum types {
   LOGGED_USER = "loggedUser",
   API_TOKEN = "apiToken",
+  CART = "cart",
   ERROR = "error",
   LOGOUT = "logout",
 }
@@ -14,6 +15,11 @@ function rootReducer(
   if (action.type === types.LOGGED_USER) {
     return Object.assign({}, state, {
       loggedUser: action.payload,
+    });
+  }
+  if (action.type === types.CART) {
+    return Object.assign({}, state, {
+      cart: action.payload,
     });
   }
   if (action.type === types.API_TOKEN) {

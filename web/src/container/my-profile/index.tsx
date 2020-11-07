@@ -141,7 +141,12 @@ function MyProfile(props: props) {
           <div></div>
 
           <div className="button-comp">
-            <button className="cancel-btn">cancelar</button>
+            <button
+              className="cancel-btn"
+              onClick={() => props.history.push("/home")}
+            >
+              cancelar
+            </button>
             <button onClick={() => handleSubmit()}>salvar</button>
           </div>
         </div>

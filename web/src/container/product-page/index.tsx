@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Breadcrumb, Rate } from "antd";
+import { Breadcrumb, Rate, InputNumber } from "antd";
 import { Product } from "../../ducks/product";
 import { RouteComponentProps, useLocation } from "react-router-dom";
 import { getAllProducts } from "../../ducks/product";
@@ -22,6 +22,7 @@ interface props extends RouteComponentProps<any> {
 function Productpage(props: props) {
   const { state } = useLocation<Product>();
   const [products, setProducts] = useState<Array<Product>>([]);
+  const [quantity, setQuantity] = useState<any>(1);
 
   useEffect(() => {
     props.getAllProducts().then((res) => {
@@ -54,6 +55,7 @@ function Productpage(props: props) {
                 <h1>adicionar aos favoritos</h1>
               </div>
             </div>
+
             <div className="data-text">
               <h1>{state.Name}</h1>
               <Rate value={3} disabled />
@@ -62,9 +64,23 @@ function Productpage(props: props) {
                 <span>R$ {state.Value.toFixed(2).replace(".", ",")}</span>
                 {state.HasShipping ? null : <button>frete grátis</button>}
               </div>
+              <div className="selector-qtd">
+                <h1>Quantidade: </h1>
+                <InputNumber
+                  min={1}
+                  value={quantity}
+                  onChange={(value) => setQuantity(value)}
+                />
+              </div>
               <button
                 onClick={() =>
-                  props.history.push({ pathname: "/cart", state: state })
+                  props.history.push({
+                    pathname: "/cart",
+                    state: {
+                      product: state,
+                      quantity: quantity,
+                    },
+                  })
                 }
                 className="buy-button"
               >

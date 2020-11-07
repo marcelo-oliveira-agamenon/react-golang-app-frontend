@@ -82,6 +82,19 @@ export const BoxProduct = styled.div`
           border-radius: 18px;
         }
       }
+
+      .selector-qtd {
+        display: flex;
+        margin-top: 20px;
+        align-items: center;
+
+        h1 {
+          margin: 0;
+          font-size: 13px;
+          font-family: "Montserrat Medium";
+          margin-right: 30px;
+        }
+      }
     }
 
     .btn-imagem {

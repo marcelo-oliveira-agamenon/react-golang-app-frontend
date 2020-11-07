@@ -1,11 +1,8 @@
 const initialState = {
-	loggedUser: {},
-	userList: [],
-	usernameList: [],
-	productList: [],
-	user: {},
-	apiToken: "",
-	error: "",
+  loggedUser: {},
+  cart: [],
+  apiToken: "",
+  error: "",
 };
 
 export default initialState;

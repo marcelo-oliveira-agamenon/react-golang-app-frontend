@@ -49,10 +49,10 @@ function Header(props: props) {
               <h1>home</h1>
             </div>
             <div>
-              <ShoppingOutlined />
+              <ShoppingOutlined onClick={() => props.history.push("/orders")} />
               <h1>pedidos</h1>
             </div>
-            <div>
+            <div onClick={() => props.history.push("/cart")}>
               <ShoppingCartOutlined />
               <h1>carrinho</h1>
             </div>
@@ -60,7 +60,7 @@ function Header(props: props) {
               <UserOutlined />
               <h1>meu perfil</h1>
             </div>
-            <div>
+            <div onClick={() => props.history.push("/favorites")}>
               <HeartOutlined />
               <h1>favoritos</h1>
             </div>
