@@ -40,20 +40,6 @@ function SearchPage(props: props) {
               </div>
             );
           })}
-          {search?.map((product) => {
-            return (
-              <div key={product.ID} className="content">
-                <ProductComp {...props} product={product} />
-              </div>
-            );
-          })}
-          {search?.map((product) => {
-            return (
-              <div key={product.ID} className="content">
-                <ProductComp {...props} product={product} />
-              </div>
-            );
-          })}
         </div>
       </ProductSearch>
       <Footer />

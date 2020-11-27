@@ -29,7 +29,7 @@ export const ContSearch = styled.div`
   justify-content: center;
 `;
 
-export const PromotionComp = styled.div`
+export const Section = styled.div`
   display: flex;
   justify-content: center;
 
@@ -48,6 +48,12 @@ export const PromotionComp = styled.div`
       color: white;
       text-transform: uppercase;
       margin-bottom: 20px;
+    }
+
+    .category {
+      display: flex;
+      gap: 50px;
+      margin-top: 20px;
     }
 
     .product {

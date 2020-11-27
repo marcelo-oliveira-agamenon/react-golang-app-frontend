@@ -2,22 +2,26 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { getPromotions, getRecents, Product } from "../../ducks/product";
+import { Category, getCategories } from "../../ducks/category";
 import { LoadingOutlined } from "@ant-design/icons";
 
+import { Container, Banner, ContSearch, Section } from "./styles";
 import Header from "../../components/header";
 import SearchBar from "../../components/searchbar";
 import ProductComp from "../../components/product";
+import CategoryComp from "../../components/category";
 import Footer from "../../components/footer";
-import { Container, Banner, ContSearch, PromotionComp } from "./styles";
 import BannerImg from "../../assets/image/banner_home.jpg";
 
 interface props extends RouteComponentProps<any> {
   getPromotions: () => Promise<any>;
   getRecents: () => Promise<any>;
+  getCategories: () => Promise<any>;
 }
 
 function Home(props: props) {
   const [promotions, setPromotions] = useState<Array<Product>>();
+  const [categories, setCategories] = useState<Array<Category>>();
   const [recents, setRecents] = useState<Array<Product>>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -30,10 +34,19 @@ function Home(props: props) {
         setLoading(false);
       })
       .catch((err) => {});
+
     props
       .getRecents()
       .then((res) => {
         setRecents(res);
+        setLoading(false);
+      })
+      .catch((err) => {});
+
+    props
+      .getCategories()
+      .then((res) => {
+        setCategories(res);
         setLoading(false);
       })
       .catch((err) => {});
@@ -52,7 +65,22 @@ function Home(props: props) {
         <SearchBar {...props} />
       </ContSearch>
 
-      <PromotionComp>
+      <Section>
+        <div className="component">
+          <h1>categorias</h1>
+          <div className="category">
+            {loading ? (
+              <LoadingOutlined />
+            ) : (
+              categories?.map((category) => {
+                return <CategoryComp key={category.ID} data={category} />;
+              })
+            )}
+          </div>
+        </div>
+      </Section>
+
+      <Section>
         <div className="component">
           <h1>em promoção</h1>
           <div className="product">
@@ -67,9 +95,9 @@ function Home(props: props) {
             )}
           </div>
         </div>
-      </PromotionComp>
+      </Section>
 
-      <PromotionComp>
+      <Section>
         <div className="component">
           <h1>recentes</h1>
           <div className="product">
@@ -84,7 +112,7 @@ function Home(props: props) {
             )}
           </div>
         </div>
-      </PromotionComp>
+      </Section>
 
       <Footer />
     </Container>
@@ -94,4 +122,5 @@ function Home(props: props) {
 export default connect(null, {
   getPromotions,
   getRecents,
+  getCategories,
 })(Home);

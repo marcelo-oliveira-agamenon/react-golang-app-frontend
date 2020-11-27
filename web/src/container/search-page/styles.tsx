@@ -30,6 +30,7 @@ export const ProductSearch = styled.div`
   }
 
   .center {
+    min-width: 700px;
     display: grid;
     grid-template-columns: 33% 33% 33%;
     grid-gap: 50px;
