@@ -26,7 +26,7 @@ function SignUp(props: props) {
   const [avatar, setAvatar] = useState<string>("");
   const [file, setFile] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [show, setShow] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(true);
 
   const handleSubmit = () => {
     setLoading(true);

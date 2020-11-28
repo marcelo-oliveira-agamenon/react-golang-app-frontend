@@ -4,6 +4,7 @@ import { Breadcrumb, Rate, InputNumber } from "antd";
 import { Product } from "../../ducks/product";
 import { RouteComponentProps, useLocation } from "react-router-dom";
 import { getAllProducts } from "../../ducks/product";
+import { addFavorite } from "../../ducks/favorite";
 import {
   ShareAltOutlined,
   HeartOutlined,
@@ -17,6 +18,7 @@ import ProductComp from "../../components/product";
 
 interface props extends RouteComponentProps<any> {
   getAllProducts: () => Promise<any>;
+  addFavorite: (productID: string) => Promise<any>;
 }
 
 function Productpage(props: props) {
@@ -50,7 +52,7 @@ function Productpage(props: props) {
                 <ShareAltOutlined />
                 <h1>compartilhe</h1>
               </div>
-              <div>
+              <div onClick={() => props.addFavorite(state.ID)}>
                 <HeartOutlined />
                 <h1>adicionar aos favoritos</h1>
               </div>
@@ -114,4 +116,4 @@ function Productpage(props: props) {
   );
 }
 
-export default connect(null, { getAllProducts })(Productpage);
+export default connect(null, { getAllProducts, addFavorite })(Productpage);
