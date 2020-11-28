@@ -44,6 +44,30 @@ export function addFavorite(productID: string) {
   };
 }
 
+//Delete favorites function
+export function deleteFavorite(favoriteID: string) {
+  const state: any = store.getState();
+  const token = "Bearer " + state.apiToken;
+  return function (dispatch: any) {
+    return api
+      .delete(`/v1/favorite/${favoriteID}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        dispatch({
+          type: types.ERROR,
+          payload: error,
+        });
+        return Promise.reject<boolean>(false);
+      });
+  };
+}
+
 //Get favorites by user function
 export function getFavoriteByUser() {
   const state: any = store.getState();

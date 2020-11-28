@@ -119,3 +119,27 @@ export function getAllProducts() {
       });
   };
 }
+
+//Search product by id function
+export function getProductbyID(productID: string) {
+  const state: any = store.getState();
+  const token = "Bearer " + state.apiToken;
+  return function (dispatch: any) {
+    return api
+      .get(`/v1/product/getbyId/${productID}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        dispatch({
+          type: types.ERROR,
+          payload: error,
+        });
+        return Promise.reject<boolean>(false);
+      });
+  };
+}

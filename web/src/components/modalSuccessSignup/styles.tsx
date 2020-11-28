@@ -45,23 +45,11 @@ export const Container = styled.div`
       }
     }
 
-    @media (max-width: 700px) {
-      img {
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
-      }
-
-      .content-modal-ant {
-        h1 {
-          font-size: 15px;
-        }
-      }
-    }
-
-    @media (max-width: 520px) {
+    @media (max-width: 550px) {
       .main-container {
         flex-direction: column;
+        width: fit-content;
+        height: auto;
       }
 
       img {

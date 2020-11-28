@@ -20,9 +20,9 @@ interface props extends RouteComponentProps<any> {
 }
 
 function Home(props: props) {
-  const [promotions, setPromotions] = useState<Array<Product>>();
-  const [categories, setCategories] = useState<Array<Category>>();
-  const [recents, setRecents] = useState<Array<Product>>();
+  const [promotions, setPromotions] = useState<Array<Product>>([]);
+  const [categories, setCategories] = useState<Array<Category>>([]);
+  const [recents, setRecents] = useState<Array<Product>>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -33,7 +33,9 @@ function Home(props: props) {
         setPromotions(res);
         setLoading(false);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setLoading(false);
+      });
 
     props
       .getRecents()
@@ -41,7 +43,9 @@ function Home(props: props) {
         setRecents(res);
         setLoading(false);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setLoading(false);
+      });
 
     props
       .getCategories()
@@ -49,7 +53,9 @@ function Home(props: props) {
         setCategories(res);
         setLoading(false);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setLoading(false);
+      });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

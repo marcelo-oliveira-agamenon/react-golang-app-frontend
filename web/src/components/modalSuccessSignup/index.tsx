@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from "antd";
 import { RouteComponentProps } from "react-router-dom";
 
@@ -9,10 +9,21 @@ interface props extends RouteComponentProps {
   visible: boolean;
 }
 
-const modalSuccessSignup: React.FC<props> = ({ visible, history }) => {
+const ModalSuccessSignup: React.FC<props> = ({ visible, history }) => {
+  const [width, setWidth] = useState<number>(1080);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setWidth(window.innerWidth);
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Modal
       visible={visible}
+      width={width <= 550 ? 100 : 520}
       centered
       closable={false}
       footer={null}
@@ -21,12 +32,15 @@ const modalSuccessSignup: React.FC<props> = ({ visible, history }) => {
         padding: 0,
       }}
     >
+      {console.log(width)}
       <Container>
         <div className="main-container">
           <img src={Logo} alt="cash and grab" />
           <div className="content-modal-ant">
             <h1>usuário criado com sucesso!</h1>
-            <button onClick={() => history.push("login")}>Acessar conta</button>
+            <button onClick={() => history.push("/login")}>
+              Acessar conta
+            </button>
           </div>
         </div>
       </Container>
@@ -34,4 +48,4 @@ const modalSuccessSignup: React.FC<props> = ({ visible, history }) => {
   );
 };
 
-export default modalSuccessSignup;
+export default ModalSuccessSignup;

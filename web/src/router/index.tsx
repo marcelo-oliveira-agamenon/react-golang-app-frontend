@@ -8,6 +8,7 @@ import Signup from "../container/signup";
 import ResetPassword from "../container/reset-password";
 import Home from "../container/home";
 import Search from "../container/search-page";
+import Favorites from "../container/favorites";
 import MyProfile from "../container/my-profile";
 import Product from "../container/product-page";
 import Cart from "../container/cart";
@@ -23,6 +24,7 @@ function Routes() {
         <Route path="/signup" component={Signup} />
         <ProtectedRoute path="/home" component={Home} />
         <ProtectedRoute path="/search" component={Search} />
+        <ProtectedRoute path="/favorites" component={Favorites} />
         <ProtectedRoute path="/myProfile" component={MyProfile} />
         <ProtectedRoute path="/product" component={Product} />
         <ProtectedRoute path="/cart" component={Cart} />
