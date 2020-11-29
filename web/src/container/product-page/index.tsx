@@ -74,21 +74,26 @@ function Productpage(props: props) {
                   onChange={(value) => setQuantity(value)}
                 />
               </div>
-              <button
-                onClick={() =>
-                  props.history.push({
-                    pathname: "/cart",
-                    state: {
-                      product: state,
-                      quantity: quantity,
-                    },
-                  })
-                }
-                className="buy-button"
-              >
-                <ShoppingCartOutlined />
-                <span>comprar</span>
-              </button>
+
+              {state.StockQtd > 0 ? (
+                <button
+                  onClick={() =>
+                    props.history.push({
+                      pathname: "/cart",
+                      state: {
+                        product: state,
+                        quantity: quantity,
+                      },
+                    })
+                  }
+                  className="buy-button"
+                >
+                  <ShoppingCartOutlined />
+                  <span>comprar</span>
+                </button>
+              ) : (
+                <h2>Produto Esgotado</h2>
+              )}
             </div>
           </div>
 

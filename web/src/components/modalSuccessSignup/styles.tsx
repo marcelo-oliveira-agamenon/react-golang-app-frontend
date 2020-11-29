@@ -46,7 +46,7 @@ export const Container = styled.div`
     }
 
     @media (max-width: 550px) {
-      .main-container {
+      /* .main-container {
         flex-direction: column;
         width: fit-content;
         height: auto;
@@ -60,7 +60,7 @@ export const Container = styled.div`
         h1 {
           font-size: 15px;
         }
-      }
+      } */
     }
   }
 `;

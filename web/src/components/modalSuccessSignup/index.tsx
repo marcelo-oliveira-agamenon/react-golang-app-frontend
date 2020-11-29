@@ -23,7 +23,7 @@ const ModalSuccessSignup: React.FC<props> = ({ visible, history }) => {
   return (
     <Modal
       visible={visible}
-      width={width <= 550 ? 100 : 520}
+      //width={width - 400}
       centered
       closable={false}
       footer={null}

@@ -53,6 +53,14 @@ export const BoxProduct = styled.div`
         text-transform: capitalize;
       }
 
+      h2 {
+        font-family: "Montserrat Bold";
+        font-size: 25px;
+        text-transform: uppercase;
+        color: red;
+        margin-top: 30px;
+      }
+
       p {
         font-family: "Montserrat Light";
         font-size: 12px;
