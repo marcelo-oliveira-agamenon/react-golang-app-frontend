@@ -2,6 +2,15 @@ import api from "../config/axiosConfig";
 import { store } from "../store/store";
 import { types } from "../store/reducer";
 
+export type ProductImage = {
+  ID: string;
+  Productid: string;
+  ImageURL: string;
+  ImageKey: string;
+  CreatedAt: string;
+  UpdatedAt: string;
+};
+
 export type Product = {
   ID: string;
   Name: string;
@@ -17,7 +26,7 @@ export type Product = {
   Discount: number;
   HasPromotion: boolean;
   HasShipping: boolean;
-  Photos: Array<string>;
+  ProductImage: Array<ProductImage>;
   ShippingPrice: number;
   StockQtd: number;
   TecnicalDetails: string;

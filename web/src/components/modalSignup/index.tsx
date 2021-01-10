@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Modal } from "antd";
 import { RouteComponentProps } from "react-router-dom";
 
@@ -10,20 +10,9 @@ interface props extends RouteComponentProps {
 }
 
 const ModalSuccessSignup: React.FC<props> = ({ visible, history }) => {
-  const [width, setWidth] = useState<number>(1080);
-
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      setWidth(window.innerWidth);
-    });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <Modal
       visible={visible}
-      //width={width - 400}
       centered
       closable={false}
       footer={null}
@@ -32,7 +21,6 @@ const ModalSuccessSignup: React.FC<props> = ({ visible, history }) => {
         padding: 0,
       }}
     >
-      {console.log(width)}
       <Container>
         <div className="main-container">
           <img src={Logo} alt="cash and grab" />

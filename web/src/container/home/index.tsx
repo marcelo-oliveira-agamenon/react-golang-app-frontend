@@ -80,7 +80,11 @@ function Home(props: props) {
             ) : (
               categories?.map((category) => {
                 return (
-                  <CategoryComp key={category.ID} data={category} {...props} />
+                  <CategoryComp
+                    key={category.ID}
+                    category={category}
+                    {...props}
+                  />
                 );
               })
             )}

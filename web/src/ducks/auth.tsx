@@ -5,7 +5,8 @@ import { store } from "../store/store";
 
 export type User = {
   Address: string;
-  Avatar: string;
+  ImageURL: string;
+  ImageKey: string;
   Birthday: string;
   CreatedAt: string;
   DeletedAt: {

@@ -29,7 +29,7 @@ export const Box = styled.div`
   .box-cart {
     margin-top: 50px;
     width: 1100px;
-    height: 100px;
+    min-height: 100px;
     background-color: white;
     border-radius: 8px;
 

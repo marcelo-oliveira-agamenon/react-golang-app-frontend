@@ -117,7 +117,7 @@ export const InputCont = styled.div`
   select {
     outline: none;
     border-radius: 8px;
-    width: 322px;
+    width: 300px;
     height: 23px;
     border: 1px solid #7c7c7c;
     background-color: #efefef;

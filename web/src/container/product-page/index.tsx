@@ -47,7 +47,7 @@ function Productpage(props: props) {
         <div className="container-product">
           <div className="data-img-product">
             <div className="btn-imagem">
-              <img src={state.Photos[0]} alt="product" />
+              <img src={state.ProductImage[0].ImageURL} alt="product" />
               <div>
                 <ShareAltOutlined />
                 <h1>compartilhe</h1>

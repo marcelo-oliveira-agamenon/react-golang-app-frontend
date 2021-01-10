@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  .ant-modal-body {
+    border-radius: 20px;
+  }
+
   .main-container {
     background-color: #e4f2ff;
     display: flex;

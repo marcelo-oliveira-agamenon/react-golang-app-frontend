@@ -38,8 +38,8 @@ export const Section = styled.div`
     flex-direction: column;
     width: 1200px;
     height: 200px;
-    margin-top: 150px;
-    margin-bottom: 30px;
+    margin-top: 100px;
+    margin-bottom: 80px;
 
     h1 {
       font-family: "Montserrat SemiBold";

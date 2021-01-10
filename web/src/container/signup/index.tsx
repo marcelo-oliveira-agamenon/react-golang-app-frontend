@@ -7,7 +7,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
 import { Container, Card, InputCont, ImgContainer } from "./styles";
-import MdSucess from "../../components/modalSuccessSignup";
+import MdSucess from "../../components/modalSignup";
 import ImageAvatar from "../../assets/avatar/avataaars.png";
 
 interface props extends RouteComponentProps<any> {
@@ -26,7 +26,7 @@ function SignUp(props: props) {
   const [avatar, setAvatar] = useState<string>("");
   const [file, setFile] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [show, setShow] = useState<boolean>(true);
+  const [show, setShow] = useState<boolean>(false);
 
   const handleSubmit = () => {
     setLoading(true);

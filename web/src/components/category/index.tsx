@@ -3,27 +3,25 @@ import { RouteComponentProps } from "react-router-dom";
 import { Category } from "../../ducks/category";
 
 import { Container } from "./styles";
-import image from "../../assets/image/banner_home.jpg";
-
 interface props extends RouteComponentProps<any> {
-  data: Category;
+  category: Category;
 }
 
-const category: React.FC<props> = ({ data, history }) => {
+const category: React.FC<props> = ({ category, history }) => {
   return (
     <Container
       onClick={() =>
         history.push({
           pathname: "/categories",
           state: {
-            categoryID: data.ID,
-            name: data.Name,
+            categoryID: category.ID,
+            name: category.Name,
           },
         })
       }
     >
-      <img src={image} alt="banner" />
-      <h1>{data.Name}</h1>
+      <img src={category.ImageURL} alt="banner" />
+      <h1>{category.Name}</h1>
     </Container>
   );
 };

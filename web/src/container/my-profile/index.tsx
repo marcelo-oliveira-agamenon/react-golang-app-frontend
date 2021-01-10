@@ -19,7 +19,7 @@ function MyProfile(props: props) {
   const [date, setDate] = useState<string>(props.loggedUser.Birthday);
   const [gender, setGender] = useState<string>(props.loggedUser.Gender);
   const [address, setAddress] = useState<string>(props.loggedUser.Address);
-  const [avatar, setAvatar] = useState<string>(props.loggedUser.Avatar);
+  const [avatar, setAvatar] = useState<string>(props.loggedUser.ImageURL);
   const [file, setFile] = useState<any>();
 
   const handleImage = (event: any) => {

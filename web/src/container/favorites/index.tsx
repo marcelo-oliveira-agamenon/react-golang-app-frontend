@@ -84,7 +84,7 @@ function Favorites(props: props) {
             products.map((value, index) => {
               return (
                 <div className="favorite-comp" key={value.ID}>
-                  <img src={value.Photos[0]} alt="product" />
+                  <img src={value.ProductImage[0].ImageURL} alt="product" />
 
                   <div className="data-favorite">
                     <h1>{value.Name}</h1>
