@@ -18,7 +18,7 @@ const product: React.FC<props> = ({ product, history }) => {
         })
       }
     >
-      <img src={product.Photos[0]} alt="product" />
+      <img src={product.ProductImage[0].ImageURL} alt="product" />
       <section>
         <h2>{product.Name}</h2>
         <h2>R$ {product.Value.toFixed(2).replace(".", ",")}</h2>

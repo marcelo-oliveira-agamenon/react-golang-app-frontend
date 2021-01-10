@@ -11,7 +11,18 @@ export type Order = {
 export function saveProductInCart(order: Order) {
   const state: any = store.getState();
   const orders: Array<Order> = state.cart;
-  orders.push(order);
+  let aux = false;
+  orders.forEach((ord) => {
+    if (ord.product.ID === order.product.ID) {
+      ord.quantity = ord.quantity + order.quantity;
+      aux = !aux;
+    }
+  });
+
+  if (aux === false) {
+    orders.push(order);
+  }
+
   return function (dispatch: any) {
     return dispatch({
       type: types.CART,
@@ -24,7 +35,24 @@ export function saveProductInCart(order: Order) {
 export function getAllOrderInCart() {
   const state: any = store.getState();
   const orders: Array<Order> = state.cart;
-  return function (dispatch: any) {
+
+  return function () {
     return Promise.resolve(orders);
+  };
+}
+
+//delete order from cart
+export function deleteFromCard(index: number) {
+  const state: any = store.getState();
+  const orders: Array<Order> = state.cart;
+
+  return function (dispatch: any) {
+    let aux = orders.filter((item, value) => {
+      return value !== index && item;
+    });
+    return dispatch({
+      type: types.CART,
+      payload: aux,
+    });
   };
 }

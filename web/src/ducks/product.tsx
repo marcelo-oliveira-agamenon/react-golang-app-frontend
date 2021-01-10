@@ -2,6 +2,15 @@ import api from "../config/axiosConfig";
 import { store } from "../store/store";
 import { types } from "../store/reducer";
 
+export type ProductImage = {
+  ID: string;
+  Productid: string;
+  ImageURL: string;
+  ImageKey: string;
+  CreatedAt: string;
+  UpdatedAt: string;
+};
+
 export type Product = {
   ID: string;
   Name: string;
@@ -17,7 +26,7 @@ export type Product = {
   Discount: number;
   HasPromotion: boolean;
   HasShipping: boolean;
-  Photos: Array<string>;
+  ProductImage: Array<ProductImage>;
   ShippingPrice: number;
   StockQtd: number;
   TecnicalDetails: string;
@@ -127,6 +136,30 @@ export function getProductbyID(productID: string) {
   return function (dispatch: any) {
     return api
       .get(`/v1/product/getbyId/${productID}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        dispatch({
+          type: types.ERROR,
+          payload: error,
+        });
+        return Promise.reject<boolean>(false);
+      });
+  };
+}
+
+//Get products by category function
+export function getProductByCategory(categoryID: string) {
+  const state: any = store.getState();
+  const token = "Bearer " + state.apiToken;
+  return function (dispatch: any) {
+    return api
+      .get(`/v1/product/category/${categoryID}`, {
         headers: {
           Authorization: token,
         },

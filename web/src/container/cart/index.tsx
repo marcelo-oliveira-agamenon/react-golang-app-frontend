@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, useLocation } from "react-router-dom";
-import { saveProductInCart, getAllOrderInCart, Order } from "../../ducks/cart";
+import {
+  saveProductInCart,
+  getAllOrderInCart,
+  Order,
+  deleteFromCard,
+} from "../../ducks/cart";
 
 import { Container, Box } from "./styles";
 import Header from "../../components/header";
@@ -11,17 +16,15 @@ import Footer from "../../components/footer";
 interface props extends RouteComponentProps {
   getAllOrderInCart: () => Promise<Array<Order>>;
   saveProductInCart: (order: Order) => void;
+  deleteFromCard: (index: number) => void;
 }
 
 function Cart(props: props) {
   const { state } = useLocation<Order>();
   const [cart, setCart] = useState<Array<Order>>([]);
+  const [refresh, setRefresh] = useState<boolean>(false);
 
   useEffect(() => {
-    props.getAllOrderInCart().then((res) => {
-      setCart(res);
-    });
-
     if (state) {
       let order = {
         product: state.product,
@@ -30,8 +33,12 @@ function Cart(props: props) {
       props.saveProductInCart(order);
     }
 
+    props.getAllOrderInCart().then((res) => {
+      setCart(res);
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [refresh]);
 
   return (
     <Container>
@@ -41,12 +48,16 @@ function Cart(props: props) {
       <Box>
         <div className="box-cart">
           {cart.length > 0 ? (
-            cart.map((order) => {
+            cart.map((order, index) => {
               return (
                 <CartList
-                  key={order.product.ID}
+                  key={index}
                   product={order.product}
                   quantity={order.quantity}
+                  onDelete={() => {
+                    props.deleteFromCard(index);
+                    setRefresh(!refresh);
+                  }}
                 />
               );
             })
@@ -54,23 +65,32 @@ function Cart(props: props) {
             <h2>Carrinho vazio</h2>
           )}
         </div>
-        {state && (
-          <div className="product-cart">
-            <h1>produto no carrinho</h1>
-            <div className="product-detail">
-              <img src={state.product.Photos[0]} alt="product" />
-              <div>
-                <h2>{state.product.Name}</h2>
-                <p>{state.product.Description}</p>
-              </div>
-              <div>
-                <span>
-                  R$ {state.product.Value.toFixed(2).replace(".", ",")}
-                </span>
-                <h5>Quantidade: 1</h5>
-              </div>
-            </div>
-          </div>
+        {cart.length > 0 && (
+          <>
+            {cart.map((order, index) => {
+              return (
+                <div className="product-cart" key={index}>
+                  <h1>produto no carrinho</h1>
+                  <div className="product-detail">
+                    <img
+                      src={order.product.ProductImage[0].ImageURL}
+                      alt="product"
+                    />
+                    <div>
+                      <h2>{order.product.Name}</h2>
+                      <p>{order.product.Description}</p>
+                    </div>
+                    <div>
+                      <span>
+                        R$ {order.product.Value.toFixed(2).replace(".", ",")}
+                      </span>
+                      <h5>Quantidade: {order.quantity}</h5>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </>
         )}
       </Box>
       <Footer />
@@ -81,4 +101,5 @@ function Cart(props: props) {
 export default connect(null, {
   getAllOrderInCart,
   saveProductInCart,
+  deleteFromCard,
 })(Cart);

@@ -79,7 +79,13 @@ function Home(props: props) {
               <LoadingOutlined />
             ) : (
               categories?.map((category) => {
-                return <CategoryComp key={category.ID} data={category} />;
+                return (
+                  <CategoryComp
+                    key={category.ID}
+                    category={category}
+                    {...props}
+                  />
+                );
               })
             )}
           </div>

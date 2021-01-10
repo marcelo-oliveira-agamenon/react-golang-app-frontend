@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  .ant-modal-body {
+    border-radius: 20px;
+  }
+
   .main-container {
     background-color: #e4f2ff;
     display: flex;
@@ -46,7 +50,7 @@ export const Container = styled.div`
     }
 
     @media (max-width: 550px) {
-      .main-container {
+      /* .main-container {
         flex-direction: column;
         width: fit-content;
         height: auto;
@@ -60,7 +64,7 @@ export const Container = styled.div`
         h1 {
           font-size: 15px;
         }
-      }
+      } */
     }
   }
 `;

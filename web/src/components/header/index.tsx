@@ -40,7 +40,7 @@ function Header(props: props) {
               <h1>BEM VINDO, {props.loggedUser.Name}</h1>
               <h1>{props.loggedUser.Email}</h1>
             </div>
-            <img src={props.loggedUser.Avatar} alt="avatar" />
+            <img src={props.loggedUser.ImageURL} alt="avatar" />
           </div>
 
           <div className="options">
@@ -48,8 +48,8 @@ function Header(props: props) {
               <HomeOutlined />
               <h1>home</h1>
             </div>
-            <div>
-              <ShoppingOutlined onClick={() => props.history.push("/orders")} />
+            <div onClick={() => props.history.push("/orders")}>
+              <ShoppingOutlined />
               <h1>pedidos</h1>
             </div>
             <div onClick={() => props.history.push("/cart")}>
@@ -78,7 +78,7 @@ function Header(props: props) {
 
         <Icon>
           <h1>bem vindo {props.loggedUser.Name}</h1>
-          <img src={props.loggedUser.Avatar} alt="avatar" />
+          <img src={props.loggedUser.ImageURL} alt="avatar" />
         </Icon>
       </Container>
     </>

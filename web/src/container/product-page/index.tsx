@@ -47,7 +47,7 @@ function Productpage(props: props) {
         <div className="container-product">
           <div className="data-img-product">
             <div className="btn-imagem">
-              <img src={state.Photos[0]} alt="product" />
+              <img src={state.ProductImage[0].ImageURL} alt="product" />
               <div>
                 <ShareAltOutlined />
                 <h1>compartilhe</h1>
@@ -74,21 +74,26 @@ function Productpage(props: props) {
                   onChange={(value) => setQuantity(value)}
                 />
               </div>
-              <button
-                onClick={() =>
-                  props.history.push({
-                    pathname: "/cart",
-                    state: {
-                      product: state,
-                      quantity: quantity,
-                    },
-                  })
-                }
-                className="buy-button"
-              >
-                <ShoppingCartOutlined />
-                <span>comprar</span>
-              </button>
+
+              {state.StockQtd > 0 ? (
+                <button
+                  onClick={() =>
+                    props.history.push({
+                      pathname: "/cart",
+                      state: {
+                        product: state,
+                        quantity: quantity,
+                      },
+                    })
+                  }
+                  className="buy-button"
+                >
+                  <ShoppingCartOutlined />
+                  <span>comprar</span>
+                </button>
+              ) : (
+                <h2>Produto Esgotado</h2>
+              )}
             </div>
           </div>
 
