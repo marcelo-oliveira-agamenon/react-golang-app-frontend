@@ -1,4 +1,3 @@
-import { RouteComponentProps } from "react-router-dom";
 import api from "../config/axiosConfig";
 import { types } from "../store/reducer";
 import { store } from "../store/store";
@@ -21,6 +20,30 @@ export type Order = {
 };
 
 //Get all orders by user id function
-export function getOrdersByUserId(userid: string) {
-  return function (dispatch: any) {};
+export function createOrder(data: object) {}
+
+//Get all orders by user id function
+export function getOrdersByUserId() {
+  const state: any = store.getState();
+  const token = "Bearer " + state.apiToken;
+  const user = state.loggedUser;
+
+  return function (dispatch: any) {
+    return api
+      .get(`/v1/order/user/${user.ID}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        dispatch({
+          type: types.ERROR,
+          payload: error,
+        });
+        return Promise.reject<boolean>(false);
+      });
+  };
 }

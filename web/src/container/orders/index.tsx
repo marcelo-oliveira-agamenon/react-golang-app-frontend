@@ -1,22 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { getOrdersByUserId, Order } from "../../ducks/order";
 import { RouteComponentProps } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 
 import { Container, Box } from "./styles";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
+import OrderComp from "../../components/order";
 
-interface props extends RouteComponentProps<any> {}
+interface props extends RouteComponentProps<any> {
+  getOrdersByUserId: () => Promise<any>;
+}
 
 function Orders(props: props) {
   const [loading, setLoading] = useState<boolean>(false);
+  const [orders, setOrders] = useState<Array<Order>>([]);
 
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+
+    props
+      .getOrdersByUserId()
+      .then((response) => {
+        setOrders(response);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -27,7 +42,15 @@ function Orders(props: props) {
 
       <Box>
         <div className="card-profile">
-          {loading ? <LoadingOutlined /> : null}
+          {loading ? (
+            <LoadingOutlined />
+          ) : (
+            <>
+              {orders.map((ord) => {
+                return <OrderComp key={ord.ID} />;
+              })}
+            </>
+          )}
         </div>
       </Box>
 
@@ -36,4 +59,4 @@ function Orders(props: props) {
   );
 }
 
-export default connect(null, null)(Orders);
+export default connect(null, { getOrdersByUserId })(Orders);
