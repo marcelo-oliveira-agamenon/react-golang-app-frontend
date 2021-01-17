@@ -20,7 +20,30 @@ export type Order = {
 };
 
 //Get all orders by user id function
-export function createOrder(data: object) {}
+export function createOrder(data: object) {
+  const state: any = store.getState();
+  const token = "Bearer " + state.apiToken;
+  const form = { ...data, userID: state.loggedUser.ID };
+  console.log(form);
+  return function (dispatch: any) {
+    return api
+      .post(`/v1/order`, form, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        return Promise.resolve(true);
+      })
+      .catch((error) => {
+        dispatch({
+          type: types.ERROR,
+          payload: error,
+        });
+        return Promise.resolve(false);
+      });
+  };
+}
 
 //Get all orders by user id function
 export function getOrdersByUserId() {

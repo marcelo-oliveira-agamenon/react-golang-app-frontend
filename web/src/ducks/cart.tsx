@@ -42,7 +42,7 @@ export function getAllOrderInCart() {
 }
 
 //delete order from cart
-export function deleteFromCard(index: number) {
+export function deleteFromCart(index: number) {
   const state: any = store.getState();
   const orders: Array<Order> = state.cart;
 
@@ -53,6 +53,16 @@ export function deleteFromCard(index: number) {
     return dispatch({
       type: types.CART,
       payload: aux,
+    });
+  };
+}
+
+//delete all orders from cart
+export function deleteAllCartProducts() {
+  return function (dispatch: any) {
+    return dispatch({
+      type: types.CART,
+      payload: [],
     });
   };
 }

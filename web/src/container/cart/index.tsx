@@ -5,7 +5,8 @@ import {
   saveProductInCart,
   getAllOrderInCart,
   Order,
-  deleteFromCard,
+  deleteFromCart,
+  deleteAllCartProducts,
 } from "../../ducks/cart";
 import { createOrder } from "../../ducks/order";
 import { RightCircleOutlined, ShoppingCartOutlined } from "@ant-design/icons";
@@ -15,12 +16,14 @@ import { Container, Box } from "./styles";
 import Header from "../../components/header";
 import CartList from "../../components/cart-list-detail";
 import Footer from "../../components/footer";
+import ModalCart from "../../components/modalCart";
 
 interface props extends RouteComponentProps {
   getAllOrderInCart: () => Promise<Array<Order>>;
   saveProductInCart: (order: Order) => void;
-  deleteFromCard: (index: number) => void;
-  createOrder: (data: object) => void;
+  deleteFromCart: (index: number) => void;
+  createOrder: (data: object) => Promise<boolean>;
+  deleteAllCartProducts: () => void;
 }
 
 function Cart(props: props) {
@@ -31,6 +34,8 @@ function Cart(props: props) {
   const [refresh, setRefresh] = useState<boolean>(false);
   const [coupon, setCoupon] = useState<string>("");
   const [total, setTotal] = useState<number>(0);
+  const [count, setCount] = useState<number>(0);
+  const [show, setShow] = useState<boolean>(false);
 
   useEffect(() => {
     if (state) {
@@ -51,7 +56,7 @@ function Cart(props: props) {
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refresh, window.innerWidth]);
+  }, [refresh, count]);
 
   function useCoupon() {
     addToast("Cupom cadastrado com sucesso", {
@@ -60,8 +65,24 @@ function Cart(props: props) {
     });
   }
 
+  function handleOrder() {
+    let aux = 0;
+    cart.forEach((obj) => (aux += aux + obj.quantity));
+    let data = {
+      productID: cart.map((obj) => obj.product.ID),
+      qtd: aux,
+      totalValue: total,
+    };
+    props.createOrder(data).then(() => {
+      setShow(true);
+    });
+    props.deleteAllCartProducts();
+    setCount(count + 1);
+  }
+
   return (
     <Container>
+      <ModalCart visible={show} {...props} />
       <Header {...props} />
       <div className="buffer"></div>
       <h1 className="title-cart">confira seu carrinho</h1>
@@ -75,7 +96,7 @@ function Cart(props: props) {
                   product={order.product}
                   quantity={order.quantity}
                   onDelete={() => {
-                    props.deleteFromCard(index);
+                    props.deleteFromCart(index);
                     setRefresh(!refresh);
                   }}
                 />
@@ -112,7 +133,7 @@ function Cart(props: props) {
               <div className="btn-cart">
                 <p onClick={() => history.push("/home")}>retornar</p>
 
-                <button onClick={() => {}}>
+                <button onClick={handleOrder}>
                   <ShoppingCartOutlined />
                   finalizar compra
                 </button>
@@ -129,6 +150,7 @@ function Cart(props: props) {
 export default connect(null, {
   getAllOrderInCart,
   saveProductInCart,
-  deleteFromCard,
+  deleteFromCart,
   createOrder,
+  deleteAllCartProducts,
 })(Cart);
