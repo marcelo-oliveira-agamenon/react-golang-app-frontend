@@ -7,7 +7,7 @@ export type Order = {
   UserID: string;
   ProductID: Array<string>;
   TotalValue: number;
-  status: string;
+  Status: string;
   Qtd: number;
   Paid: boolean;
   Rate: number;
@@ -20,11 +20,19 @@ export type Order = {
 };
 
 //Get all orders by user id function
-export function createOrder(data: object) {
+export function createOrder(data: {
+  productID: any;
+  qtd: number;
+  totalValue: number;
+}) {
   const state: any = store.getState();
   const token = "Bearer " + state.apiToken;
-  const form = { ...data, userID: state.loggedUser.ID };
-  console.log(form);
+  const form = new FormData();
+  form.append("userID", state.loggedUser.ID);
+  form.append("productID", data.productID);
+  form.append("qtd", data.qtd.toString());
+  form.append("totalValue", data.totalValue.toString());
+
   return function (dispatch: any) {
     return api
       .post(`/v1/order`, form, {

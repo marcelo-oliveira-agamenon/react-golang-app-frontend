@@ -22,7 +22,7 @@ interface props extends RouteComponentProps {
   getAllOrderInCart: () => Promise<Array<Order>>;
   saveProductInCart: (order: Order) => void;
   deleteFromCart: (index: number) => void;
-  createOrder: (data: object) => Promise<boolean>;
+  createOrder: (data: any) => Promise<boolean>;
   deleteAllCartProducts: () => void;
 }
 

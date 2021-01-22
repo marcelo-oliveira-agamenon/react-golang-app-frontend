@@ -47,7 +47,7 @@ function Orders(props: props) {
           ) : (
             <>
               {orders.map((ord) => {
-                return <OrderComp key={ord.ID} />;
+                return <OrderComp key={ord.ID} order={ord} />;
               })}
             </>
           )}
