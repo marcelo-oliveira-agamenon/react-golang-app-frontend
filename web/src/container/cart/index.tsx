@@ -38,6 +38,8 @@ function Cart(props: props) {
   const [show, setShow] = useState<boolean>(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     if (state) {
       let order = {
         product: state.product,

@@ -25,6 +25,8 @@ function Categories(props: props) {
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     setLoading(true);
 
     props

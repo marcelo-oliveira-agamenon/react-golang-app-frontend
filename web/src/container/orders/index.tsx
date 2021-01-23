@@ -18,6 +18,8 @@ function Orders(props: props) {
   const [orders, setOrders] = useState<Array<Order>>([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     setLoading(true);
 
     props

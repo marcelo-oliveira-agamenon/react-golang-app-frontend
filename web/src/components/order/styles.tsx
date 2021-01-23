@@ -84,12 +84,15 @@ export const Container = styled.div`
     }
 
     .CANCELADO {
+      background-color: #f98e3a;
     }
 
     .ENTREGUE {
+      background-color: #35c14f;
     }
 
     .ANDAMENTO {
+      background-color: #faff1e;
     }
   }
 `;

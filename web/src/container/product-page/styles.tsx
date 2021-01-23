@@ -20,6 +20,7 @@ export const Container = styled.div`
     color: white;
     text-transform: uppercase;
     font-family: "Montserrat SemiBold";
+    cursor: pointer;
   }
 
   .ant-breadcrumb-separator {

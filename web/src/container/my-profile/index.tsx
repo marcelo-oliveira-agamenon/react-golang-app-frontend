@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { User } from "../../ducks/auth";
 
@@ -21,6 +21,12 @@ function MyProfile(props: props) {
   const [address, setAddress] = useState<string>(props.loggedUser.Address);
   const [avatar, setAvatar] = useState<string>(props.loggedUser.ImageURL);
   const [file, setFile] = useState<any>();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleImage = (event: any) => {
     if (event.target.files.length > 0) {

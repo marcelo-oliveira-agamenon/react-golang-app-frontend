@@ -27,6 +27,8 @@ function Productpage(props: props) {
   const [quantity, setQuantity] = useState<any>(1);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     props.getAllProducts().then((res) => {
       setProducts(res);
     });
@@ -39,8 +41,21 @@ function Productpage(props: props) {
       <Header {...props} />
       <div className="buffer"></div>
       <Breadcrumb separator="/">
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Categoria</Breadcrumb.Item>
+        <Breadcrumb.Item onClick={() => props.history.push("/home")}>
+          Home
+        </Breadcrumb.Item>
+        <Breadcrumb.Item
+          onClick={() =>
+            props.history.push({
+              pathname: "/categories",
+              state: {
+                categoryID: state.Categoryid,
+              },
+            })
+          }
+        >
+          Categoria
+        </Breadcrumb.Item>
         <Breadcrumb.Item>{state.Name}</Breadcrumb.Item>
       </Breadcrumb>
       <BoxProduct>

@@ -15,7 +15,10 @@ interface props extends RouteComponentProps<any> {
 
 function SearchPage(props: props) {
   const [search, setSearch] = useState<Array<Product>>([]);
+
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     let value: any = props.location.state;
     props.searchProduct(value).then((res) => {
       setSearch(res);
