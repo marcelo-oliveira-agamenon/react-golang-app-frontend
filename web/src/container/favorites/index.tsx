@@ -30,6 +30,8 @@ function Favorites(props: props) {
   const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     setLoading(true);
 
     props

@@ -9,7 +9,7 @@ interface props extends RouteComponentProps {
   visible: boolean;
 }
 
-const ModalSuccessSignup: React.FC<props> = ({ visible, history }) => {
+const modalCart: React.FC<props> = ({ visible, history }) => {
   return (
     <Modal
       visible={visible}
@@ -22,18 +22,20 @@ const ModalSuccessSignup: React.FC<props> = ({ visible, history }) => {
       }}
     >
       <Container>
-        <div className="main-container">
-          <img src={Logo} alt="cash and grab" />
-          <div className="content-modal-ant">
-            <h1>usuário criado com sucesso!</h1>
-            <button onClick={() => history.push("/login")}>
-              Acessar conta
-            </button>
-          </div>
+        <img src={Logo} alt="cash and grab" />
+
+        <div>
+          <h1>Parabéns! seu pedido nº 3 está sendo processado!</h1>
+
+          <button onClick={() => history.push("/orders")}>
+            acompanhar pedido
+          </button>
+
+          <p onClick={() => history.push("/home")}>continue comprando</p>
         </div>
       </Container>
     </Modal>
   );
 };
 
-export default ModalSuccessSignup;
+export default modalCart;

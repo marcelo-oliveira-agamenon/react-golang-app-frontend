@@ -13,6 +13,7 @@ export const Container = styled.div`
   section {
     display: flex;
     gap: 18px;
+    margin-top: 8px;
 
     h2 {
       color: black;
@@ -27,7 +28,6 @@ export const Container = styled.div`
     font-size: 11px;
     color: #7c7c7c;
     padding: 0 12px;
-    margin-top: 12px;
     text-overflow: ellipsis;
     display: block;
     overflow: hidden;

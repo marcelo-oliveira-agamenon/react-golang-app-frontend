@@ -27,6 +27,9 @@ export const Box = styled.div`
   align-items: center;
 
   .box-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 50px;
     width: 1100px;
     min-height: 100px;
@@ -40,56 +43,106 @@ export const Box = styled.div`
       font-size: 28px;
       text-transform: capitalize;
     }
-  }
 
-  .product-cart {
-    margin-top: 80px;
-    width: 1100px;
-    height: auto;
-    background-color: white;
-    border-radius: 8px;
-    padding: 30px 60px;
-
-    h1 {
+    h3 {
+      text-align: center;
+      margin-top: 20px;
       font-family: "Montserrat Regular";
-      font-size: 25px;
-      text-transform: capitalize;
-      margin-bottom: 80px;
+      font-size: 15px;
+      text-transform: uppercase;
+      margin-top: 80px;
+      color: blue;
+      cursor: pointer;
+
+      :hover {
+        text-decoration: underline;
+      }
     }
   }
 
-  .product-detail {
+  .coupon {
+    width: 82%;
+    background-color: #efefef;
+    height: 40px;
     display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    align-items: center;
 
-    img {
-      width: 220px;
-      height: 180px;
-      border-radius: 15px;
+    input[type="text"] {
+      border-style: none;
+      padding: 2px 12px;
+      width: 200px;
+      margin-right: 20px;
     }
 
-    h2 {
-      font-family: "Montserrat Regular";
+    .anticon {
       font-size: 20px;
+      cursor: pointer;
+    }
+
+    h4 {
+      font-family: "Montserrat Regular";
       text-transform: capitalize;
-      padding: 0 30px;
+      font-size: 18px;
+      margin: 0;
+    }
+  }
+
+  .btn-cart {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    padding: 0 100px;
+    margin-bottom: 30px;
+
+    button {
+      padding: 10px 25px;
+      border-radius: 8px;
+      background-color: white;
+      border: 2px solid black;
+      font-size: 18px;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      .anticon {
+        margin-right: 20px;
+        font-size: 20px;
+      }
     }
 
     p {
-      font-family: "Montserrat Light";
-      font-size: 13px;
-      text-align: justify;
-      padding: 0 30px;
+      margin: 0;
+      text-transform: capitalize;
+      cursor: pointer;
+      font-size: 16px;
+
+      :hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .subtotal {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 15px;
+    align-items: center;
+    background-color: #efefef;
+    min-width: 280px;
+    min-height: 30px;
+    margin-top: 30px;
+
+    p {
+      margin: 0;
+      font-family: "Montserrat Regular";
+      font-size: 18px;
     }
 
     span {
-      font-family: "Montserrat SemiBold";
-      font-size: 22px;
-      letter-spacing: 1px;
-    }
-
-    div {
-      display: flex;
-      flex-direction: column;
+      font-family: "Montserrat Bold";
     }
   }
 `;
