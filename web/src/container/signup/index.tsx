@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { signup } from "../../ducks/auth";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, useLocation } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
@@ -14,8 +14,22 @@ interface props extends RouteComponentProps<any> {
   signup: (form: FormData) => Promise<any>;
 }
 
+interface facebookData {
+  email: string;
+  name: string;
+  accessToken: string;
+  picture: {
+    data: {
+      height: number;
+      width: number;
+      url: string;
+    };
+  };
+}
+
 function SignUp(props: props) {
   const { addToast } = useToasts();
+  const { state } = useLocation<facebookData>();
   const [email, setEmail] = useState<string>("");
   const [pass, setPass] = useState<string>("");
   const [name, setName] = useState<string>("");
@@ -27,6 +41,11 @@ function SignUp(props: props) {
   const [file, setFile] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
+
+  useEffect(() => {
+    setEmail(state.email);
+    setName(state.name);
+  }, [props.location.state]);
 
   const handleSubmit = () => {
     setLoading(true);

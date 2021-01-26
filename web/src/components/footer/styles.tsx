@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 200px;
+  margin-top: 22vh;
   width: 100%;
   height: 280px;
   background-color: white;

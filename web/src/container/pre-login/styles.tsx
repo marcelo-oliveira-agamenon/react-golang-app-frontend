@@ -68,6 +68,45 @@ export const Box = styled.div`
   width: 80%;
   height: 100%;
 
+  .facebook-btn {
+    display: flex;
+    border: none;
+    justify-content: space-evenly;
+    background-color: white;
+    height: 56px;
+    width: 320px;
+    margin: 8px 0;
+    align-items: center;
+    border-radius: 22px;
+    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
+    font-family: "Montserrat Regular";
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: black;
+    cursor: pointer;
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    path {
+      color: black;
+    }
+
+    :hover {
+      animation: hover 3s;
+    }
+
+    @keyframes hover {
+      from {
+        margin-left: 15px;
+      }
+    }
+  }
+
   img {
     display: none;
   }
@@ -173,6 +212,7 @@ export const Btncomp = styled.div`
 
   :hover {
     animation: hover 3s;
+    text-decoration: underline;
   }
 
   @keyframes hover {
