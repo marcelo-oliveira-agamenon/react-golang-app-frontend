@@ -43,9 +43,11 @@ function SignUp(props: props) {
   const [show, setShow] = useState<boolean>(false);
 
   useEffect(() => {
-    setEmail(state.email);
-    setName(state.name);
-  }, [props.location.state]);
+    if (state !== undefined) {
+      setEmail(state.email);
+      setName(state.name);
+    }
+  }, [state]);
 
   const handleSubmit = () => {
     setLoading(true);
