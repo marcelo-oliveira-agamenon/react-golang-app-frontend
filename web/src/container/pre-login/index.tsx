@@ -23,15 +23,15 @@ function PreLogin(props: props) {
   const responseFacebook = (
     response: ReactFacebookLoginInfo | ReactFacebookFailureResponse | any
   ) => {
-    console.log("dasd", response);
     props
       .loginFacebook(response.email, response.accessToken)
       .then((resp) => {
-        if (resp) {
-          props.history.push("/home");
-        } else {
-          props.history.push("/signup", response);
-        }
+        // if (resp) {
+        //   props.history.push("/home");
+        // } else {
+        //   props.history.push("/signup", response);
+        // }
+        props.history.push("/signup", response);
       })
       .catch((err) => {
         addToast(err, {

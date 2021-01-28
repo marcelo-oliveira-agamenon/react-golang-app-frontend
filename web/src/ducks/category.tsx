@@ -1,5 +1,4 @@
 import api from "../config/axiosConfig";
-import { store } from "../store/store";
 import { types } from "../store/reducer";
 
 export type Category = {
@@ -17,15 +16,9 @@ export type Category = {
 
 //Get all categories function
 export function getCategories() {
-  const state: any = store.getState();
-  const token = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return api
-      .get(`/v1/category`, {
-        headers: {
-          Authorization: token,
-        },
-      })
+      .get(`/v1/category`)
       .then((response) => {
         return response.data;
       })

@@ -17,7 +17,6 @@ export type Favorite = {
 //add favorite product function
 export function addFavorite(productID: string) {
   const state: any = store.getState();
-  const token = "Bearer " + state.apiToken;
   let form = new FormData();
   form.set("userid", state.loggedUser.ID);
   form.set("productid", productID);
@@ -26,7 +25,6 @@ export function addFavorite(productID: string) {
     return api
       .post(`/v1/favorite`, form, {
         headers: {
-          Authorization: token,
           "Content-Type": "multipart/form-data",
         },
       })
@@ -46,15 +44,9 @@ export function addFavorite(productID: string) {
 
 //Delete favorites function
 export function deleteFavorite(favoriteID: string) {
-  const state: any = store.getState();
-  const token = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return api
-      .delete(`/v1/favorite/${favoriteID}`, {
-        headers: {
-          Authorization: token,
-        },
-      })
+      .delete(`/v1/favorite/${favoriteID}`)
       .then((response) => {
         return response.data;
       })
@@ -71,14 +63,9 @@ export function deleteFavorite(favoriteID: string) {
 //Get favorites by user function
 export function getFavoriteByUser() {
   const state: any = store.getState();
-  const token = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return api
-      .get(`/v1/favorite/${state.loggedUser.ID}`, {
-        headers: {
-          Authorization: token,
-        },
-      })
+      .get(`/v1/favorite/${state.loggedUser.ID}`)
       .then((response) => {
         return response.data;
       })

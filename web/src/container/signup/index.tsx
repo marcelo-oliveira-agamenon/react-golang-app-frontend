@@ -44,10 +44,48 @@ function SignUp(props: props) {
 
   useEffect(() => {
     if (state !== undefined) {
-      setEmail(state.email);
-      setName(state.name);
+      handleFacebookSignUp(state);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
+
+  const handleFacebookSignUp = (state: facebookData) => {
+    setEmail(state.email);
+    setName(state.name);
+    getBase64ImageFromUrl(state.picture.data.url)
+      .then((resp) => {
+        setFile(resp);
+        setAvatar(state.picture.data.url);
+      })
+      .catch(() => {
+        addToast("Falha ao carregar imagem do Facebook", {
+          appearance: "error",
+          autoDismiss: true,
+        });
+      });
+  };
+
+  async function getBase64ImageFromUrl(imageUrl: string) {
+    let res = await fetch(imageUrl);
+    let blob = await res.blob();
+
+    return new Promise((resolve, reject) => {
+      let reader = new FileReader();
+      reader.addEventListener(
+        "load",
+        () => {
+          resolve(reader.result);
+        },
+        false
+      );
+
+      reader.onerror = () => {
+        return reject("");
+      };
+      reader.readAsDataURL(blob);
+    });
+  }
 
   const handleSubmit = () => {
     setLoading(true);
