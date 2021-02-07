@@ -36,7 +36,7 @@ export const Section = styled.div`
   .component {
     display: flex;
     flex-direction: column;
-    width: 1200px;
+    width: 90%;
     height: 200px;
     margin-top: 100px;
     margin-bottom: 80px;
@@ -54,11 +54,16 @@ export const Section = styled.div`
       display: flex;
       gap: 50px;
       margin-top: 20px;
+      overflow-x: auto;
+      min-height: 280px;
     }
 
     .product {
       display: flex;
       background-color: white;
+      width: 100%;
+      overflow-x: auto;
+      min-height: 280px;
       gap: 17px;
       border-radius: 5px;
       padding: 10px 15px;

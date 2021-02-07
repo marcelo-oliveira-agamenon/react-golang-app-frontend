@@ -45,4 +45,16 @@ export default createGlobalStyle`
     html, body, #root {
         height: 100%;
     }
+
+    ::-webkit-scrollbar {
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #dddddd;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: grey;
+      }
 `;
