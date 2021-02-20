@@ -35,4 +35,23 @@ export const Container = styled.div`
     width: 550px;
     padding: 5px 10px;
   }
+
+  @media (max-width: 815px) {
+    width: 95%;
+    min-height: 150px;
+
+    div {
+      width: 90%;
+    }
+
+    input {
+      width: 90%;
+    }
+  }
+
+  @media (max-width: 460px) {
+    h1 {
+      padding: 0 15px;
+    }
+  }
 `;

@@ -1,5 +1,4 @@
 import api from "../config/axiosConfig";
-import { store } from "../store/store";
 import { types } from "../store/reducer";
 
 export type ProductImage = {
@@ -35,15 +34,9 @@ export type Product = {
 
 //Get promotion products function
 export function getPromotions() {
-  const state: any = store.getState();
-  const token = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return api
-      .get(`/v1/product/promotion`, {
-        headers: {
-          Authorization: token,
-        },
-      })
+      .get(`/v1/product/promotion`)
       .then((response) => {
         return response.data;
       })
@@ -59,15 +52,9 @@ export function getPromotions() {
 
 //Get most recent products function
 export function getRecents() {
-  const state: any = store.getState();
-  const token = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return api
-      .get(`/v1/product/recent`, {
-        headers: {
-          Authorization: token,
-        },
-      })
+      .get(`/v1/product/recent`)
       .then((response) => {
         return response.data;
       })
@@ -83,15 +70,9 @@ export function getRecents() {
 
 //Search product by name function
 export function searchProduct(value: string) {
-  const state: any = store.getState();
-  const token = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return api
-      .get(`/v1/product/search/${value}`, {
-        headers: {
-          Authorization: token,
-        },
-      })
+      .get(`/v1/product/search/${value}`)
       .then((response) => {
         return response.data;
       })
@@ -107,15 +88,9 @@ export function searchProduct(value: string) {
 
 //Search product by name function
 export function getAllProducts() {
-  const state: any = store.getState();
-  const token = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return api
-      .get(`/v1/product`, {
-        headers: {
-          Authorization: token,
-        },
-      })
+      .get(`/v1/product`)
       .then((response) => {
         return response.data;
       })
@@ -131,15 +106,9 @@ export function getAllProducts() {
 
 //Search product by id function
 export function getProductbyID(productID: string) {
-  const state: any = store.getState();
-  const token = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return api
-      .get(`/v1/product/getbyId/${productID}`, {
-        headers: {
-          Authorization: token,
-        },
-      })
+      .get(`/v1/product/getbyId/${productID}`)
       .then((response) => {
         return response.data;
       })
@@ -155,15 +124,9 @@ export function getProductbyID(productID: string) {
 
 //Get products by category function
 export function getProductByCategory(categoryID: string) {
-  const state: any = store.getState();
-  const token = "Bearer " + state.apiToken;
   return function (dispatch: any) {
     return api
-      .get(`/v1/product/category/${categoryID}`, {
-        headers: {
-          Authorization: token,
-        },
-      })
+      .get(`/v1/product/category/${categoryID}`)
       .then((response) => {
         return response.data;
       })

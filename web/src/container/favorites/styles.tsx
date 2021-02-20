@@ -35,6 +35,14 @@ export const Box = styled.div`
     background-color: white;
     border-radius: 8px;
 
+    @media (max-width: 920px) {
+      width: 95%;
+    }
+
+    @media (max-width: 360px) {
+      padding: 30px;
+    }
+
     span {
       text-align: center;
       font-size: 20px;
@@ -53,6 +61,14 @@ export const Box = styled.div`
       padding-bottom: 20px;
       border-bottom: 2px solid black;
 
+      @media (max-width: 920px) {
+        justify-content: space-between;
+      }
+
+      @media (max-width: 360px) {
+        flex-direction: column;
+      }
+
       .anticon {
         font-size: 40px;
         cursor: pointer;
@@ -64,6 +80,30 @@ export const Box = styled.div`
         height: 71px;
         border-radius: 15px;
         margin-right: 80px;
+
+        @media (max-width: 920px) {
+          margin-right: 0;
+        }
+
+        @media (max-width: 480px) {
+          display: none;
+        }
+      }
+
+      @media (max-width: 920px) {
+        section {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        section {
+          display: flex;
+          flex-direction: row;
+          margin-top: 20px;
+        }
       }
 
       .data-favorite {
@@ -73,9 +113,28 @@ export const Box = styled.div`
         flex-direction: column;
         row-gap: 10px;
 
+        @media (max-width: 920px) {
+          margin-right: 0;
+        }
+
+        @media (max-width: 720px) {
+          min-width: auto;
+        }
+
         div {
           display: flex;
           justify-content: space-between;
+
+          @media (max-width: 740px) {
+            justify-content: flex-start;
+            gap: 8px;
+          }
+
+          @media (max-width: 360px) {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
         }
 
         h1 {

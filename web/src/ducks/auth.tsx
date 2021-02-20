@@ -58,6 +58,41 @@ export function login(email: string, password: string) {
   };
 }
 
+//LoginWithFacebook function
+export function loginFacebook(email: string, token: string) {
+  return function (dispatch: any) {
+    return api
+      .post(`/v1/loginWithFacebook`, {
+        email: email,
+        token: token,
+      })
+      .then((response) => {
+        dispatch({
+          type: types.API_TOKEN,
+          payload: response.data.token,
+        });
+        dispatch({
+          type: types.LOGGED_USER,
+          payload: response.data.user,
+        });
+        return Promise.resolve<boolean>(true);
+      })
+      .catch((error) => {
+        dispatch({
+          type: types.ERROR,
+          payload: error,
+        });
+        let msg =
+          error.response.data === "Invalid token"
+            ? "Token expirado para login com Facebook"
+            : error.response.data === "No user with this email"
+            ? "Nenhum usuário com este email"
+            : "Erro inesperado!";
+        return Promise.reject<string>(msg);
+      });
+  };
+}
+
 //Add user in the api without token
 export function signup(form: FormData) {
   return function (dispatch: any) {

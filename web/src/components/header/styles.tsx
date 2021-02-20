@@ -34,6 +34,23 @@ export const Avatar = styled.div`
     border-radius: 50%;
     margin: 0 14px;
   }
+
+  @media (max-width: 700px) {
+    justify-content: flex-end;
+
+    h1 {
+      font-size: 17px;
+      width: 80%;
+      text-align: end;
+      line-height: 1.2;
+    }
+  }
+
+  @media (max-width: 325px) {
+    h1 {
+      display: none;
+    }
+  }
 `;
 
 export const DrawerMenu = styled.div`

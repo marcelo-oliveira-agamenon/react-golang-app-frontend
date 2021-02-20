@@ -20,7 +20,7 @@ function Login(props: props) {
   const [loading, setLoading] = useState<boolean>(false);
   const { addToast } = useToasts();
 
-  const handleLogin = () => {
+  const handleLogin = (): void => {
     if (email === "" || pass === "") {
       addToast("Preencha os Campos!", {
         appearance: "error",
@@ -46,12 +46,12 @@ function Login(props: props) {
       });
   };
 
-  const handleResetPassword = () => {
+  function handleResetPassword(): void {
     addToast("Email de redefinição enviado para o seu email", {
       appearance: "success",
       autoDismiss: true,
     });
-  };
+  }
 
   return (
     <Container>

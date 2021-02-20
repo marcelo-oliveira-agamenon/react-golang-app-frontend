@@ -26,7 +26,6 @@ export function createOrder(data: {
   totalValue: number;
 }) {
   const state: any = store.getState();
-  const token = "Bearer " + state.apiToken;
   const form = new FormData();
   form.append("userID", state.loggedUser.ID);
   form.append("productID", data.productID);
@@ -35,11 +34,7 @@ export function createOrder(data: {
 
   return function (dispatch: any) {
     return api
-      .post(`/v1/order`, form, {
-        headers: {
-          Authorization: token,
-        },
-      })
+      .post(`/v1/order`, form)
       .then((response) => {
         return Promise.resolve(true);
       })
@@ -56,16 +51,11 @@ export function createOrder(data: {
 //Get all orders by user id function
 export function getOrdersByUserId() {
   const state: any = store.getState();
-  const token = "Bearer " + state.apiToken;
   const user = state.loggedUser;
 
   return function (dispatch: any) {
     return api
-      .get(`/v1/order/user/${user.ID}`, {
-        headers: {
-          Authorization: token,
-        },
-      })
+      .get(`/v1/order/user/${user.ID}`)
       .then((response) => {
         return response.data;
       })
