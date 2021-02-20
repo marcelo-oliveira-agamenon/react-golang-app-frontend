@@ -30,8 +30,6 @@ function Favorites(props: props) {
   const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-
     setLoading(true);
 
     props
@@ -41,35 +39,27 @@ function Favorites(props: props) {
 
         if (response.length > 0) {
           response.map((value: Favorite) => {
-            props
-              .getProductbyID(value.ProductID)
-              .then((response) => {
-                let aux = products.concat([response]);
-                setProducts(aux);
-              })
-              .catch((err) => {});
+            props.getProductbyID(value.ProductID).then((response) => {
+              let aux = products.concat([response]);
+              setProducts(aux);
+            });
             return null;
           });
         }
 
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
       });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
-  const deleteFavorite = (index: number) => {
-    let aux = favorites[index];
-
-    props
-      .deleteFavorite(aux.ID)
-      .then((response) => {
-        setCount(count + 1);
-      })
-      .catch((err) => {});
+  const deleteFavorite = (index: number): void => {
+    props.deleteFavorite(favorites[index].ID).then(() => {
+      setCount(count + 1);
+    });
   };
 
   return (
@@ -90,6 +80,7 @@ function Favorites(props: props) {
 
                   <div className="data-favorite">
                     <h1>{value.Name}</h1>
+
                     <div>
                       <p>Quantidade: 1</p>
                       <span>
@@ -98,18 +89,20 @@ function Favorites(props: props) {
                     </div>
                   </div>
 
-                  <ShoppingCartOutlined
-                    onClick={() =>
-                      props.history.push({
-                        pathname: "/cart",
-                        state: {
-                          product: value,
-                          quantity: 1,
-                        },
-                      })
-                    }
-                  />
-                  <DeleteOutlined onClick={() => deleteFavorite(index)} />
+                  <section>
+                    <ShoppingCartOutlined
+                      onClick={() =>
+                        props.history.push({
+                          pathname: "/cart",
+                          state: {
+                            product: value,
+                            quantity: 1,
+                          },
+                        })
+                      }
+                    />
+                    <DeleteOutlined onClick={() => deleteFavorite(index)} />
+                  </section>
                 </div>
               );
             })

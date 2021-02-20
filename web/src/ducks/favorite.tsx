@@ -29,7 +29,6 @@ export function addFavorite(productID: string) {
         },
       })
       .then((response) => {
-        console.log(response.data);
         return response.data;
       })
       .catch((error) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { User } from "../../ducks/auth";
 
@@ -22,13 +22,7 @@ function MyProfile(props: props) {
   const [avatar, setAvatar] = useState<string>(props.loggedUser.ImageURL);
   const [file, setFile] = useState<any>();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handleImage = (event: any) => {
+  const handleImage = (event: any): void => {
     if (event.target.files.length > 0) {
       setFile(event.target.files[0]);
       let image = URL.createObjectURL(event.target.files[0]);
@@ -36,7 +30,7 @@ function MyProfile(props: props) {
     }
   };
 
-  const phoneMask = (value: string) => {
+  const phoneMask = (value: string): string => {
     return value
       .replace(/\D/g, "")
       .replace(/(\d{2})(\d)/, "($1) $2")
@@ -52,6 +46,7 @@ function MyProfile(props: props) {
       <Header {...props} />
       <div className="buffer"></div>
       <h1 className="main-container-h1">meu perfil</h1>
+
       <Box>
         <div className="card-profile">
           <div className="inputs">

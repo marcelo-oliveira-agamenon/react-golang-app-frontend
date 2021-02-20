@@ -13,12 +13,17 @@ export const Container = styled.div`
   .main-container-h1 {
     margin-top: 80px;
     margin-bottom: 80px;
-    margin-left: 18%;
+    margin-left: 10%;
     font-family: "Montserrat SemiBold";
     font-size: 22px;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: white;
+
+    @media (max-width: 1000px) {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
   }
 `;
 
@@ -31,13 +36,25 @@ export const Box = styled.div`
     grid-template-rows: 1fr, 3fr;
     grid-template-columns: 1fr 1fr;
     padding: 40px 60px;
-    width: 800px;
+    width: 60%;
     height: auto;
     background-color: white;
     border-radius: 8px;
 
     .inputs {
       width: 100%;
+    }
+
+    @media (max-width: 1150px) {
+      padding: 40px 30px;
+    }
+
+    @media (max-width: 1000px) {
+      grid-template-columns: 100%;
+    }
+
+    @media (max-width: 700px) {
+      width: 75%;
     }
   }
 
@@ -81,11 +98,24 @@ export const Box = styled.div`
         background-color: white;
         box-shadow: 2px 2px 3px rgb(0, 0, 0, 0.25);
       }
+
+      @media (max-width: 620px) {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      padding: 0;
     }
   }
 
   .button-comp {
     margin-top: 50px;
+    display: flex;
+    justify-content: flex-end;
     gap: 5px;
 
     button {
@@ -108,6 +138,11 @@ export const Box = styled.div`
       color: black;
       background-color: white;
       box-shadow: -2px 2px 6px rgb(0, 0, 0, 0.25);
+    }
+
+    @media (max-width: 620px) {
+      flex-direction: column;
+      justify-content: center;
     }
   }
 `;
