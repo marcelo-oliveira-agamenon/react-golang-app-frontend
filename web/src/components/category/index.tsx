@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Category } from '@ducks/category';
+import { Category } from 'ducks/category';
 
 import { Container } from './styles';
 interface props extends RouteComponentProps<any> {

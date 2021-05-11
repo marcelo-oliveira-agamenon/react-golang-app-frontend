@@ -10,7 +10,7 @@ import {
   LogoutOutlined,
 } from '@ant-design/icons';
 import { Drawer } from 'antd';
-import { User, logout } from '@ducks/auth';
+import { User, logout } from 'ducks/auth';
 
 import { Container, Avatar as Icon, DrawerMenu } from './styles';
 import { RouteComponentProps } from 'react-router-dom';

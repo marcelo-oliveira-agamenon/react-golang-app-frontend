@@ -1,6 +1,6 @@
-import { types } from "../store/reducer";
-import { store } from "../store/store";
-import { Product } from "./product";
+import { types } from 'store/reducer';
+import { store } from 'store/store';
+import { Product } from './product';
 
 export type Order = {
   product: Product;
@@ -12,7 +12,7 @@ export function saveProductInCart(order: Order) {
   const state: any = store.getState();
   const orders: Array<Order> = state.cart;
   let aux = false;
-  orders.forEach((ord) => {
+  orders.forEach(ord => {
     if (ord.product.ID === order.product.ID) {
       ord.quantity = ord.quantity + order.quantity;
       aux = !aux;

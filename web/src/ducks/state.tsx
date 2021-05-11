@@ -1,8 +1,8 @@
 const initialState = {
   loggedUser: {},
   cart: [],
-  apiToken: "",
-  error: "",
+  apiToken: '',
+  error: '',
 };
 
 export default initialState;

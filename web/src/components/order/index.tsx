@@ -1,6 +1,6 @@
 import React from 'react';
 import { parseISO, format } from 'date-fns';
-import { Order } from '@ducks/order';
+import { Order } from 'ducks/order';
 
 import { Container } from './styles';
 

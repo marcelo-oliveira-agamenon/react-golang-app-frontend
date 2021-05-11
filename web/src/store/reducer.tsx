@@ -1,4 +1,4 @@
-import initialState from '@ducks/state';
+import initialState from 'ducks/state';
 
 export enum types {
   LOGGED_USER = 'loggedUser',

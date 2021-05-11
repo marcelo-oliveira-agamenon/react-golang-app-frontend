@@ -3,11 +3,11 @@ import { RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Checkbox, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { login } from '@ducks/auth';
+import { login } from 'ducks/auth';
 import { useToasts } from 'react-toast-notifications';
 
 import { Container, Overlay, Card, Box, Inputcomp, BtnLogin } from './styles';
-import Logo from '@assets/icons/logo.png';
+import Logo from 'assets/icons/logo.png';
 
 interface props extends RouteComponentProps<any> {
   login: (email: string, password: string) => Promise<any>;

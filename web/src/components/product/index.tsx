@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Product } from '@ducks/product';
+import { Product } from 'ducks/product';
 
 import { Container } from './styles';
 

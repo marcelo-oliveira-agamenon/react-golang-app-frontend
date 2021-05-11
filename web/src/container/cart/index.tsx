@@ -7,16 +7,16 @@ import {
   Order,
   deleteFromCart,
   deleteAllCartProducts,
-} from '@ducks/cart';
-import { createOrder } from '@ducks/order';
+} from 'ducks/cart';
+import { createOrder } from 'ducks/order';
 import { RightCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { useToasts } from 'react-toast-notifications';
 
 import { Container, Box } from './styles';
-import Header from '@components/header';
-import CartList from '@components/cart-list-detail';
-import Footer from '@components/footer';
-import ModalCart from '@components/modalCart';
+import Header from 'components/header';
+import CartList from 'components/cart-list-detail';
+import Footer from 'components/footer';
+import ModalCart from 'components/modalCart';
 
 interface props extends RouteComponentProps {
   getAllOrderInCart: () => Promise<Array<Order>>;

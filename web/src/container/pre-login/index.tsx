@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loginFacebook } from '@ducks/auth';
+import { loginFacebook } from 'ducks/auth';
 import { RouteComponentProps } from 'react-router-dom';
 import { FacebookOutlined, MailOutlined } from '@ant-design/icons';
 import FacebookLogin, {
@@ -10,7 +10,7 @@ import FacebookLogin, {
 import { useToasts } from 'react-toast-notifications';
 
 import { Container, Overlay, Card, Box, Btncomp } from './styles';
-import Logo from '@assets/icons/logo.png';
+import Logo from 'assets/icons/logo.png';
 
 interface props extends RouteComponentProps<any> {
   loginFacebook: (email: string, token: string) => Promise<any>;

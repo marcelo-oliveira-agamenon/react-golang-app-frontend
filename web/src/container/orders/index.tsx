@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getOrdersByUserId, Order } from '@ducks/order';
+import { getOrdersByUserId, Order } from 'ducks/order';
 import { RouteComponentProps } from 'react-router-dom';
 import { LoadingOutlined } from '@ant-design/icons';
 
 import { Container, Box } from './styles';
-import Header from '@components/header';
-import Footer from '@components/footer';
-import OrderComp from '@components/order';
+import Header from 'components/header';
+import Footer from 'components/footer';
+import OrderComp from 'components/order';
 
 interface props extends RouteComponentProps<any> {
   getOrdersByUserId: () => Promise<any>;

@@ -1,7 +1,7 @@
-import { RouteComponentProps } from "react-router-dom";
-import api from "../config/axiosConfig";
-import { types } from "../store/reducer";
-import { store } from "../store/store";
+import { RouteComponentProps } from 'react-router-dom';
+import api from 'config/axiosConfig';
+import { types } from 'store/reducer';
+import { store } from 'store/store';
 
 export type User = {
   Address: string;
@@ -31,7 +31,7 @@ export function login(email: string, password: string) {
         email: email,
         password: password,
       })
-      .then((response) => {
+      .then(response => {
         dispatch({
           type: types.API_TOKEN,
           payload: response.data.token,
@@ -42,17 +42,17 @@ export function login(email: string, password: string) {
         });
         return Promise.resolve<boolean>(true);
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
         });
         let msg =
-          error.response.data === "Wrong password"
-            ? "Senha incorreta"
-            : error.response.data === "No user with this email"
-            ? "Nenhum usuário com este email"
-            : "Erro inesperado!";
+          error.response.data === 'Wrong password'
+            ? 'Senha incorreta'
+            : error.response.data === 'No user with this email'
+            ? 'Nenhum usuário com este email'
+            : 'Erro inesperado!';
         return Promise.reject<string>(msg);
       });
   };
@@ -66,7 +66,7 @@ export function loginFacebook(email: string, token: string) {
         email: email,
         token: token,
       })
-      .then((response) => {
+      .then(response => {
         dispatch({
           type: types.API_TOKEN,
           payload: response.data.token,
@@ -77,17 +77,17 @@ export function loginFacebook(email: string, token: string) {
         });
         return Promise.resolve<boolean>(true);
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
         });
         let msg =
-          error.response.data === "Invalid token"
-            ? "Token expirado para login com Facebook"
-            : error.response.data === "No user with this email"
-            ? "Nenhum usuário com este email"
-            : "Erro inesperado!";
+          error.response.data === 'Invalid token'
+            ? 'Token expirado para login com Facebook'
+            : error.response.data === 'No user with this email'
+            ? 'Nenhum usuário com este email'
+            : 'Erro inesperado!';
         return Promise.reject<string>(msg);
       });
   };
@@ -99,13 +99,13 @@ export function signup(form: FormData) {
     return api
       .post(`/v1/signUp`, form, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       })
-      .then((response) => {
+      .then(response => {
         return Promise.resolve(true);
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -118,10 +118,10 @@ export function signup(form: FormData) {
 //Remove token and user logged, redirect to login screen
 export function logout(props: RouteComponentProps) {
   return function (dispatch: any) {
-    props.history.push("/prelogin");
+    props.history.push('/prelogin');
     return dispatch({
       type: types.LOGOUT,
-      payload: "",
+      payload: '',
     });
   };
 }

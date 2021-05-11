@@ -21,7 +21,6 @@
     "styled-components": "^5.1.0"
   },
   "scripts": {
-    "watch": "tsc -p . -w",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

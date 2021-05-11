@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   .ant-modal-body {
@@ -29,7 +29,7 @@ export const Container = styled.div`
 
       h1 {
         text-align: center;
-        font-family: "Montserrat Medium";
+        font-family: 'Montserrat Medium';
         font-size: 22px;
         text-transform: uppercase;
       }
@@ -40,7 +40,7 @@ export const Container = styled.div`
         color: white;
         font-size: 16px;
         text-transform: uppercase;
-        font-family: "Montserrat Medium";
+        font-family: 'Montserrat Medium';
         padding: 2px 0;
         border-radius: 6px;
         outline: none;

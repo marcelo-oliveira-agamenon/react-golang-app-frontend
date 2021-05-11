@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { signup } from '@ducks/auth';
+import { signup } from 'ducks/auth';
 import { RouteComponentProps, useLocation } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 
 import { Container, Card, InputCont, ImgContainer } from './styles';
-import MdSucess from '@components/modalSignup';
-import ImageAvatar from '@assets/avatar/avataaars.png';
+import MdSucess from 'components/modalSignup';
+import ImageAvatar from 'assets/avatar/avataaars.png';
 
 interface props extends RouteComponentProps<any> {
   signup: (form: FormData) => Promise<any>;

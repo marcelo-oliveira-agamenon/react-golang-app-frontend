@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   .container-list {
@@ -25,7 +25,7 @@ export const Container = styled.div`
       margin-right: 340px;
 
       h1 {
-        font-family: "Montserrat Regular";
+        font-family: 'Montserrat Regular';
         font-size: 20px;
         text-transform: capitalize;
       }
@@ -37,13 +37,13 @@ export const Container = styled.div`
         justify-content: space-between;
 
         p {
-          font-family: "Montserrat Light";
+          font-family: 'Montserrat Light';
           font-size: 12px;
           margin: 0;
         }
 
         span {
-          font-family: "Montserrat SemiBold";
+          font-family: 'Montserrat SemiBold';
           font-size: 18px;
           letter-spacing: 1px;
         }

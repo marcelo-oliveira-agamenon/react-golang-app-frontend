@@ -1,6 +1,6 @@
-import api from "../config/axiosConfig";
-import { types } from "../store/reducer";
-import { store } from "../store/store";
+import api from 'config/axiosConfig';
+import { types } from 'store/reducer';
+import { store } from 'store/store';
 
 export type Order = {
   ID: string;
@@ -27,18 +27,18 @@ export function createOrder(data: {
 }) {
   const state: any = store.getState();
   const form = new FormData();
-  form.append("userID", state.loggedUser.ID);
-  form.append("productID", data.productID);
-  form.append("qtd", data.qtd.toString());
-  form.append("totalValue", data.totalValue.toString());
+  form.append('userID', state.loggedUser.ID);
+  form.append('productID', data.productID);
+  form.append('qtd', data.qtd.toString());
+  form.append('totalValue', data.totalValue.toString());
 
   return function (dispatch: any) {
     return api
       .post(`/v1/order`, form)
-      .then((response) => {
+      .then(response => {
         return Promise.resolve(true);
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -56,10 +56,10 @@ export function getOrdersByUserId() {
   return function (dispatch: any) {
     return api
       .get(`/v1/order/user/${user.ID}`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,

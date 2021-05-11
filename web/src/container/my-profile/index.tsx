@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { User } from '@ducks/auth';
+import { User } from 'ducks/auth';
 
 import { Container, Box, InputContainer } from './styles';
-import Header from '@components/header';
-import Footer from '@components/footer';
+import Header from 'components/header';
+import Footer from 'components/footer';
 import { RouteComponentProps } from 'react-router-dom';
 
 interface props extends RouteComponentProps {

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
-import { searchProduct, Product } from '@ducks/product';
+import { searchProduct, Product } from 'ducks/product';
 
 import { Container, ContSearch, ProductSearch } from './styles';
-import Header from '@components/header';
-import Footer from '@components/footer';
-import SearchBar from '@components/searchbar';
-import ProductComp from '@components/product';
+import Header from 'components/header';
+import Footer from 'components/footer';
+import SearchBar from 'components/searchbar';
+import ProductComp from 'components/product';
 
 interface props extends RouteComponentProps<any> {
   searchProduct: (value: string) => Promise<any>;

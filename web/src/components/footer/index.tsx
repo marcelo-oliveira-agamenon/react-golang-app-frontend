@@ -7,7 +7,7 @@ import {
 import { format } from 'date-fns';
 
 import { Container } from './styles';
-import Logo from '@assets/icons/logo.png';
+import Logo from 'assets/icons/logo.png';
 
 const footer: React.FC = () => {
   return (

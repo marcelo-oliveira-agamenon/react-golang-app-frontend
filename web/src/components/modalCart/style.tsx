@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ export const Container = styled.div`
     color: white;
     font-size: 15px;
     text-transform: uppercase;
-    font-family: "Montserrat Medium";
+    font-family: 'Montserrat Medium';
     padding: 4px 32px;
     border-radius: 6px;
     outline: none;
@@ -35,7 +35,7 @@ export const Container = styled.div`
   }
 
   p {
-    font-family: "Montserrat Medium";
+    font-family: 'Montserrat Medium';
     font-size: 15px;
     text-transform: uppercase;
     cursor: pointer;
@@ -47,7 +47,7 @@ export const Container = styled.div`
 
   h1 {
     text-align: center;
-    font-family: "Montserrat Medium";
+    font-family: 'Montserrat Medium';
     font-size: 20px;
     text-transform: uppercase;
     line-height: 1;

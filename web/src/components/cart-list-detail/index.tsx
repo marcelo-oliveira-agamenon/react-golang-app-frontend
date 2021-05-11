@@ -1,5 +1,5 @@
 import React from 'react';
-import { Product } from '@ducks/product';
+import { Product } from 'ducks/product';
 import { DeleteOutlined } from '@ant-design/icons';
 
 import { Container } from './styles';

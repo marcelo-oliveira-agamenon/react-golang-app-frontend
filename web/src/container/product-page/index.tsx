@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Breadcrumb, Rate, InputNumber } from 'antd';
-import { Product } from '@ducks/product';
+import { Product } from 'ducks/product';
 import { RouteComponentProps, useLocation } from 'react-router-dom';
-import { getAllProducts } from '@ducks/product';
-import { addFavorite } from '@ducks/favorite';
+import { getAllProducts } from 'ducks/product';
+import { addFavorite } from 'ducks/favorite';
 import {
   ShareAltOutlined,
   HeartOutlined,
@@ -12,9 +12,9 @@ import {
 } from '@ant-design/icons';
 
 import { Container, BoxProduct, Products } from './styles';
-import Header from '@components/header';
-import Footer from '@components/footer';
-import ProductComp from '@components/product';
+import Header from 'components/header';
+import Footer from 'components/footer';
+import ProductComp from 'components/product';
 
 interface props extends RouteComponentProps<any> {
   getAllProducts: () => Promise<any>;

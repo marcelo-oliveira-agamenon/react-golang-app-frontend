@@ -3,7 +3,7 @@ import { Modal } from 'antd';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { Container } from './style';
-import Logo from '@assets/icons/logo.png';
+import Logo from 'assets/icons/logo.png';
 
 interface props extends RouteComponentProps {
   visible: boolean;

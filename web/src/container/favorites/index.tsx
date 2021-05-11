@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
-import { Favorite, getFavoriteByUser, deleteFavorite } from '@ducks/favorite';
-import { Product, getProductbyID } from '@ducks/product';
+import { Favorite, getFavoriteByUser, deleteFavorite } from 'ducks/favorite';
+import { Product, getProductbyID } from 'ducks/product';
 import {
   ShoppingCartOutlined,
   DeleteOutlined,
@@ -10,8 +10,8 @@ import {
 } from '@ant-design/icons';
 
 import { Container, Box } from './styles';
-import Header from '@components/header';
-import Footer from '@components/footer';
+import Header from 'components/header';
+import Footer from 'components/footer';
 
 interface props extends RouteComponentProps<any> {
   getFavoriteByUser: () => Promise<any>;

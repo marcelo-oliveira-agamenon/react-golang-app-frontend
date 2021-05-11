@@ -1,6 +1,6 @@
-import api from "../config/axiosConfig";
-import { store } from "../store/store";
-import { types } from "../store/reducer";
+import api from 'config/axiosConfig';
+import { store } from 'store/store';
+import { types } from 'store/reducer';
 
 export type Favorite = {
   ID: string;
@@ -18,20 +18,20 @@ export type Favorite = {
 export function addFavorite(productID: string) {
   const state: any = store.getState();
   let form = new FormData();
-  form.set("userid", state.loggedUser.ID);
-  form.set("productid", productID);
+  form.set('userid', state.loggedUser.ID);
+  form.set('productid', productID);
 
   return function (dispatch: any) {
     return api
       .post(`/v1/favorite`, form, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       })
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -46,10 +46,10 @@ export function deleteFavorite(favoriteID: string) {
   return function (dispatch: any) {
     return api
       .delete(`/v1/favorite/${favoriteID}`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -65,10 +65,10 @@ export function getFavoriteByUser() {
   return function (dispatch: any) {
     return api
       .get(`/v1/favorite/${state.loggedUser.ID}`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,

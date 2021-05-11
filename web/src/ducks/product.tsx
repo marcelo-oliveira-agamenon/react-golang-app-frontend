@@ -1,5 +1,5 @@
-import api from "../config/axiosConfig";
-import { types } from "../store/reducer";
+import api from 'config/axiosConfig';
+import { types } from 'store/reducer';
 
 export type ProductImage = {
   ID: string;
@@ -37,10 +37,10 @@ export function getPromotions() {
   return function (dispatch: any) {
     return api
       .get(`/v1/product/promotion`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -55,10 +55,10 @@ export function getRecents() {
   return function (dispatch: any) {
     return api
       .get(`/v1/product/recent`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -73,10 +73,10 @@ export function searchProduct(value: string) {
   return function (dispatch: any) {
     return api
       .get(`/v1/product/search/${value}`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -91,10 +91,10 @@ export function getAllProducts() {
   return function (dispatch: any) {
     return api
       .get(`/v1/product`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -109,10 +109,10 @@ export function getProductbyID(productID: string) {
   return function (dispatch: any) {
     return api
       .get(`/v1/product/getbyId/${productID}`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -127,10 +127,10 @@ export function getProductByCategory(categoryID: string) {
   return function (dispatch: any) {
     return api
       .get(`/v1/product/category/${categoryID}`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
