@@ -10,7 +10,7 @@ import Footer from 'components/footer';
 import SearchBar from 'components/searchbar';
 import ProductComp from 'components/product';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   getProductByCategory: (categoryID: string) => Promise<any>;
 }
 

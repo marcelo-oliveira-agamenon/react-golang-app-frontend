@@ -12,7 +12,7 @@ import { useToasts } from 'react-toast-notifications';
 import { Container, Overlay, Card, Box, Btncomp } from './styles';
 import Logo from 'assets/icons/logo.png';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   loginFacebook: (email: string, token: string) => Promise<any>;
 }
 

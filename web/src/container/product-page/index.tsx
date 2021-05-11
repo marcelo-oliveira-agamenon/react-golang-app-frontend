@@ -16,7 +16,7 @@ import Header from 'components/header';
 import Footer from 'components/footer';
 import ProductComp from 'components/product';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   getAllProducts: () => Promise<any>;
   addFavorite: (productID: string) => Promise<any>;
 }
@@ -58,6 +58,7 @@ function Productpage(props: props) {
         </Breadcrumb.Item>
         <Breadcrumb.Item>{state.Name}</Breadcrumb.Item>
       </Breadcrumb>
+
       <BoxProduct>
         <div className="container-product">
           <div className="data-img-product">

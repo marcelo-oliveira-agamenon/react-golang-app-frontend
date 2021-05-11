@@ -13,7 +13,7 @@ import CategoryComp from 'components/category';
 import Footer from 'components/footer';
 import BannerImg from 'assets/image/banner_home.jpg';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   getPromotions: () => Promise<any>;
   getRecents: () => Promise<any>;
   getCategories: () => Promise<any>;

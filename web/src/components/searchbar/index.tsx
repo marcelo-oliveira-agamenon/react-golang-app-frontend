@@ -4,7 +4,7 @@ import { SearchOutlined } from '@ant-design/icons';
 
 import { Container } from './styles';
 
-interface props extends RouteComponentProps<any> {}
+interface props extends RouteComponentProps {}
 
 function Searchbar(props: props) {
   const [search, setSearch] = useState<string>('');

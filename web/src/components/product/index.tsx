@@ -4,7 +4,7 @@ import { Product } from 'ducks/product';
 
 import { Container } from './styles';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   product: Product;
 }
 

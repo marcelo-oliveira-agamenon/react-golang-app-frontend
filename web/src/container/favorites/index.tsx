@@ -13,7 +13,7 @@ import { Container, Box } from './styles';
 import Header from 'components/header';
 import Footer from 'components/footer';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   getFavoriteByUser: () => Promise<any>;
   getProductbyID: (productID: string) => Promise<any>;
   deleteFavorite: (favoriteID: string) => Promise<any>;

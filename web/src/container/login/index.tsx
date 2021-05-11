@@ -9,7 +9,7 @@ import { useToasts } from 'react-toast-notifications';
 import { Container, Overlay, Card, Box, Inputcomp, BtnLogin } from './styles';
 import Logo from 'assets/icons/logo.png';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   login: (email: string, password: string) => Promise<any>;
 }
 

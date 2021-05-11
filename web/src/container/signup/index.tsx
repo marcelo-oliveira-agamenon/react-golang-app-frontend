@@ -10,7 +10,7 @@ import { Container, Card, InputCont, ImgContainer } from './styles';
 import MdSucess from 'components/modalSignup';
 import ImageAvatar from 'assets/avatar/avataaars.png';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   signup: (form: FormData) => Promise<any>;
 }
 

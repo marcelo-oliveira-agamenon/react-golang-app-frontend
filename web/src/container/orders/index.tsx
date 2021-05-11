@@ -9,7 +9,7 @@ import Header from 'components/header';
 import Footer from 'components/footer';
 import OrderComp from 'components/order';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   getOrdersByUserId: () => Promise<any>;
 }
 
