@@ -1,11 +1,11 @@
-import { createStore, compose, applyMiddleware } from "redux";
-import rootReducer, { types } from "./reducer";
-import thunk from "redux-thunk";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { createStore, compose, applyMiddleware } from 'redux';
+import rootReducer, { types } from './reducer';
+import thunk from 'redux-thunk';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
-  key: "authInfo",
+  key: 'authInfo',
   storage: storage,
   whitelist: [types.API_TOKEN, types.LOGGED_USER, types.CART],
 };

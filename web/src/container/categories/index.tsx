@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { RouteComponentProps, useLocation } from "react-router-dom";
-import { connect } from "react-redux";
-import { getProductByCategory, Product } from "../../ducks/product";
-import { LoadingOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from 'react';
+import { RouteComponentProps, useLocation } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getProductByCategory, Product } from '@ducks/product';
+import { LoadingOutlined } from '@ant-design/icons';
 
-import { Container, ContSearch, Content } from "./styles";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
-import SearchBar from "../../components/searchbar";
-import ProductComp from "../../components/product";
+import { Container, ContSearch, Content } from './styles';
+import Header from '@components/header';
+import Footer from '@components/footer';
+import SearchBar from '@components/searchbar';
+import ProductComp from '@components/product';
 
 interface props extends RouteComponentProps<any> {
   getProductByCategory: (categoryID: string) => Promise<any>;
@@ -31,7 +31,7 @@ function Categories(props: props) {
 
     props
       .getProductByCategory(state.categoryID)
-      .then((response) => {
+      .then(response => {
         setProducts(response);
         setLoading(false);
       })
@@ -54,7 +54,7 @@ function Categories(props: props) {
           {loading ? (
             <LoadingOutlined />
           ) : (
-            products.map((product) => {
+            products.map(product => {
               return (
                 <div key={product.ID} className="each">
                   <ProductComp product={product} {...props} />

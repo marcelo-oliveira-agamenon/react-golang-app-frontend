@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 import {
   TwitterOutlined,
   FacebookOutlined,
   InstagramOutlined,
-} from "@ant-design/icons";
-import { format } from "date-fns";
+} from '@ant-design/icons';
+import { format } from 'date-fns';
 
-import { Container } from "./styles";
-import Logo from "../../assets/icons/logo.png";
+import { Container } from './styles';
+import Logo from '@assets/icons/logo.png';
 
 const footer: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ const footer: React.FC = () => {
       <div className="icon">
         <img src={Logo} alt="cash and grab" />
         <h1>
-          Copyright © {format(new Date(), "yyyy")} Grab and cash - Todos os
+          Copyright © {format(new Date(), 'yyyy')} Grab and cash - Todos os
           direitos reservados
         </h1>
       </div>

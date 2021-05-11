@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { RouteComponentProps, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { RouteComponentProps, useLocation } from 'react-router-dom';
 import {
   saveProductInCart,
   getAllOrderInCart,
   Order,
   deleteFromCart,
   deleteAllCartProducts,
-} from "../../ducks/cart";
-import { createOrder } from "../../ducks/order";
-import { RightCircleOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { useToasts } from "react-toast-notifications";
+} from '@ducks/cart';
+import { createOrder } from '@ducks/order';
+import { RightCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { useToasts } from 'react-toast-notifications';
 
-import { Container, Box } from "./styles";
-import Header from "../../components/header";
-import CartList from "../../components/cart-list-detail";
-import Footer from "../../components/footer";
-import ModalCart from "../../components/modalCart";
+import { Container, Box } from './styles';
+import Header from '@components/header';
+import CartList from '@components/cart-list-detail';
+import Footer from '@components/footer';
+import ModalCart from '@components/modalCart';
 
 interface props extends RouteComponentProps {
   getAllOrderInCart: () => Promise<Array<Order>>;
@@ -32,7 +32,7 @@ function Cart(props: props) {
   const history = props.history;
   const [cart, setCart] = useState<Array<Order>>([]);
   const [refresh, setRefresh] = useState<boolean>(false);
-  const [coupon, setCoupon] = useState<string>("");
+  const [coupon, setCoupon] = useState<string>('');
   const [total, setTotal] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
   const [show, setShow] = useState<boolean>(false);
@@ -48,9 +48,9 @@ function Cart(props: props) {
       props.saveProductInCart(order);
     }
 
-    props.getAllOrderInCart().then((res) => {
+    props.getAllOrderInCart().then(res => {
       let total = 0;
-      res.forEach((obj) => {
+      res.forEach(obj => {
         total = total + obj.quantity * obj.product.Value;
       });
       setTotal(total);
@@ -61,17 +61,17 @@ function Cart(props: props) {
   }, [refresh, count]);
 
   function useCoupon() {
-    addToast("Cupom cadastrado com sucesso", {
-      appearance: "success",
+    addToast('Cupom cadastrado com sucesso', {
+      appearance: 'success',
       autoDismiss: true,
     });
   }
 
   function handleOrder() {
     let aux = 0;
-    cart.forEach((obj) => (aux += aux + obj.quantity));
+    cart.forEach(obj => (aux += aux + obj.quantity));
     let data = {
-      productID: cart.map((obj) => obj.product.ID),
+      productID: cart.map(obj => obj.product.ID),
       qtd: aux,
       totalValue: total,
     };
@@ -107,7 +107,7 @@ function Cart(props: props) {
           ) : (
             <>
               <h2>Carrinho vazio</h2>
-              <h3 onClick={() => props.history.push("/home")}>
+              <h3 onClick={() => props.history.push('/home')}>
                 Continue comprando
               </h3>
             </>
@@ -122,7 +122,7 @@ function Cart(props: props) {
                   <input
                     type="text"
                     value={coupon}
-                    onChange={(e) => setCoupon(e.target.value)}
+                    onChange={e => setCoupon(e.target.value)}
                   />
                   <RightCircleOutlined onClick={useCoupon} />
                 </div>
@@ -130,10 +130,10 @@ function Cart(props: props) {
               <div className="subtotal">
                 <p>Total:</p>
 
-                <span>R$ {total.toFixed(2).replace(".", ",")}</span>
+                <span>R$ {total.toFixed(2).replace('.', ',')}</span>
               </div>
               <div className="btn-cart">
-                <p onClick={() => history.push("/home")}>retornar</p>
+                <p onClick={() => history.push('/home')}>retornar</p>
 
                 <button onClick={handleOrder}>
                   <ShoppingCartOutlined />

@@ -1,16 +1,16 @@
-import React from "react";
-import { connect } from "react-redux";
-import { loginFacebook } from "../../ducks/auth";
-import { RouteComponentProps } from "react-router-dom";
-import { FacebookOutlined, MailOutlined } from "@ant-design/icons";
+import React from 'react';
+import { connect } from 'react-redux';
+import { loginFacebook } from '@ducks/auth';
+import { RouteComponentProps } from 'react-router-dom';
+import { FacebookOutlined, MailOutlined } from '@ant-design/icons';
 import FacebookLogin, {
   ReactFacebookLoginInfo,
   ReactFacebookFailureResponse,
-} from "react-facebook-login";
-import { useToasts } from "react-toast-notifications";
+} from 'react-facebook-login';
+import { useToasts } from 'react-toast-notifications';
 
-import { Container, Overlay, Card, Box, Btncomp } from "./styles";
-import Logo from "../../assets/icons/logo.png";
+import { Container, Overlay, Card, Box, Btncomp } from './styles';
+import Logo from '@assets/icons/logo.png';
 
 interface props extends RouteComponentProps<any> {
   loginFacebook: (email: string, token: string) => Promise<any>;
@@ -21,21 +21,21 @@ function PreLogin(props: props) {
   const { addToast } = useToasts();
 
   const responseFacebook = (
-    response: ReactFacebookLoginInfo | ReactFacebookFailureResponse | any
+    response: ReactFacebookLoginInfo | ReactFacebookFailureResponse | any,
   ) => {
     props
       .loginFacebook(response.email, response.accessToken)
-      .then((resp) => {
+      .then(resp => {
         // if (resp) {
         //   props.history.push("/home");
         // } else {
         //   props.history.push("/signup", response);
         // }
-        props.history.push("/signup", response);
+        props.history.push('/signup', response);
       })
-      .catch((err) => {
+      .catch(err => {
         addToast(err, {
-          appearance: "error",
+          appearance: 'error',
           autoDismiss: true,
         });
       });
@@ -59,14 +59,14 @@ function PreLogin(props: props) {
               icon={<FacebookOutlined />}
             />
 
-            <Btncomp onClick={() => props.history.push("/login")}>
+            <Btncomp onClick={() => props.history.push('/login')}>
               <MailOutlined />
               <h4>entrar com email</h4>
             </Btncomp>
 
             <p>
-              não possui cadastro?{" "}
-              <span onClick={() => props.history.push("/signup")}>
+              não possui cadastro?{' '}
+              <span onClick={() => props.history.push('/signup')}>
                 cadastre-se
               </span>
             </p>

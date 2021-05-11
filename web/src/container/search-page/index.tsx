@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { RouteComponentProps } from "react-router-dom";
-import { searchProduct, Product } from "../../ducks/product";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
+import { searchProduct, Product } from '@ducks/product';
 
-import { Container, ContSearch, ProductSearch } from "./styles";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
-import SearchBar from "../../components/searchbar";
-import ProductComp from "../../components/product";
+import { Container, ContSearch, ProductSearch } from './styles';
+import Header from '@components/header';
+import Footer from '@components/footer';
+import SearchBar from '@components/searchbar';
+import ProductComp from '@components/product';
 
 interface props extends RouteComponentProps<any> {
   searchProduct: (value: string) => Promise<any>;
@@ -20,7 +20,7 @@ function SearchPage(props: props) {
     window.scrollTo(0, 0);
 
     let value: any = props.location.state;
-    props.searchProduct(value).then((res) => {
+    props.searchProduct(value).then(res => {
       setSearch(res);
     });
 
@@ -36,7 +36,7 @@ function SearchPage(props: props) {
       <ProductSearch>
         <h1>BUSCANDO POR: "{props.location.state}"</h1>
         <div className="center">
-          {search?.map((product) => {
+          {search?.map(product => {
             return (
               <div key={product.ID} className="content">
                 <ProductComp {...props} product={product} />

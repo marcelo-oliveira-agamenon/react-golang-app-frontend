@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { RouteComponentProps } from "react-router-dom";
-import {
-  Favorite,
-  getFavoriteByUser,
-  deleteFavorite,
-} from "../../ducks/favorite";
-import { Product, getProductbyID } from "../../ducks/product";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
+import { Favorite, getFavoriteByUser, deleteFavorite } from '@ducks/favorite';
+import { Product, getProductbyID } from '@ducks/product';
 import {
   ShoppingCartOutlined,
   DeleteOutlined,
   LoadingOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
-import { Container, Box } from "./styles";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
+import { Container, Box } from './styles';
+import Header from '@components/header';
+import Footer from '@components/footer';
 
 interface props extends RouteComponentProps<any> {
   getFavoriteByUser: () => Promise<any>;
@@ -34,12 +30,12 @@ function Favorites(props: props) {
 
     props
       .getFavoriteByUser()
-      .then((response) => {
+      .then(response => {
         setFavorites(response);
 
         if (response.length > 0) {
           response.map((value: Favorite) => {
-            props.getProductbyID(value.ProductID).then((response) => {
+            props.getProductbyID(value.ProductID).then(response => {
               let aux = products.concat([response]);
               setProducts(aux);
             });
@@ -84,7 +80,7 @@ function Favorites(props: props) {
                     <div>
                       <p>Quantidade: 1</p>
                       <span>
-                        {"R$ " + value.Value.toFixed(2).replace(".", ",")}
+                        {'R$ ' + value.Value.toFixed(2).replace('.', ',')}
                       </span>
                     </div>
                   </div>
@@ -93,7 +89,7 @@ function Favorites(props: props) {
                     <ShoppingCartOutlined
                       onClick={() =>
                         props.history.push({
-                          pathname: "/cart",
+                          pathname: '/cart',
                           state: {
                             product: value,
                             quantity: 1,

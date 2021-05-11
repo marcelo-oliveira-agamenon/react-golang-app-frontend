@@ -1,8 +1,8 @@
-import React from "react";
-import { Product } from "../../ducks/product";
-import { DeleteOutlined } from "@ant-design/icons";
+import React from 'react';
+import { Product } from '@ducks/product';
+import { DeleteOutlined } from '@ant-design/icons';
 
-import { Container } from "./styles";
+import { Container } from './styles';
 
 interface props {
   product: Product;
@@ -20,7 +20,7 @@ function Cartlistdetail(props: props) {
           <h1>{product.Name}</h1>
           <div>
             <p>Quantidade: {quantity}</p>
-            <span>R$ {product.Value.toFixed(2).replace(".", ",")}</span>
+            <span>R$ {product.Value.toFixed(2).replace('.', ',')}</span>
           </div>
         </div>
         <DeleteOutlined onClick={props.onDelete} />
