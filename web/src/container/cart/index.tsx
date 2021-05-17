@@ -88,6 +88,7 @@ function Cart(props: props) {
       <Header {...props} />
       <div className="buffer"></div>
       <h1 className="title-cart">confira seu carrinho</h1>
+
       <Box>
         <div className="box-cart">
           {cart.length > 0 ? (

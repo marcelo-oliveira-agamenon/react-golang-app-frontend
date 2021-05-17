@@ -9,6 +9,11 @@ export const Container = styled.div`
     padding: 0 60px;
     padding-bottom: 25px;
 
+    @media (max-width: 1020px) {
+      width: 100%;
+      justify-content: space-between;
+    }
+
     img {
       width: 85px;
       height: 80px;
@@ -23,6 +28,11 @@ export const Container = styled.div`
     .data-list {
       margin-left: 110px;
       margin-right: 340px;
+
+      @media (max-width: 1020px) {
+        margin-left: 0;
+        margin-right: 0;
+      }
 
       h1 {
         font-family: 'Montserrat Regular';

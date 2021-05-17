@@ -28,8 +28,7 @@ function Orders(props: props) {
         setOrders(response);
         setLoading(false);
       })
-      .catch(error => {
-        console.log(error);
+      .catch(() => {
         setLoading(false);
       });
 
@@ -48,8 +47,8 @@ function Orders(props: props) {
             <LoadingOutlined />
           ) : (
             <>
-              {orders.map(ord => {
-                return <OrderComp key={ord.ID} order={ord} />;
+              {orders.map(order => {
+                return <OrderComp key={order.ID} order={order} />;
               })}
             </>
           )}

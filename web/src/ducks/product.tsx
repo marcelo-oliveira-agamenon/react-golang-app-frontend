@@ -1,5 +1,6 @@
 import api from 'config/axiosConfig';
 import { types } from 'store/reducer';
+import { Category } from './category';
 
 export type ProductImage = {
   ID: string;
@@ -14,6 +15,7 @@ export type Product = {
   ID: string;
   Name: string;
   Categoryid: number;
+  Category: Category;
   Value: number;
   CreatedAt: string;
   UpdatedAt: string;

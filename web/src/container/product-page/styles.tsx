@@ -34,7 +34,7 @@ export const BoxProduct = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1120px) {
     padding: 0 8px;
   }
 
@@ -166,7 +166,7 @@ export const BoxProduct = styled.div`
       display: grid;
       grid-template-columns: 50% 50%;
 
-      @media (max-width: 768px) {
+      @media (max-width: 1120px) {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -199,6 +199,16 @@ export const BoxProduct = styled.div`
       text-transform: uppercase;
       cursor: pointer;
 
+      @media (max-width: 620px) {
+        width: 100%;
+        justify-content: space-evenly;
+
+        .anticon {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+
       .anticon {
         font-size: 25px;
         margin-left: 22px;
@@ -211,6 +221,10 @@ export const BoxProduct = styled.div`
 export const Products = styled.div`
   display: flex;
   justify-content: center;
+
+  @media (max-width: 620px) {
+    padding: 0 8px;
+  }
 
   .component {
     display: flex;

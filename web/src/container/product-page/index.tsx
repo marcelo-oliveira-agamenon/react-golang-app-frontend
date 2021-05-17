@@ -54,7 +54,7 @@ function Productpage(props: props) {
             })
           }
         >
-          Categoria
+          {state.Category.Name}
         </Breadcrumb.Item>
         <Breadcrumb.Item>{state.Name}</Breadcrumb.Item>
       </Breadcrumb>

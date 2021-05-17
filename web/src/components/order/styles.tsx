@@ -6,9 +6,22 @@ export const Container = styled.div`
   justify-content: space-between;
   padding: 15px 38px;
 
+  @media (max-width: 620px) {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media (max-width: 500px) {
+    padding: 15px 10px;
+  }
+
   .title {
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 440px) {
+      width: 100%;
+    }
 
     div {
       display: flex;
@@ -18,6 +31,10 @@ export const Container = styled.div`
         font-family: 'Montserrat Medium';
         font-size: 18px;
         margin: 0;
+
+        @media (max-width: 440px) {
+          display: block;
+        }
       }
     }
 
@@ -26,6 +43,11 @@ export const Container = styled.div`
       align-items: center;
       justify-content: space-between;
       margin-top: 20px;
+
+      @media (max-width: 440px) {
+        flex-direction: column;
+        justify-content: center;
+      }
 
       div {
         display: flex;
