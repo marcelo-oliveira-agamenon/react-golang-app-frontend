@@ -36,8 +36,8 @@ export type Product = {
 
 //Get promotion products function
 export function getPromotions() {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/product/promotion`)
       .then(response => {
         return response.data;
@@ -54,8 +54,8 @@ export function getPromotions() {
 
 //Get most recent products function
 export function getRecents() {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/product/recent`)
       .then(response => {
         return response.data;
@@ -71,10 +71,15 @@ export function getRecents() {
 }
 
 //Search product by name function
-export function searchProduct(value: string) {
-  return function (dispatch: any) {
-    return api
-      .get(`/v1/product/search/${value}`)
+export function searchProduct(value: string, limit: number, offset: number) {
+  return async function (dispatch: any) {
+    return await api
+      .get(`/v1/product/search/${value}`, {
+        params: {
+          limit,
+          offset,
+        },
+      })
       .then(response => {
         return response.data;
       })
@@ -90,8 +95,8 @@ export function searchProduct(value: string) {
 
 //Search product by name function
 export function getAllProducts() {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/product`)
       .then(response => {
         return response.data;
@@ -108,8 +113,8 @@ export function getAllProducts() {
 
 //Search product by id function
 export function getProductbyID(productID: string) {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/product/getbyId/${productID}`)
       .then(response => {
         return response.data;
@@ -126,8 +131,8 @@ export function getProductbyID(productID: string) {
 
 //Get products by category function
 export function getProductByCategory(categoryID: string) {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/product/category/${categoryID}`)
       .then(response => {
         return response.data;

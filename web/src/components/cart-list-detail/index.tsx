@@ -10,12 +10,12 @@ interface props {
   onDelete: () => void;
 }
 
-function Cartlistdetail(props: props) {
-  const { product, quantity } = props;
+function Cartlistdetail({ onDelete, product, quantity }: props) {
   return (
     <Container>
       <div className="container-list">
         <img src={product.ProductImage[0].ImageURL} alt="product" />
+
         <div className="data-list">
           <h1>{product.Name}</h1>
           <div>
@@ -23,7 +23,8 @@ function Cartlistdetail(props: props) {
             <span>R$ {product.Value.toFixed(2).replace('.', ',')}</span>
           </div>
         </div>
-        <DeleteOutlined onClick={props.onDelete} />
+
+        <DeleteOutlined onClick={onDelete} />
       </div>
     </Container>
   );

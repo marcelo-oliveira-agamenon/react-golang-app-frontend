@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps, useLocation } from 'react-router-dom';
 import {
@@ -18,8 +18,13 @@ import CartList from 'components/cart-list-detail';
 import Footer from 'components/footer';
 import ModalCart from 'components/modalCart';
 
+interface IAllOrdersInCart {
+  orders: Order[];
+  total: number;
+}
+
 interface props extends RouteComponentProps {
-  getAllOrderInCart: () => Promise<Array<Order>>;
+  getAllOrderInCart: () => Promise<IAllOrdersInCart>;
   saveProductInCart: (order: Order) => void;
   deleteFromCart: (index: number) => void;
   createOrder: (data: any) => Promise<boolean>;
@@ -37,24 +42,25 @@ function Cart(props: props) {
   const [count, setCount] = useState<number>(0);
   const [show, setShow] = useState<boolean>(false);
 
+  const addProductToOrder = useCallback((): void => {
+    let order = {
+      product: state.product,
+      quantity: state.quantity,
+    };
+
+    props.saveProductInCart(order);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    addProductToOrder();
+  }, [addProductToOrder]);
 
-    if (state) {
-      let order = {
-        product: state.product,
-        quantity: state.quantity,
-      };
-      props.saveProductInCart(order);
-    }
-
-    props.getAllOrderInCart().then(res => {
-      let total = 0;
-      res.forEach(obj => {
-        total = total + obj.quantity * obj.product.Value;
-      });
-      setTotal(total);
-      setCart(res);
+  useEffect(() => {
+    props.getAllOrderInCart().then(response => {
+      setTotal(response.total);
+      setCart(response.orders);
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -67,7 +73,7 @@ function Cart(props: props) {
     });
   }
 
-  function handleOrder() {
+  async function handleOrder() {
     let aux = 0;
     cart.forEach(obj => (aux += aux + obj.quantity));
     let data = {
@@ -75,9 +81,11 @@ function Cart(props: props) {
       qtd: aux,
       totalValue: total,
     };
-    props.createOrder(data).then(() => {
+
+    await props.createOrder(data).then(response => {
       setShow(true);
     });
+
     props.deleteAllCartProducts();
     setCount(count + 1);
   }
@@ -92,19 +100,17 @@ function Cart(props: props) {
       <Box>
         <div className="box-cart">
           {cart.length > 0 ? (
-            cart.map((order, index) => {
-              return (
-                <CartList
-                  key={index}
-                  product={order.product}
-                  quantity={order.quantity}
-                  onDelete={() => {
-                    props.deleteFromCart(index);
-                    setRefresh(!refresh);
-                  }}
-                />
-              );
-            })
+            cart.map((order, index) => (
+              <CartList
+                key={index}
+                product={order.product}
+                quantity={order.quantity}
+                onDelete={() => {
+                  props.deleteFromCart(index);
+                  setRefresh(!refresh);
+                }}
+              />
+            ))
           ) : (
             <>
               <h2>Carrinho vazio</h2>
@@ -128,11 +134,13 @@ function Cart(props: props) {
                   <RightCircleOutlined onClick={useCoupon} />
                 </div>
               </div>
+
               <div className="subtotal">
                 <p>Total:</p>
 
                 <span>R$ {total.toFixed(2).replace('.', ',')}</span>
               </div>
+
               <div className="btn-cart">
                 <p onClick={() => history.push('/home')}>retornar</p>
 

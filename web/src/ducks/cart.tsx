@@ -11,15 +11,12 @@ export type Order = {
 export function saveProductInCart(order: Order) {
   const state: any = store.getState();
   const orders: Array<Order> = state.cart;
-  let aux = false;
-  orders.forEach(ord => {
-    if (ord.product.ID === order.product.ID) {
-      ord.quantity = ord.quantity + order.quantity;
-      aux = !aux;
-    }
-  });
 
-  if (aux === false) {
+  let hasProduct = orders.filter(
+    localOrder => localOrder.product.ID === order.product.ID,
+  );
+
+  if (hasProduct.length === 0) {
     orders.push(order);
   }
 
@@ -36,8 +33,16 @@ export function getAllOrderInCart() {
   const state: any = store.getState();
   const orders: Array<Order> = state.cart;
 
+  let total = 0;
+  orders.forEach(order => {
+    total = total + order.quantity * order.product.Value;
+  });
+
   return function () {
-    return Promise.resolve(orders);
+    return Promise.resolve({
+      orders: orders,
+      total: total,
+    });
   };
 }
 
@@ -50,6 +55,7 @@ export function deleteFromCart(index: number) {
     let aux = orders.filter((item, value) => {
       return value !== index && item;
     });
+
     return dispatch({
       type: types.CART,
       payload: aux,

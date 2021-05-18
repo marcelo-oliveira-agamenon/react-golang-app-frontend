@@ -21,8 +21,8 @@ export function addFavorite(productID: string) {
   form.set('userid', state.loggedUser.ID);
   form.set('productid', productID);
 
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .post(`/v1/favorite`, form, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -43,8 +43,8 @@ export function addFavorite(productID: string) {
 
 //Delete favorites function
 export function deleteFavorite(favoriteID: string) {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .delete(`/v1/favorite/${favoriteID}`)
       .then(response => {
         return response.data;
@@ -62,8 +62,8 @@ export function deleteFavorite(favoriteID: string) {
 //Get favorites by user function
 export function getFavoriteByUser() {
   const state: any = store.getState();
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/favorite/${state.loggedUser.ID}`)
       .then(response => {
         return response.data;

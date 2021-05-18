@@ -25,8 +25,8 @@ export type User = {
 
 //Login function
 export function login(email: string, password: string) {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .post(`/v1/login`, {
         email: email,
         password: password,
@@ -60,8 +60,8 @@ export function login(email: string, password: string) {
 
 //LoginWithFacebook function
 export function loginFacebook(email: string, token: string) {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .post(`/v1/loginWithFacebook`, {
         email: email,
         token: token,
@@ -95,8 +95,8 @@ export function loginFacebook(email: string, token: string) {
 
 //Add user in the api without token
 export function signup(form: FormData) {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .post(`/v1/signUp`, form, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -127,9 +127,9 @@ export function logout(props: RouteComponentProps) {
 }
 
 //Verify if a user is logged in
-export function verifyLoggedUser() {
+export function verifyLoggedUser(): User {
   const data: any = store.getState();
-  const main = data.loggedUser;
+  const main: User = data.loggedUser;
 
   return main;
 }

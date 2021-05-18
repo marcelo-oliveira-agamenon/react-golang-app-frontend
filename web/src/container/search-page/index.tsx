@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { searchProduct, Product } from 'ducks/product';
@@ -10,22 +10,34 @@ import SearchBar from 'components/searchbar';
 import ProductComp from 'components/product';
 
 interface props extends RouteComponentProps {
-  searchProduct: (value: string) => Promise<any>;
+  searchProduct: (value: string, limit: number, offset: number) => Promise<any>;
 }
 
+const LIMIT: number = 5;
+
 function SearchPage(props: props) {
+  const { searchProduct } = props;
   const [search, setSearch] = useState<Array<Product>>([]);
+  const [offset, setOffset] = useState<number>(0);
+  const value: any = props.location.state;
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    let value: any = props.location.state;
-    props.searchProduct(value).then(res => {
+    searchProduct(value, LIMIT, offset).then(res => {
       setSearch(res);
     });
+  }, []);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location.state]);
+  const handlePaginationLoad = useCallback(() => {
+    searchProduct(value, LIMIT, offset).then(res => {
+      setSearch(res);
+    });
+  }, [offset]);
+
+  useEffect(() => {
+    handlePaginationLoad();
+  }, [handlePaginationLoad]);
 
   return (
     <Container>
@@ -44,6 +56,12 @@ function SearchPage(props: props) {
             );
           })}
         </div>
+
+        {search && search.length ? (
+          <h1 onClick={() => setOffset(offset => offset + 5)}>Carregar Mais</h1>
+        ) : (
+          <h1>Desculpe, produto {value} não encontrado!</h1>
+        )}
       </ProductSearch>
       <Footer />
     </Container>

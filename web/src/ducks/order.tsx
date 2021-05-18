@@ -4,7 +4,7 @@ import { store } from 'store/store';
 
 export type Order = {
   ID: string;
-  UserID: string;
+  Userid: string;
   ProductID: Array<string>;
   TotalValue: number;
   Status: string;
@@ -32,10 +32,10 @@ export function createOrder(data: {
   form.append('qtd', data.qtd.toString());
   form.append('totalValue', data.totalValue.toString());
 
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .post(`/v1/order`, form)
-      .then(response => {
+      .then(() => {
         return Promise.resolve(true);
       })
       .catch(error => {
@@ -53,8 +53,8 @@ export function getOrdersByUserId() {
   const state: any = store.getState();
   const user = state.loggedUser;
 
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/order/user/${user.ID}`)
       .then(response => {
         return response.data;

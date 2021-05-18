@@ -25,7 +25,7 @@ const modalCart: React.FC<props> = ({ visible, history }) => {
         <img src={Logo} alt="cash and grab" />
 
         <div>
-          <h1>Parabéns! seu pedido nº 3 está sendo processado!</h1>
+          <h1>Parabéns! seu pedido está sendo processado!</h1>
 
           <button onClick={() => history.push('/orders')}>
             acompanhar pedido

@@ -46,6 +46,11 @@ export const Container = styled.div`
   @media (max-width: 1050px) {
     .socials {
       flex-direction: column;
+      gap: 25px;
+
+      .anticon {
+        font-size: 40px;
+      }
     }
   }
 

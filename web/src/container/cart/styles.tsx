@@ -37,7 +37,7 @@ export const Box = styled.div`
     border-radius: 8px;
 
     @media (max-width: 1120px) {
-      width: 99%;
+      width: 98%;
     }
 
     h2 {
@@ -75,6 +75,11 @@ export const Box = styled.div`
 
     @media (max-width: 1020px) {
       width: 100%;
+      padding: 15px 1%;
+      gap: 15px;
+      margin-top: 20px;
+      flex-direction: column;
+      height: fit-content;
     }
 
     input[type='text'] {
@@ -82,11 +87,16 @@ export const Box = styled.div`
       padding: 2px 12px;
       width: 200px;
       margin-right: 20px;
+      outline: none;
     }
 
     .anticon {
       font-size: 20px;
       cursor: pointer;
+
+      :hover {
+        transform: scale(1.1);
+      }
     }
 
     h4 {
@@ -105,6 +115,12 @@ export const Box = styled.div`
     margin-top: 50px;
     padding: 0 100px;
     margin-bottom: 30px;
+
+    @media (max-width: 1020px) {
+      flex-direction: column-reverse;
+      padding: 0;
+      gap: 25px;
+    }
 
     button {
       padding: 10px 25px;
@@ -142,6 +158,11 @@ export const Box = styled.div`
     min-width: 280px;
     min-height: 30px;
     margin-top: 30px;
+
+    @media (max-width: 1020px) {
+      margin-top: 50px;
+      width: fit-content;
+    }
 
     p {
       margin: 0;

@@ -11,7 +11,10 @@ export const Container = styled.div`
 
     @media (max-width: 1020px) {
       width: 100%;
-      justify-content: space-between;
+      margin: 30px 0;
+      padding: 0 0 25px 0;
+      flex-direction: column;
+      gap: 18px;
     }
 
     img {
@@ -45,6 +48,10 @@ export const Container = styled.div`
         align-items: center;
         min-width: 250px;
         justify-content: space-between;
+
+        @media (max-width: 1020px) {
+          width: 100%;
+        }
 
         p {
           font-family: 'Montserrat Light';

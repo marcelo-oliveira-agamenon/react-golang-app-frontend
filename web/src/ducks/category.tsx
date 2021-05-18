@@ -16,8 +16,8 @@ export type Category = {
 
 //Get all categories function
 export function getCategories() {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/category`)
       .then(response => {
         return response.data;

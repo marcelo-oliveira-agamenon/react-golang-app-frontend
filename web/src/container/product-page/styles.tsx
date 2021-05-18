@@ -116,6 +116,10 @@ export const BoxProduct = styled.div`
     }
 
     .btn-imagem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       @media (max-width: 768px) {
         margin-bottom: 20px;
       }
@@ -125,6 +129,7 @@ export const BoxProduct = styled.div`
         justify-content: center;
         cursor: pointer;
         margin-bottom: 10px;
+        margin-top: 10px;
 
         .anticon {
           margin-top: 8px;
