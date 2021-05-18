@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { getOrdersByUserId, Order } from "../../ducks/order";
-import { RouteComponentProps } from "react-router-dom";
-import { LoadingOutlined } from "@ant-design/icons";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getOrdersByUserId, Order } from 'ducks/order';
+import { RouteComponentProps } from 'react-router-dom';
+import { LoadingOutlined } from '@ant-design/icons';
 
-import { Container, Box } from "./styles";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
-import OrderComp from "../../components/order";
+import { Container, Box } from './styles';
+import Header from 'components/header';
+import Footer from 'components/footer';
+import OrderComp from 'components/order';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   getOrdersByUserId: () => Promise<any>;
 }
 
@@ -24,12 +24,11 @@ function Orders(props: props) {
 
     props
       .getOrdersByUserId()
-      .then((response) => {
+      .then(response => {
         setOrders(response);
         setLoading(false);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         setLoading(false);
       });
 
@@ -48,8 +47,8 @@ function Orders(props: props) {
             <LoadingOutlined />
           ) : (
             <>
-              {orders.map((ord) => {
-                return <OrderComp key={ord.ID} order={ord} />;
+              {orders.map(order => {
+                return <OrderComp key={order.ID} order={order} />;
               })}
             </>
           )}

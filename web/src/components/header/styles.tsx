@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ export const Avatar = styled.div`
   align-items: center;
 
   h1 {
-    font-family: "Montserrat Medium";
+    font-family: 'Montserrat Medium';
     font-size: 19px;
     text-transform: uppercase;
     margin-top: 7px;
@@ -68,7 +68,7 @@ export const DrawerMenu = styled.div`
     }
 
     h1 {
-      font-family: "Montserrat Medium";
+      font-family: 'Montserrat Medium';
       font-size: 12px;
       color: white;
     }
@@ -99,7 +99,7 @@ export const DrawerMenu = styled.div`
       cursor: pointer;
 
       h1 {
-        font-family: "Montserrat Medium";
+        font-family: 'Montserrat Medium';
         font-size: 20px;
         text-transform: uppercase;
         margin-top: 12px;

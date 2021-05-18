@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import {
   MenuOutlined,
   HomeOutlined,
@@ -8,12 +8,12 @@ import {
   HeartOutlined,
   UserOutlined,
   LogoutOutlined,
-} from "@ant-design/icons";
-import { Drawer } from "antd";
-import { User, logout } from "../../ducks/auth";
+} from '@ant-design/icons';
+import { Drawer } from 'antd';
+import { User, logout } from 'ducks/auth';
 
-import { Container, Avatar as Icon, DrawerMenu } from "./styles";
-import { RouteComponentProps } from "react-router-dom";
+import { Container, Avatar as Icon, DrawerMenu } from './styles';
+import { RouteComponentProps } from 'react-router-dom';
 
 interface props extends RouteComponentProps {
   logout: (props: any) => void;
@@ -32,7 +32,7 @@ function Header(props: props) {
           getContainer={false}
           closable={true}
           closeIcon={false}
-          onClose={() => setShow((showDrawer) => !showDrawer)}
+          onClose={() => setShow(showDrawer => !showDrawer)}
           width={320}
         >
           <div className="header">
@@ -44,23 +44,23 @@ function Header(props: props) {
           </div>
 
           <div className="options">
-            <div onClick={() => props.history.push("/home")}>
+            <div onClick={() => props.history.push('/home')}>
               <HomeOutlined />
               <h1>home</h1>
             </div>
-            <div onClick={() => props.history.push("/orders")}>
+            <div onClick={() => props.history.push('/orders')}>
               <ShoppingOutlined />
               <h1>pedidos</h1>
             </div>
-            <div onClick={() => props.history.push("/cart")}>
+            <div onClick={() => props.history.push('/cart')}>
               <ShoppingCartOutlined />
               <h1>carrinho</h1>
             </div>
-            <div onClick={() => props.history.push("/myProfile")}>
+            <div onClick={() => props.history.push('/myProfile')}>
               <UserOutlined />
               <h1>meu perfil</h1>
             </div>
-            <div onClick={() => props.history.push("/favorites")}>
+            <div onClick={() => props.history.push('/favorites')}>
               <HeartOutlined />
               <h1>favoritos</h1>
             </div>
@@ -73,7 +73,7 @@ function Header(props: props) {
       </DrawerMenu>
       <Container>
         <div>
-          <MenuOutlined onClick={() => setShow((showDrawer) => !showDrawer)} />
+          <MenuOutlined onClick={() => setShow(showDrawer => !showDrawer)} />
         </div>
 
         <Icon>
@@ -93,5 +93,5 @@ export default connect(
   },
   {
     logout,
-  }
+  },
 )(Header);

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { User } from "../../ducks/auth";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { User } from 'ducks/auth';
 
-import { Container, Box, InputContainer } from "./styles";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
-import { RouteComponentProps } from "react-router-dom";
+import { Container, Box, InputContainer } from './styles';
+import Header from 'components/header';
+import Footer from 'components/footer';
+import { RouteComponentProps } from 'react-router-dom';
 
 interface props extends RouteComponentProps {
   loggedUser: User;
@@ -15,7 +15,7 @@ function MyProfile(props: props) {
   const [name, setName] = useState<string>(props.loggedUser.Name);
   const [email, setEmail] = useState<string>(props.loggedUser.Email);
   const [phone, setPhone] = useState<string>(props.loggedUser.Phone);
-  const [pass, setPass] = useState<string>("");
+  const [pass, setPass] = useState<string>('');
   const [date, setDate] = useState<string>(props.loggedUser.Birthday);
   const [gender, setGender] = useState<string>(props.loggedUser.Gender);
   const [address, setAddress] = useState<string>(props.loggedUser.Address);
@@ -32,9 +32,9 @@ function MyProfile(props: props) {
 
   const phoneMask = (value: string): string => {
     return value
-      .replace(/\D/g, "")
-      .replace(/(\d{2})(\d)/, "($1) $2")
-      .replace(/(\d{5})(\d)/, "$1-$2");
+      .replace(/\D/g, '')
+      .replace(/(\d{2})(\d)/, '($1) $2')
+      .replace(/(\d{5})(\d)/, '$1-$2');
   };
 
   const handleSubmit = () => {
@@ -55,7 +55,7 @@ function MyProfile(props: props) {
               <input
                 type="text"
                 value={name}
-                onChange={(event) => setName(event.target.value)}
+                onChange={event => setName(event.target.value)}
               />
             </InputContainer>
 
@@ -64,7 +64,7 @@ function MyProfile(props: props) {
               <input
                 type="email"
                 value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={event => setEmail(event.target.value)}
               />
             </InputContainer>
 
@@ -73,7 +73,7 @@ function MyProfile(props: props) {
               <input
                 type="password"
                 value={pass}
-                onChange={(event) => setPass(event.target.value)}
+                onChange={event => setPass(event.target.value)}
               />
             </InputContainer>
 
@@ -82,7 +82,7 @@ function MyProfile(props: props) {
               <input
                 type="date"
                 value={date}
-                onChange={(event) => setDate(event.target.value)}
+                onChange={event => setDate(event.target.value)}
               />
             </InputContainer>
 
@@ -92,7 +92,7 @@ function MyProfile(props: props) {
                 name="gender"
                 id="gender"
                 value={gender}
-                onChange={(event) => setGender(event.target.value)}
+                onChange={event => setGender(event.target.value)}
               >
                 <option value=""></option>
                 <option value="masc">Masculino</option>
@@ -105,7 +105,7 @@ function MyProfile(props: props) {
               <input
                 type="text"
                 value={phone}
-                onChange={(event) => setPhone(phoneMask(event.target.value))}
+                onChange={event => setPhone(phoneMask(event.target.value))}
               />
             </InputContainer>
 
@@ -114,7 +114,7 @@ function MyProfile(props: props) {
               <input
                 type="text"
                 value={address}
-                onChange={(event) => setAddress(event.target.value)}
+                onChange={event => setAddress(event.target.value)}
               />
             </InputContainer>
           </div>
@@ -125,15 +125,15 @@ function MyProfile(props: props) {
               type="file"
               id="fileHandle"
               accept="image/jpg/png/jpeg"
-              onChange={(e) => handleImage(e)}
+              onChange={e => handleImage(e)}
             />
             <div className="buttons-img-profile">
               <button
-                onClick={() => document.getElementById("fileHandle")?.click()}
+                onClick={() => document.getElementById('fileHandle')?.click()}
               >
                 adicionar imagem
               </button>
-              <button onClick={() => setAvatar("")} className="cancel-btn">
+              <button onClick={() => setAvatar('')} className="cancel-btn">
                 remover imagem
               </button>
             </div>
@@ -144,7 +144,7 @@ function MyProfile(props: props) {
           <div className="button-comp">
             <button
               className="cancel-btn"
-              onClick={() => props.history.push("/home")}
+              onClick={() => props.history.push('/home')}
             >
               cancelar
             </button>

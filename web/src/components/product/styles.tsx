@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -17,14 +17,14 @@ export const Container = styled.div`
 
     h2 {
       color: black;
-      font-family: "Montserrat Regular";
+      font-family: 'Montserrat Regular';
       font-size: 14px;
       text-transform: capitalize;
     }
   }
 
   p {
-    font-family: "Montserrat Regular";
+    font-family: 'Montserrat Regular';
     font-size: 11px;
     color: #7c7c7c;
     padding: 0 12px;

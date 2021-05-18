@@ -1,9 +1,9 @@
-import React from "react";
-import { Modal } from "antd";
-import { RouteComponentProps } from "react-router-dom";
+import React from 'react';
+import { Modal } from 'antd';
+import { RouteComponentProps } from 'react-router-dom';
 
-import { Container } from "./style";
-import Logo from "../../assets/icons/logo.png";
+import { Container } from './style';
+import Logo from 'assets/icons/logo.png';
 
 interface props extends RouteComponentProps {
   visible: boolean;
@@ -17,7 +17,7 @@ const modalCart: React.FC<props> = ({ visible, history }) => {
       closable={false}
       footer={null}
       bodyStyle={{
-        backgroundColor: "#e4f2ff",
+        backgroundColor: '#e4f2ff',
         padding: 0,
       }}
     >
@@ -25,13 +25,13 @@ const modalCart: React.FC<props> = ({ visible, history }) => {
         <img src={Logo} alt="cash and grab" />
 
         <div>
-          <h1>Parabéns! seu pedido nº 3 está sendo processado!</h1>
+          <h1>Parabéns! seu pedido está sendo processado!</h1>
 
-          <button onClick={() => history.push("/orders")}>
+          <button onClick={() => history.push('/orders')}>
             acompanhar pedido
           </button>
 
-          <p onClick={() => history.push("/home")}>continue comprando</p>
+          <p onClick={() => history.push('/home')}>continue comprando</p>
         </div>
       </Container>
     </Modal>

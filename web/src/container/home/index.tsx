@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { RouteComponentProps } from "react-router-dom";
-import { getPromotions, getRecents, Product } from "../../ducks/product";
-import { Category, getCategories } from "../../ducks/category";
-import { LoadingOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
+import { getPromotions, getRecents, Product } from 'ducks/product';
+import { Category, getCategories } from 'ducks/category';
+import { LoadingOutlined } from '@ant-design/icons';
 
-import { Container, Banner, ContSearch, Section } from "./styles";
-import Header from "../../components/header";
-import SearchBar from "../../components/searchbar";
-import ProductComp from "../../components/product";
-import CategoryComp from "../../components/category";
-import Footer from "../../components/footer";
-import BannerImg from "../../assets/image/banner_home.jpg";
+import { Container, Banner, ContSearch, Section } from './styles';
+import Header from 'components/header';
+import SearchBar from 'components/searchbar';
+import ProductComp from 'components/product';
+import CategoryComp from 'components/category';
+import Footer from 'components/footer';
+import BannerImg from 'assets/image/banner_home.jpg';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   getPromotions: () => Promise<any>;
   getRecents: () => Promise<any>;
   getCategories: () => Promise<any>;
@@ -29,31 +29,31 @@ function Home(props: props) {
     setLoading(true);
     props
       .getPromotions()
-      .then((res) => {
+      .then(res => {
         setPromotions(res);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(err => {
         setLoading(false);
       });
 
     props
       .getRecents()
-      .then((res) => {
+      .then(res => {
         setRecents(res);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(err => {
         setLoading(false);
       });
 
     props
       .getCategories()
-      .then((res) => {
+      .then(res => {
         setCategories(res);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(err => {
         setLoading(false);
       });
 
@@ -78,7 +78,7 @@ function Home(props: props) {
             {loading ? (
               <LoadingOutlined />
             ) : (
-              categories?.map((category) => {
+              categories?.map(category => {
                 return (
                   <CategoryComp
                     key={category.ID}
@@ -99,7 +99,7 @@ function Home(props: props) {
             {loading ? (
               <LoadingOutlined />
             ) : (
-              promotions?.map((product) => {
+              promotions?.map(product => {
                 return (
                   <ProductComp key={product.ID} product={product} {...props} />
                 );
@@ -116,7 +116,7 @@ function Home(props: props) {
             {loading ? (
               <LoadingOutlined />
             ) : (
-              recents?.map((product) => {
+              recents?.map(product => {
                 return (
                   <ProductComp key={product.ID} product={product} {...props} />
                 );

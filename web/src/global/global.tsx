@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
     * {
@@ -8,32 +8,32 @@ export default createGlobalStyle`
 
     @font-face {
         font-family: "Montserrat Regular";
-        src: url(${require("../assets/fonts/Montserrat/Montserrat-Regular.ttf")});
+        src: url(${require('../assets/fonts/Montserrat/Montserrat-Regular.ttf')});
     }
 
     @font-face {
         font-family: "Montserrat Medium";
-        src: url(${require("../assets/fonts/Montserrat/Montserrat-Medium.ttf")});
+        src: url(${require('../assets/fonts/Montserrat/Montserrat-Medium.ttf')});
     }
 
     @font-face {
         font-family: "Montserrat Bold";
-        src: url(${require("../assets/fonts/Montserrat/Montserrat-Bold.ttf")});
+        src: url(${require('../assets/fonts/Montserrat/Montserrat-Bold.ttf')});
     }
 
     @font-face {
         font-family: "Montserrat Light";
-        src: url(${require("../assets/fonts/Montserrat/Montserrat-Light.ttf")});
+        src: url(${require('../assets/fonts/Montserrat/Montserrat-Light.ttf')});
     }
 
     @font-face {
         font-family: "Montserrat Thin";
-        src: url(${require("../assets/fonts/Montserrat/Montserrat-Thin.ttf")});
+        src: url(${require('../assets/fonts/Montserrat/Montserrat-Thin.ttf')});
     }
 
     @font-face {
         font-family: "Montserrat SemiBold";
-        src: url(${require("../assets/fonts/Montserrat/Montserrat-SemiBold.ttf")});
+        src: url(${require('../assets/fonts/Montserrat/Montserrat-SemiBold.ttf')});
     }
 
     body {

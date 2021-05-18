@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -23,7 +23,7 @@ export const Container = styled.div`
       align-self: center;
       width: 500px;
       text-align: center;
-      font-family: "Montserrat Regular";
+      font-family: 'Montserrat Regular';
       font-size: 22px;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -46,6 +46,11 @@ export const Container = styled.div`
   @media (max-width: 1050px) {
     .socials {
       flex-direction: column;
+      gap: 25px;
+
+      .anticon {
+        font-size: 40px;
+      }
     }
   }
 

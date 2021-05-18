@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   position: initial;
@@ -13,7 +13,7 @@ export const Container = styled.div`
   .title-cart {
     margin-top: 60px;
     margin-left: 10%;
-    font-family: "Montserrat SemiBold";
+    font-family: 'Montserrat SemiBold';
     font-size: 28px;
     letter-spacing: 1px;
     color: white;
@@ -36,10 +36,14 @@ export const Box = styled.div`
     background-color: white;
     border-radius: 8px;
 
+    @media (max-width: 1120px) {
+      width: 98%;
+    }
+
     h2 {
       text-align: center;
       margin-top: 20px;
-      font-family: "Montserrat Regular";
+      font-family: 'Montserrat Regular';
       font-size: 28px;
       text-transform: capitalize;
     }
@@ -47,7 +51,7 @@ export const Box = styled.div`
     h3 {
       text-align: center;
       margin-top: 20px;
-      font-family: "Montserrat Regular";
+      font-family: 'Montserrat Regular';
       font-size: 15px;
       text-transform: uppercase;
       margin-top: 80px;
@@ -69,20 +73,34 @@ export const Box = styled.div`
     padding: 0 40px;
     align-items: center;
 
-    input[type="text"] {
+    @media (max-width: 1020px) {
+      width: 100%;
+      padding: 15px 1%;
+      gap: 15px;
+      margin-top: 20px;
+      flex-direction: column;
+      height: fit-content;
+    }
+
+    input[type='text'] {
       border-style: none;
       padding: 2px 12px;
       width: 200px;
       margin-right: 20px;
+      outline: none;
     }
 
     .anticon {
       font-size: 20px;
       cursor: pointer;
+
+      :hover {
+        transform: scale(1.1);
+      }
     }
 
     h4 {
-      font-family: "Montserrat Regular";
+      font-family: 'Montserrat Regular';
       text-transform: capitalize;
       font-size: 18px;
       margin: 0;
@@ -97,6 +115,12 @@ export const Box = styled.div`
     margin-top: 50px;
     padding: 0 100px;
     margin-bottom: 30px;
+
+    @media (max-width: 1020px) {
+      flex-direction: column-reverse;
+      padding: 0;
+      gap: 25px;
+    }
 
     button {
       padding: 10px 25px;
@@ -135,14 +159,19 @@ export const Box = styled.div`
     min-height: 30px;
     margin-top: 30px;
 
+    @media (max-width: 1020px) {
+      margin-top: 50px;
+      width: fit-content;
+    }
+
     p {
       margin: 0;
-      font-family: "Montserrat Regular";
+      font-family: 'Montserrat Regular';
       font-size: 18px;
     }
 
     span {
-      font-family: "Montserrat Bold";
+      font-family: 'Montserrat Bold';
     }
   }
 `;

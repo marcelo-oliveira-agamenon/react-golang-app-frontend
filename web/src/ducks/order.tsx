@@ -1,10 +1,10 @@
-import api from "../config/axiosConfig";
-import { types } from "../store/reducer";
-import { store } from "../store/store";
+import api from 'config/axiosConfig';
+import { types } from 'store/reducer';
+import { store } from 'store/store';
 
 export type Order = {
   ID: string;
-  UserID: string;
+  Userid: string;
   ProductID: Array<string>;
   TotalValue: number;
   Status: string;
@@ -27,18 +27,18 @@ export function createOrder(data: {
 }) {
   const state: any = store.getState();
   const form = new FormData();
-  form.append("userID", state.loggedUser.ID);
-  form.append("productID", data.productID);
-  form.append("qtd", data.qtd.toString());
-  form.append("totalValue", data.totalValue.toString());
+  form.append('userID', state.loggedUser.ID);
+  form.append('productID', data.productID);
+  form.append('qtd', data.qtd.toString());
+  form.append('totalValue', data.totalValue.toString());
 
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .post(`/v1/order`, form)
-      .then((response) => {
+      .then(() => {
         return Promise.resolve(true);
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -53,13 +53,13 @@ export function getOrdersByUserId() {
   const state: any = store.getState();
   const user = state.loggedUser;
 
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/order/user/${user.ID}`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,

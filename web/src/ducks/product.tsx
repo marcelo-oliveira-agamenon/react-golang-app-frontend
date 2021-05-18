@@ -1,5 +1,6 @@
-import api from "../config/axiosConfig";
-import { types } from "../store/reducer";
+import api from 'config/axiosConfig';
+import { types } from 'store/reducer';
+import { Category } from './category';
 
 export type ProductImage = {
   ID: string;
@@ -14,6 +15,7 @@ export type Product = {
   ID: string;
   Name: string;
   Categoryid: number;
+  Category: Category;
   Value: number;
   CreatedAt: string;
   UpdatedAt: string;
@@ -34,13 +36,13 @@ export type Product = {
 
 //Get promotion products function
 export function getPromotions() {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/product/promotion`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -52,13 +54,13 @@ export function getPromotions() {
 
 //Get most recent products function
 export function getRecents() {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/product/recent`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -69,14 +71,19 @@ export function getRecents() {
 }
 
 //Search product by name function
-export function searchProduct(value: string) {
-  return function (dispatch: any) {
-    return api
-      .get(`/v1/product/search/${value}`)
-      .then((response) => {
+export function searchProduct(value: string, limit: number, offset: number) {
+  return async function (dispatch: any) {
+    return await api
+      .get(`/v1/product/search/${value}`, {
+        params: {
+          limit,
+          offset,
+        },
+      })
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -88,13 +95,13 @@ export function searchProduct(value: string) {
 
 //Search product by name function
 export function getAllProducts() {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/product`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -106,13 +113,13 @@ export function getAllProducts() {
 
 //Search product by id function
 export function getProductbyID(productID: string) {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/product/getbyId/${productID}`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,
@@ -124,13 +131,13 @@ export function getProductbyID(productID: string) {
 
 //Get products by category function
 export function getProductByCategory(categoryID: string) {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/product/category/${categoryID}`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,

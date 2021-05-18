@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   position: initial;
@@ -19,7 +19,7 @@ export const Container = styled.div`
     font-size: 20px;
     color: white;
     text-transform: uppercase;
-    font-family: "Montserrat SemiBold";
+    font-family: 'Montserrat SemiBold';
     cursor: pointer;
   }
 
@@ -34,6 +34,10 @@ export const BoxProduct = styled.div`
   justify-content: center;
   align-items: center;
 
+  @media (max-width: 1120px) {
+    padding: 0 8px;
+  }
+
   .container-product {
     width: 1100px;
     height: auto;
@@ -42,6 +46,11 @@ export const BoxProduct = styled.div`
     margin-top: 30px;
     padding: 40px 70px;
 
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 40px;
+    }
+
     .data-text {
       .ant-rate {
         color: black;
@@ -49,13 +58,13 @@ export const BoxProduct = styled.div`
       }
 
       h1 {
-        font-family: "Montserrat Regular";
+        font-family: 'Montserrat Regular';
         font-size: 25px;
         text-transform: capitalize;
       }
 
       h2 {
-        font-family: "Montserrat Bold";
+        font-family: 'Montserrat Bold';
         font-size: 25px;
         text-transform: uppercase;
         color: red;
@@ -63,7 +72,7 @@ export const BoxProduct = styled.div`
       }
 
       p {
-        font-family: "Montserrat Light";
+        font-family: 'Montserrat Light';
         font-size: 12px;
         margin: 0;
         margin-bottom: 30px;
@@ -74,13 +83,13 @@ export const BoxProduct = styled.div`
         justify-content: space-between;
 
         span {
-          font-family: "Montserrat Bold";
+          font-family: 'Montserrat Bold';
           font-size: 22px;
           letter-spacing: 1px;
         }
 
         button {
-          font-family: "Montserrat Medium";
+          font-family: 'Montserrat Medium';
           font-size: 9px;
           padding: 6px 15px;
           color: white;
@@ -100,18 +109,27 @@ export const BoxProduct = styled.div`
         h1 {
           margin: 0;
           font-size: 13px;
-          font-family: "Montserrat Medium";
+          font-family: 'Montserrat Medium';
           margin-right: 30px;
         }
       }
     }
 
     .btn-imagem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @media (max-width: 768px) {
+        margin-bottom: 20px;
+      }
+
       div {
         display: flex;
         justify-content: center;
         cursor: pointer;
         margin-bottom: 10px;
+        margin-top: 10px;
 
         .anticon {
           margin-top: 8px;
@@ -119,7 +137,7 @@ export const BoxProduct = styled.div`
         }
 
         h1 {
-          font-family: "Montserrat Light";
+          font-family: 'Montserrat Light';
           font-size: 18px;
         }
       }
@@ -130,15 +148,20 @@ export const BoxProduct = styled.div`
       padding: 5px 60px;
       margin-top: 120px;
 
+      @media (max-width: 768px) {
+        margin-top: 80px;
+        padding: 5px 25px;
+      }
+
       h1 {
         margin-top: 5px;
-        font-family: "Montserrat Light";
+        font-family: 'Montserrat Light';
         font-size: 18px;
         text-transform: capitalize;
       }
 
       p {
-        font-family: "Montserrat Light";
+        font-family: 'Montserrat Light';
         font-size: 13px;
         text-align: justify;
       }
@@ -148,10 +171,21 @@ export const BoxProduct = styled.div`
       display: grid;
       grid-template-columns: 50% 50%;
 
+      @media (max-width: 1120px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
       img {
         margin-bottom: 10px;
         width: 400px;
         height: 300px;
+
+        @media (max-width: 768px) {
+          width: 100%;
+          margin-bottom: 25px;
+        }
       }
     }
 
@@ -165,10 +199,20 @@ export const BoxProduct = styled.div`
       width: 300px;
       height: 55px;
       border-radius: 8px;
-      font-family: "Montserrat Regular";
+      font-family: 'Montserrat Regular';
       font-size: 22px;
       text-transform: uppercase;
       cursor: pointer;
+
+      @media (max-width: 620px) {
+        width: 100%;
+        justify-content: space-evenly;
+
+        .anticon {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
 
       .anticon {
         font-size: 25px;
@@ -183,6 +227,10 @@ export const Products = styled.div`
   display: flex;
   justify-content: center;
 
+  @media (max-width: 620px) {
+    padding: 0 8px;
+  }
+
   .component {
     display: flex;
     flex-direction: column;
@@ -192,7 +240,7 @@ export const Products = styled.div`
     margin-bottom: 100px;
 
     h1 {
-      font-family: "Montserrat SemiBold";
+      font-family: 'Montserrat SemiBold';
       letter-spacing: 1px;
       font-size: 18px;
       color: white;

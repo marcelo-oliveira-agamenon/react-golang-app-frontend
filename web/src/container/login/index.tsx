@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import { RouteComponentProps } from "react-router-dom";
-import { connect } from "react-redux";
-import { Checkbox, Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
-import { login } from "../../ducks/auth";
-import { useToasts } from "react-toast-notifications";
+import React, { useState } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Checkbox, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { login } from 'ducks/auth';
+import { useToasts } from 'react-toast-notifications';
 
-import { Container, Overlay, Card, Box, Inputcomp, BtnLogin } from "./styles";
-import Logo from "../../assets/icons/logo.png";
+import { Container, Overlay, Card, Box, Inputcomp, BtnLogin } from './styles';
+import Logo from 'assets/icons/logo.png';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   login: (email: string, password: string) => Promise<any>;
 }
 
 function Login(props: props) {
-  const [email, setEmail] = useState<string>("");
-  const [pass, setPass] = useState<string>("");
+  const [email, setEmail] = useState<string>('');
+  const [pass, setPass] = useState<string>('');
   const [show, setShow] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const { addToast } = useToasts();
 
   const handleLogin = (): void => {
-    if (email === "" || pass === "") {
-      addToast("Preencha os Campos!", {
-        appearance: "error",
+    if (email === '' || pass === '') {
+      addToast('Preencha os Campos!', {
+        appearance: 'error',
         autoDismiss: true,
       });
       return;
@@ -33,22 +33,22 @@ function Login(props: props) {
     props
       .login(email, pass)
       .then(() => {
-        props.history.push("/home");
+        props.history.push('/home');
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(err => {
         addToast(err, {
-          appearance: "error",
+          appearance: 'error',
           autoDismiss: true,
         });
-        setPass("");
+        setPass('');
         setLoading(false);
       });
   };
 
   function handleResetPassword(): void {
-    addToast("Email de redefinição enviado para o seu email", {
-      appearance: "success",
+    addToast('Email de redefinição enviado para o seu email', {
+      appearance: 'success',
       autoDismiss: true,
     });
   }
@@ -66,7 +66,7 @@ function Login(props: props) {
                 id="email"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
               />
             </Inputcomp>
 
@@ -76,18 +76,18 @@ function Login(props: props) {
                 <div className="show-password">
                   <Checkbox
                     checked={show}
-                    onChange={() => setShow((show) => !show)}
+                    onChange={() => setShow(show => !show)}
                   />
                   <p>exibir senha</p>
                 </div>
               </div>
               <input
                 id="password"
-                type={show ? "text" : "password"}
+                type={show ? 'text' : 'password'}
                 value={pass}
-                onChange={(e) => setPass(e.target.value)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") {
+                onChange={e => setPass(e.target.value)}
+                onKeyDown={event => {
+                  if (event.key === 'Enter') {
                     handleLogin();
                   }
                 }}
@@ -102,20 +102,20 @@ function Login(props: props) {
                     <LoadingOutlined
                       style={{
                         fontSize: 30,
-                        color: "white",
-                        marginTop: "10px",
+                        color: 'white',
+                        marginTop: '10px',
                       }}
                     />
                   }
                 />
               ) : (
-                "entrar"
+                'entrar'
               )}
             </BtnLogin>
 
             <p>
-              não possui cadastro?{" "}
-              <span onClick={() => props.history.push("/signup")}>
+              não possui cadastro?{' '}
+              <span onClick={() => props.history.push('/signup')}>
                 cadastre-se
               </span>
             </p>

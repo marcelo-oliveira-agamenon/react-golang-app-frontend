@@ -1,9 +1,9 @@
-import React from "react";
-import { RouteComponentProps } from "react-router-dom";
-import { Category } from "../../ducks/category";
+import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { Category } from 'ducks/category';
 
-import { Container } from "./styles";
-interface props extends RouteComponentProps<any> {
+import { Container } from './styles';
+interface props extends RouteComponentProps {
   category: Category;
 }
 
@@ -12,7 +12,7 @@ const category: React.FC<props> = ({ category, history }) => {
     <Container
       onClick={() =>
         history.push({
-          pathname: "/categories",
+          pathname: '/categories',
           state: {
             categoryID: category.ID,
             name: category.Name,

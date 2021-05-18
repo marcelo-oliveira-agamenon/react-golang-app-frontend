@@ -1,11 +1,10 @@
-.*
 !/.gitignore
 
 # dependencies
 /web/node_modules
 
 #android
-/mobile/node_modules
+mobile/node_modules
 mobile/android/.idea
 mobile/yarn.lock
 mobile/android/.gradle

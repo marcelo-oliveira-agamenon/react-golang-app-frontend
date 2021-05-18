@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ export const Container = styled.div`
   }
 
   h1 {
-    font-family: "Montserrat Regular";
+    font-family: 'Montserrat Regular';
     letter-spacing: 1.7 px;
     text-transform: uppercase;
     text-align: center;
@@ -29,7 +29,7 @@ export const Container = styled.div`
   }
 
   input {
-    font-family: "Montserrat Regular";
+    font-family: 'Montserrat Regular';
     outline: none;
     border: none;
     width: 550px;

@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { signup } from "../../ducks/auth";
-import { RouteComponentProps, useLocation } from "react-router-dom";
-import { useToasts } from "react-toast-notifications";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { signup } from 'ducks/auth';
+import { RouteComponentProps, useLocation } from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 
-import { Container, Card, InputCont, ImgContainer } from "./styles";
-import MdSucess from "../../components/modalSignup";
-import ImageAvatar from "../../assets/avatar/avataaars.png";
+import { Container, Card, InputCont, ImgContainer } from './styles';
+import MdSucess from 'components/modalSignup';
+import ImageAvatar from 'assets/avatar/avataaars.png';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   signup: (form: FormData) => Promise<any>;
 }
 
@@ -30,14 +30,14 @@ interface facebookData {
 function SignUp(props: props) {
   const { addToast } = useToasts();
   const { state } = useLocation<facebookData>();
-  const [email, setEmail] = useState<string>("");
-  const [pass, setPass] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [date, setDate] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [gender, setGender] = useState<string>("");
-  const [address, setAddress] = useState<string>("");
-  const [avatar, setAvatar] = useState<string>("");
+  const [email, setEmail] = useState<string>('');
+  const [pass, setPass] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [date, setDate] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [gender, setGender] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [avatar, setAvatar] = useState<string>('');
   const [file, setFile] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
@@ -54,13 +54,13 @@ function SignUp(props: props) {
     setEmail(state.email);
     setName(state.name);
     getBase64ImageFromUrl(state.picture.data.url)
-      .then((resp) => {
+      .then(resp => {
         setFile(resp);
         setAvatar(state.picture.data.url);
       })
       .catch(() => {
-        addToast("Falha ao carregar imagem do Facebook", {
-          appearance: "error",
+        addToast('Falha ao carregar imagem do Facebook', {
+          appearance: 'error',
           autoDismiss: true,
         });
       });
@@ -73,15 +73,15 @@ function SignUp(props: props) {
     return new Promise((resolve, reject) => {
       let reader = new FileReader();
       reader.addEventListener(
-        "load",
+        'load',
         () => {
           resolve(reader.result);
         },
-        false
+        false,
       );
 
       reader.onerror = () => {
-        return reject("");
+        return reject('');
       };
       reader.readAsDataURL(blob);
     });
@@ -90,17 +90,17 @@ function SignUp(props: props) {
   const handleSubmit = () => {
     setLoading(true);
     if (
-      email === "" ||
-      pass === "" ||
-      name === "" ||
-      date === "" ||
-      phone === "" ||
-      gender === "" ||
-      address === "" ||
-      avatar === ""
+      email === '' ||
+      pass === '' ||
+      name === '' ||
+      date === '' ||
+      phone === '' ||
+      gender === '' ||
+      address === '' ||
+      avatar === ''
     ) {
-      addToast("Preencha os campos!", {
-        appearance: "error",
+      addToast('Preencha os campos!', {
+        appearance: 'error',
         autoDismiss: true,
       });
       setLoading(false);
@@ -108,15 +108,15 @@ function SignUp(props: props) {
     }
 
     let form = new FormData();
-    form.set("email", email);
-    form.set("password", pass);
-    form.set("name", name);
-    form.set("birthday", date);
-    form.set("phone", phone);
-    form.set("gender", gender);
-    form.set("address", address);
-    if (avatar !== "") {
-      form.append("avatar", file);
+    form.set('email', email);
+    form.set('password', pass);
+    form.set('name', name);
+    form.set('birthday', date);
+    form.set('phone', phone);
+    form.set('gender', gender);
+    form.set('address', address);
+    if (avatar !== '') {
+      form.append('avatar', file);
     }
 
     props
@@ -125,9 +125,9 @@ function SignUp(props: props) {
         setLoading(false);
         setShow(true);
       })
-      .catch((err) => {
+      .catch(err => {
         addToast(err, {
-          appearance: "error",
+          appearance: 'error',
           autoDismiss: true,
         });
         setLoading(false);
@@ -136,9 +136,9 @@ function SignUp(props: props) {
 
   const phoneMask = (value: string) => {
     return value
-      .replace(/\D/g, "")
-      .replace(/(\d{2})(\d)/, "($1) $2")
-      .replace(/(\d{5})(\d)/, "$1-$2");
+      .replace(/\D/g, '')
+      .replace(/(\d{2})(\d)/, '($1) $2')
+      .replace(/(\d{5})(\d)/, '$1-$2');
   };
 
   const handleImage = (event: any) => {
@@ -161,7 +161,7 @@ function SignUp(props: props) {
                 id="name"
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={e => setName(e.target.value)}
               />
             </InputCont>
 
@@ -171,7 +171,7 @@ function SignUp(props: props) {
                 id="email"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
               />
             </InputCont>
 
@@ -181,7 +181,7 @@ function SignUp(props: props) {
                 id="password"
                 type="password"
                 value={pass}
-                onChange={(e) => setPass(e.target.value)}
+                onChange={e => setPass(e.target.value)}
               />
             </InputCont>
 
@@ -192,7 +192,7 @@ function SignUp(props: props) {
                 type="text"
                 value={phone}
                 maxLength={15}
-                onChange={(e) => setPhone(phoneMask(e.target.value))}
+                onChange={e => setPhone(phoneMask(e.target.value))}
               />
             </InputCont>
 
@@ -203,13 +203,13 @@ function SignUp(props: props) {
                 min={Date()}
                 type="date"
                 value={date}
-                onChange={(e) => setDate(e.target.value)}
+                onChange={e => setDate(e.target.value)}
               />
             </InputCont>
 
             <InputCont>
               <label htmlFor="gender">gênero</label>
-              <select id="gender" onChange={(e) => setGender(e.target.value)}>
+              <select id="gender" onChange={e => setGender(e.target.value)}>
                 <option value=""></option>
                 <option value="masc">Masculino</option>
                 <option value="fem">Feminino</option>
@@ -223,28 +223,28 @@ function SignUp(props: props) {
                 id="address"
                 type="text"
                 value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                onChange={e => setAddress(e.target.value)}
               />
             </InputCont>
           </div>
 
           <ImgContainer>
             <section>
-              <img src={avatar !== "" ? avatar : ImageAvatar} alt="avatar" />
+              <img src={avatar !== '' ? avatar : ImageAvatar} alt="avatar" />
               <input
                 type="file"
                 id="fileHandle"
                 accept="image/jpg/png/jpeg"
-                onChange={(e) => handleImage(e)}
+                onChange={e => handleImage(e)}
               />
             </section>
             <div>
               <button
-                onClick={() => document.getElementById("fileHandle")?.click()}
+                onClick={() => document.getElementById('fileHandle')?.click()}
               >
                 adicionar imagem
               </button>
-              <button className="remove-btn" onClick={() => setAvatar("")}>
+              <button className="remove-btn" onClick={() => setAvatar('')}>
                 remover imagem
               </button>
             </div>
@@ -254,7 +254,7 @@ function SignUp(props: props) {
         <div className="btn-main">
           <button
             className="remove-btn"
-            onClick={() => props.history.push("/prelogin")}
+            onClick={() => props.history.push('/prelogin')}
           >
             cancelar
           </button>
@@ -265,13 +265,13 @@ function SignUp(props: props) {
                   <LoadingOutlined
                     style={{
                       fontSize: 16,
-                      color: "white",
+                      color: 'white',
                     }}
                   />
                 }
               />
             ) : (
-              "cadastrar"
+              'cadastrar'
             )}
           </button>
         </div>

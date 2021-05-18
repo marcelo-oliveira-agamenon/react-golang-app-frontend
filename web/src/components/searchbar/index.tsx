@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { RouteComponentProps } from "react-router-dom";
-import { SearchOutlined } from "@ant-design/icons";
+import React, { useState } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { SearchOutlined } from '@ant-design/icons';
 
-import { Container } from "./styles";
+import { Container } from './styles';
 
-interface props extends RouteComponentProps<any> {}
+interface props extends RouteComponentProps {}
 
 function Searchbar(props: props) {
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>('');
   const handleChange = () => {
     props.history.push({
-      pathname: "/search",
+      pathname: '/search',
       state: search,
     });
   };
@@ -22,9 +22,9 @@ function Searchbar(props: props) {
         <SearchOutlined onClick={() => handleChange()} />
         <input
           value={search}
-          onChange={(event) => setSearch(event.target.value)}
-          onKeyDown={(event) => {
-            if (event.key === "Enter") {
+          onChange={event => setSearch(event.target.value)}
+          onKeyDown={event => {
+            if (event.key === 'Enter') {
               handleChange();
             }
           }}

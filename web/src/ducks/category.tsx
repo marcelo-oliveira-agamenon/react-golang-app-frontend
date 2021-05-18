@@ -1,5 +1,5 @@
-import api from "../config/axiosConfig";
-import { types } from "../store/reducer";
+import api from 'config/axiosConfig';
+import { types } from 'store/reducer';
 
 export type Category = {
   ID: string;
@@ -16,13 +16,13 @@ export type Category = {
 
 //Get all categories function
 export function getCategories() {
-  return function (dispatch: any) {
-    return api
+  return async function (dispatch: any) {
+    return await api
       .get(`/v1/category`)
-      .then((response) => {
+      .then(response => {
         return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch({
           type: types.ERROR,
           payload: error,

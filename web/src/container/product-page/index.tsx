@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { Breadcrumb, Rate, InputNumber } from "antd";
-import { Product } from "../../ducks/product";
-import { RouteComponentProps, useLocation } from "react-router-dom";
-import { getAllProducts } from "../../ducks/product";
-import { addFavorite } from "../../ducks/favorite";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Breadcrumb, Rate, InputNumber } from 'antd';
+import { Product } from 'ducks/product';
+import { RouteComponentProps, useLocation } from 'react-router-dom';
+import { getAllProducts } from 'ducks/product';
+import { addFavorite } from 'ducks/favorite';
 import {
   ShareAltOutlined,
   HeartOutlined,
   ShoppingCartOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
-import { Container, BoxProduct, Products } from "./styles";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
-import ProductComp from "../../components/product";
+import { Container, BoxProduct, Products } from './styles';
+import Header from 'components/header';
+import Footer from 'components/footer';
+import ProductComp from 'components/product';
 
-interface props extends RouteComponentProps<any> {
+interface props extends RouteComponentProps {
   getAllProducts: () => Promise<any>;
   addFavorite: (productID: string) => Promise<any>;
 }
@@ -29,7 +29,7 @@ function Productpage(props: props) {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    props.getAllProducts().then((res) => {
+    props.getAllProducts().then(res => {
       setProducts(res);
     });
 
@@ -41,23 +41,24 @@ function Productpage(props: props) {
       <Header {...props} />
       <div className="buffer"></div>
       <Breadcrumb separator="/">
-        <Breadcrumb.Item onClick={() => props.history.push("/home")}>
+        <Breadcrumb.Item onClick={() => props.history.push('/home')}>
           Home
         </Breadcrumb.Item>
         <Breadcrumb.Item
           onClick={() =>
             props.history.push({
-              pathname: "/categories",
+              pathname: '/categories',
               state: {
                 categoryID: state.Categoryid,
               },
             })
           }
         >
-          Categoria
+          {state.Category.Name}
         </Breadcrumb.Item>
         <Breadcrumb.Item>{state.Name}</Breadcrumb.Item>
       </Breadcrumb>
+
       <BoxProduct>
         <div className="container-product">
           <div className="data-img-product">
@@ -78,7 +79,7 @@ function Productpage(props: props) {
               <Rate value={3} disabled />
               <p>{state.Description}</p>
               <div className="price">
-                <span>R$ {state.Value.toFixed(2).replace(".", ",")}</span>
+                <span>R$ {state.Value.toFixed(2).replace('.', ',')}</span>
                 {state.HasShipping ? null : <button>frete grátis</button>}
               </div>
               <div className="selector-qtd">
@@ -86,7 +87,7 @@ function Productpage(props: props) {
                 <InputNumber
                   min={1}
                   value={quantity}
-                  onChange={(value) => setQuantity(value)}
+                  onChange={value => setQuantity(value)}
                 />
               </div>
 
@@ -94,7 +95,7 @@ function Productpage(props: props) {
                 <button
                   onClick={() =>
                     props.history.push({
-                      pathname: "/cart",
+                      pathname: '/cart',
                       state: {
                         product: state,
                         quantity: quantity,
@@ -123,7 +124,7 @@ function Productpage(props: props) {
         <div className="component">
           <h1>outros produtos</h1>
           <div className="product-comp">
-            {products.map((product) => {
+            {products.map(product => {
               return (
                 <ProductComp key={product.ID} product={product} {...props} />
               );
