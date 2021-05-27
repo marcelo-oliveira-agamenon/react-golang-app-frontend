@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import Img from "../../assets/image/backgroundImageLogin.jpg";
+import styled from 'styled-components';
+import Img from 'assets/image/backgroundImageLogin.jpg';
 
 export const Container = styled.div`
   background: url(${Img});
@@ -57,7 +57,7 @@ export const Box = styled.div`
   height: 100%;
 
   h1 {
-    font-family: "Montserrat SemiBold";
+    font-family: 'Montserrat SemiBold';
     text-transform: uppercase;
     font-size: 30px;
     padding: 0 60px;
@@ -70,7 +70,7 @@ export const Box = styled.div`
   }
 
   p {
-    font-family: "Montserrat Regular";
+    font-family: 'Montserrat Regular';
     font-size: 16px;
     margin-top: 32px;
     color: white;
@@ -80,7 +80,7 @@ export const Box = styled.div`
   }
 
   span {
-    font-family: "Montserrat SemiBold";
+    font-family: 'Montserrat SemiBold';
     color: #312f92;
     font-weight: 600;
     margin-bottom: 100px;
@@ -132,7 +132,7 @@ export const Inputcomp = styled.div`
   flex-direction: column;
 
   p {
-    font-family: "Montserrat Light";
+    font-family: 'Montserrat Light';
     font-size: 10px;
     margin: 0;
     margin-right: -25px;
@@ -173,7 +173,7 @@ export const Inputcomp = styled.div`
 
   label {
     font-size: 14px;
-    font-family: "Montserrat SemiBold";
+    font-family: 'Montserrat SemiBold';
     text-transform: uppercase;
     color: white;
     letter-spacing: 1px;
@@ -181,12 +181,12 @@ export const Inputcomp = styled.div`
     margin-left: 15px;
   }
 
-  input[type="email"] {
+  input[type='email'] {
     padding: 0 12px;
     font-size: 16px;
     outline: none;
     border-style: none;
-    font-family: "Montserrat Regular";
+    font-family: 'Montserrat Regular';
     width: 375px;
     height: 35px;
     border-radius: 30px;
@@ -198,13 +198,13 @@ export const Inputcomp = styled.div`
     }
   }
 
-  input[type="password"],
-  input[type="text"] {
+  input[type='password'],
+  input[type='text'] {
     padding: 0 12px;
     font-size: 16px;
     outline: none;
     border-style: none;
-    font-family: "Montserrat Regular";
+    font-family: 'Montserrat Regular';
     width: 375px;
     height: 35px;
     border-radius: 30px;
@@ -221,7 +221,7 @@ export const Inputcomp = styled.div`
   }
 
   span {
-    font-family: "Montserrat SemiBold";
+    font-family: 'Montserrat SemiBold';
     font-size: 11px;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -240,7 +240,7 @@ export const BtnLogin = styled.button`
   background-color: #312f92;
   color: white;
   text-transform: uppercase;
-  font-family: "Montserrat SemiBold";
+  font-family: 'Montserrat SemiBold';
   font-size: 18px;
   cursor: pointer;
   letter-spacing: 1px;

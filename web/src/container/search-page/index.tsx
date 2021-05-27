@@ -27,12 +27,16 @@ function SearchPage(props: props) {
     searchProduct(value, LIMIT, offset).then(res => {
       setSearch(res);
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handlePaginationLoad = useCallback(() => {
-    searchProduct(value, LIMIT, offset).then(res => {
+  const handlePaginationLoad = useCallback(async () => {
+    await searchProduct(value, LIMIT, offset).then(res => {
       setSearch(res);
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
 
   useEffect(() => {
@@ -57,11 +61,13 @@ function SearchPage(props: props) {
           })}
         </div>
 
-        {search && search.length ? (
-          <h1 onClick={() => setOffset(offset => offset + 5)}>Carregar Mais</h1>
-        ) : (
-          <h1>Desculpe, produto {value} não encontrado!</h1>
-        )}
+        {search && search.length >= 5 ? (
+          <h2 onClick={() => setOffset(offset => offset + 5)}>Carregar Mais</h2>
+        ) : null}
+
+        {search && !search.length ? (
+          <h2>Desculpe, produto {value} não encontrado!</h2>
+        ) : null}
       </ProductSearch>
       <Footer />
     </Container>
