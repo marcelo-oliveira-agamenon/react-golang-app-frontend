@@ -23,6 +23,7 @@ function Routes() {
         <Route path="/prelogin" component={PreLogin} />
         <Route path="/login" component={Login} />
         <Route path="/resetPassword" component={ResetPassword} />
+        <Route path="/resetPassword/:code" exact component={ResetPassword} />
         <Route path="/signup" component={Signup} />
 
         <ProtectedRoute path="/home" component={Home} />

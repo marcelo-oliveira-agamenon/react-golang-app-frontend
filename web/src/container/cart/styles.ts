@@ -150,8 +150,8 @@ export const Box = styled.div`
   }
 
   .subtotal {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 50% 50%;
     padding: 8px 15px;
     align-items: center;
     background-color: #efefef;

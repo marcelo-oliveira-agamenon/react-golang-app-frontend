@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from 'antd';
 import { RouteComponentProps } from 'react-router-dom';
 
-import { Container } from './style';
+import { Container } from './styles';
 import Logo from 'assets/icons/logo.png';
 
 interface props extends RouteComponentProps {

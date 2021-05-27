@@ -133,3 +133,47 @@ export function verifyLoggedUser(): User {
 
   return main;
 }
+
+//Send email to reset password
+export function sendEmailToResetPassword(email: string) {
+  return async function (dispatch: any) {
+    return await api
+      .post(
+        `/v1/resetPasswordLink`,
+        {},
+        {
+          params: {
+            email,
+          },
+        },
+      )
+      .then(() => {
+        return Promise.resolve(true);
+      })
+      .catch(error => {
+        dispatch({
+          type: types.ERROR,
+          payload: error,
+        });
+        return Promise.reject(error.response.data);
+      });
+  };
+}
+
+//Reset password
+export function resetPassword(data: FormData) {
+  return async function (dispatch: any) {
+    return await api
+      .patch(`/v1/resetPassword`, data)
+      .then(() => {
+        return Promise.resolve(true);
+      })
+      .catch(error => {
+        dispatch({
+          type: types.ERROR,
+          payload: error,
+        });
+        return Promise.reject(error.response.data);
+      });
+  };
+}

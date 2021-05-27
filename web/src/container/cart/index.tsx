@@ -9,6 +9,7 @@ import {
   deleteAllCartProducts,
 } from 'ducks/cart';
 import { createOrder } from 'ducks/order';
+import { verifyCouponVality } from 'ducks/coupon';
 import { RightCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { useToasts } from 'react-toast-notifications';
 
@@ -29,6 +30,7 @@ interface props extends RouteComponentProps {
   deleteFromCart: (index: number) => void;
   createOrder: (data: any) => Promise<boolean>;
   deleteAllCartProducts: () => void;
+  verifyCouponVality: (hash: string) => Promise<any>;
 }
 
 function Cart(props: props) {
@@ -41,14 +43,18 @@ function Cart(props: props) {
   const [total, setTotal] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
   const [show, setShow] = useState<boolean>(false);
+  const [discount, setDiscount] = useState<number>(0);
+  const [disableCoupon, setDisableCoupon] = useState<boolean>(false);
 
   const addProductToOrder = useCallback((): void => {
-    let order = {
-      product: state.product,
-      quantity: state.quantity,
-    };
+    if (state) {
+      let order = {
+        product: state.product,
+        quantity: state.quantity,
+      };
 
-    props.saveProductInCart(order);
+      props.saveProductInCart(order);
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
@@ -66,10 +72,23 @@ function Cart(props: props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refresh, count]);
 
-  function useCoupon() {
-    addToast('Cupom cadastrado com sucesso', {
-      appearance: 'success',
-      autoDismiss: true,
+  async function handleUseCoupon() {
+    await props.verifyCouponVality(coupon).then(response => {
+      if (response) {
+        addToast('Cupom válido', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+
+        setDiscount((total * response.discount) / 100);
+        setTotal(total - (total * response.discount) / 100);
+        setDisableCoupon(true);
+      } else {
+        addToast('Cupom inválido', {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      }
     });
   }
 
@@ -82,7 +101,7 @@ function Cart(props: props) {
       totalValue: total,
     };
 
-    await props.createOrder(data).then(response => {
+    await props.createOrder(data).then(() => {
       setShow(true);
     });
 
@@ -130,15 +149,32 @@ function Cart(props: props) {
                     type="text"
                     value={coupon}
                     onChange={e => setCoupon(e.target.value)}
+                    disabled={disableCoupon}
                   />
-                  <RightCircleOutlined onClick={useCoupon} />
+                  <RightCircleOutlined
+                    onClick={() => {
+                      if (disableCoupon === false) {
+                        handleUseCoupon();
+                      }
+                    }}
+                  />
                 </div>
               </div>
 
               <div className="subtotal">
-                <p>Total:</p>
+                {discount !== 0 ? (
+                  <>
+                    <p>Desconto:</p>
 
-                <span>R$ {total.toFixed(2).replace('.', ',')}</span>
+                    <span>R$ {discount.toFixed(2).replace('.', ',')}</span>
+                  </>
+                ) : null}
+
+                <>
+                  <p>Total:</p>
+
+                  <span>R$ {total.toFixed(2).replace('.', ',')}</span>
+                </>
               </div>
 
               <div className="btn-cart">
@@ -164,4 +200,5 @@ export default connect(null, {
   deleteFromCart,
   createOrder,
   deleteAllCartProducts,
+  verifyCouponVality,
 })(Cart);

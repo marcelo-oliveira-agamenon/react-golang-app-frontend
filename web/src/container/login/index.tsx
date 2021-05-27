@@ -46,13 +46,6 @@ function Login(props: props) {
       });
   };
 
-  function handleResetPassword(): void {
-    addToast('Email de redefinição enviado para o seu email', {
-      appearance: 'success',
-      autoDismiss: true,
-    });
-  }
-
   return (
     <Container>
       <Overlay>
@@ -92,7 +85,9 @@ function Login(props: props) {
                   }
                 }}
               />
-              <span onClick={handleResetPassword}>esqueceu sua senha?</span>
+              <span onClick={() => props.history.push('/resetPassword')}>
+                esqueceu sua senha?
+              </span>
             </Inputcomp>
 
             <BtnLogin onClick={() => handleLogin()} disabled={loading}>

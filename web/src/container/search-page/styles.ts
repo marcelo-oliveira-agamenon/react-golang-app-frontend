@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   position: initial;
@@ -22,11 +22,18 @@ export const ProductSearch = styled.div`
 
   h1 {
     align-self: flex-start;
-    font-family: "Montserrat Bold";
+    font-family: 'Montserrat Bold';
     color: white;
     font-size: 20px;
     margin-bottom: 50px;
     margin-left: 240px;
+  }
+
+  h2 {
+    color: white;
+    font-size: 22px;
+    margin-top: 80px;
+    cursor: pointer;
   }
 
   .center {
