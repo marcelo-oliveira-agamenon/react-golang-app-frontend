@@ -23,22 +23,23 @@ function PreLogin(props: props) {
   const responseFacebook = (
     response: ReactFacebookLoginInfo | ReactFacebookFailureResponse | any,
   ) => {
-    props
-      .loginFacebook(response.email, response.accessToken)
-      .then(resp => {
-        // if (resp) {
-        //   props.history.push("/home");
-        // } else {
-        //   props.history.push("/signup", response);
-        // }
-        props.history.push('/signup', response);
-      })
-      .catch(err => {
-        addToast(err, {
-          appearance: 'error',
-          autoDismiss: true,
+    if (response) {
+      props
+        .loginFacebook(response.email, response.accessToken)
+        .then(resp => {
+          if (resp) {
+            props.history.push('/home');
+          } else {
+            props.history.push('/signup', response);
+          }
+        })
+        .catch(err => {
+          addToast(err, {
+            appearance: 'error',
+            autoDismiss: true,
+          });
         });
-      });
+    }
   };
 
   return (

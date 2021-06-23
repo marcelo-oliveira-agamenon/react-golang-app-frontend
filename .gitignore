@@ -9,3 +9,4 @@ mobile/android/.idea
 mobile/yarn.lock
 mobile/android/.gradle
 mobile/android/app/build
+web/.env
