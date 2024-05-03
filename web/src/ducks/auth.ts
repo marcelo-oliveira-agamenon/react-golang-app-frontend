@@ -47,13 +47,7 @@ export function login(email: string, password: string) {
           type: types.ERROR,
           payload: error,
         });
-        let msg =
-          error.response.data === 'Wrong password'
-            ? 'Senha incorreta'
-            : error.response.data === 'No user with this email'
-            ? 'Nenhum usuário com este email'
-            : 'Erro inesperado!';
-        return Promise.reject<string>(msg);
+        return Promise.reject<string>(error.response.data.error);
       });
   };
 }
