@@ -1,7 +1,8 @@
 !/.gitignore
 
 # dependencies
-/web/node_modules
+web/node_modules
+web/.env
 
 #android
 mobile/node_modules
