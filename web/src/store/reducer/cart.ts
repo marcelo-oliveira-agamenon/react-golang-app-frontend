@@ -14,7 +14,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addOrderToCart: (state, action: PayloadAction<Order>) => {
-      let hasProduct = state.order.some(
+      const hasProduct = state.order.some(
         or => or.product.ID === action.payload.product.ID,
       );
 

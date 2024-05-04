@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Checkbox, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { login } from 'ducks/auth';
 import { useToasts } from 'react-toast-notifications';
+import { useAuth } from 'services/auth';
 
 import { Container, Overlay, Card, Box, Inputcomp, BtnLogin } from './styles';
 import Logo from 'assets/icons/logo.png';
 
-interface props extends RouteComponentProps {
-  login: (email: string, password: string) => Promise<any>;
-}
-
-function Login(props: props) {
+function Login() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const { addToast } = useToasts();
   const [email, setEmail] = useState<string>('');
   const [pass, setPass] = useState<string>('');
   const [show, setShow] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const { addToast } = useToasts();
 
   const handleLogin = (): void => {
     if (email === '' || pass === '') {
@@ -29,21 +28,21 @@ function Login(props: props) {
       return;
     }
 
-    setLoading(true);
-    props
-      .login(email, pass)
-      .then(() => {
-        props.history.push('/home');
-        setLoading(false);
-      })
-      .catch(err => {
-        addToast(err, {
-          appearance: 'error',
-          autoDismiss: true,
-        });
-        setPass('');
-        setLoading(false);
-      });
+    login(email, pass);
+    // setLoading(true);
+    // login(email, pass)
+    //   .then(() => {
+    //     props.history.push('/home');
+    //     setLoading(false);
+    //   })
+    //   .catch(err => {
+    //     addToast(err, {
+    //       appearance: 'error',
+    //       autoDismiss: true,
+    //     });
+    //     setPass('');
+    //     setLoading(false);
+    //   });
   };
 
   return (
@@ -85,7 +84,7 @@ function Login(props: props) {
                   }
                 }}
               />
-              <span onClick={() => props.history.push('/resetPassword')}>
+              <span onClick={() => navigate('/resetPassword')}>
                 esqueceu sua senha?
               </span>
             </Inputcomp>
@@ -109,10 +108,8 @@ function Login(props: props) {
             </BtnLogin>
 
             <p>
-              não possui cadastro?{' '}
-              <span onClick={() => props.history.push('/signup')}>
-                cadastre-se
-              </span>
+              não possui cadastro?
+              <span onClick={() => navigate('/signup')}>cadastre-se</span>
             </p>
           </Box>
         </Card>
