@@ -74,7 +74,6 @@ export const Box = styled.div`
     margin-top: 32px;
     color: white;
     font-weight: 200;
-    text-transform: capitalize;
     letter-spacing: 1px;
   }
 
@@ -83,10 +82,9 @@ export const Box = styled.div`
     color: #312f92;
     font-weight: 600;
     margin-bottom: 100px;
-
     cursor: pointer;
 
-    :hover {
+    &:hover {
       text-decoration: underline;
     }
   }
@@ -246,7 +244,8 @@ export const BtnLogin = styled.button`
   border-style: none;
   outline: none;
 
-  :hover {
+  &:hover {
+    transition-duration: 1s;
     box-shadow: 2px 2px 4px rgb(49, 47, 146, 0.6);
   }
 

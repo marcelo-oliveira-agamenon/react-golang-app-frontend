@@ -1,8 +1,9 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { ZodError, z } from 'zod';
 import { Checkbox, Spin } from 'antd';
 import { toast } from 'react-toastify';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -10,6 +11,11 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { useAuth } from '@/services/auth';
 import { Container, Overlay, Card, Box, Inputcomp, BtnLogin } from './styles';
 import { RootState } from '@/store/store';
+
+const loginSchema = z.object({
+  email: z.string().min(1),
+  password: z.string().min(1),
+});
 
 export default function Login() {
   const router = useRouter();
@@ -20,14 +26,16 @@ export default function Login() {
   const [pass, setPass] = useState<string>('');
   const [show, setShow] = useState<boolean>(false);
 
-  const handleLogin = (): void => {
-    if (email === '' || pass === '') {
-      toast.error('Preencha os Campos!');
-      return;
+  const handleLogin = useCallback(() => {
+    try {
+      loginSchema.parse({ email, password: pass });
+      login(email, pass);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        toast.error('Insira o email ou senha corretamente');
+      }
     }
-
-    login(email, pass);
-  };
+  }, [email, pass, login]);
 
   return (
     <Container>
@@ -48,13 +56,14 @@ export default function Login() {
                 id="email"
                 type="email"
                 value={email}
+                required
                 onChange={e => setEmail(e.target.value)}
               />
             </Inputcomp>
 
             <Inputcomp>
               <div className="input-component">
-                <label htmlFor="password">password</label>
+                <label htmlFor="password">Senha</label>
                 <div className="show-password">
                   <Checkbox
                     checked={show}
@@ -67,6 +76,7 @@ export default function Login() {
                 id="password"
                 type={show ? 'text' : 'password'}
                 value={pass}
+                required
                 onChange={e => setPass(e.target.value)}
                 onKeyDown={event => {
                   if (event.key === 'Enter') {
@@ -98,8 +108,8 @@ export default function Login() {
             </BtnLogin>
 
             <p>
-              não possui cadastro?
-              <span onClick={() => router.push('/signup')}>cadastre-se</span>
+              Não possui cadastro?{' '}
+              <span onClick={() => router.push('/signup')}>Cadastre-se</span>
             </p>
           </Box>
         </Card>

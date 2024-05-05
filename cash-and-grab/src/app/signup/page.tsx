@@ -1,13 +1,10 @@
+import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { signup } from 'ducks/auth';
-import { RouteComponentProps, useLocation } from 'react-router-dom';
-import { useToasts } from 'react-toast-notifications';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 
 import { Container, Card, InputCont, ImgContainer } from './styles';
-import ModalSuccess from 'components/modalSignup';
+import ModalSuccess from './modal-signup';
 import ImageAvatar from 'assets/avatar/avataaars.png';
 
 interface facebookData {
@@ -24,7 +21,6 @@ interface facebookData {
 }
 
 export default function SignUp() {
-  const { addToast } = useToasts();
   const { state } = useLocation<facebookData>();
   const [email, setEmail] = useState<string>('');
   const [pass, setPass] = useState<string>('');
