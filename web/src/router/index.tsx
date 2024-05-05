@@ -1,5 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Routes as RoutesPath,
+  Navigate,
+  RouteProps,
+} from 'react-router-dom';
 import { verifyLoggedUser } from '../ducks/auth';
 
 import PreLogin from 'container/pre-login';
@@ -18,41 +24,32 @@ import Orders from 'container/orders';
 function Routes() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Redirect exact from="/" to="/prelogin" />
-        <Route path="/prelogin" component={PreLogin} />
-        <Route path="/login" component={Login} />
-        <Route path="/resetPassword" component={ResetPassword} />
-        <Route path="/resetPassword/:code" exact component={ResetPassword} />
-        <Route path="/signup" component={Signup} />
+      <RoutesPath>
+        {/* <Navigate to="/prelogin" />
+        <Route path="/prelogin" element={<PreLogin />} /> */}
+        <Route path="/login" element={<Login />} />
+        {/* <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route path="/resetPassword/:code" element={<ResetPassword />} />
+        <Route path="/signup" element={<Signup />} />
 
-        <ProtectedRoute path="/home" component={Home} />
-        <ProtectedRoute path="/search" component={Search} />
-        <ProtectedRoute path="/categories" component={Categories} />
-        <ProtectedRoute path="/favorites" component={Favorites} />
-        <ProtectedRoute path="/myProfile" component={MyProfile} />
-        <ProtectedRoute path="/product" component={Product} />
-        <ProtectedRoute path="/cart" component={Cart} />
-        <ProtectedRoute path="/orders" component={Orders} />
-      </Switch>
+        <ProtectedRoute path="/home" element={<Home />} />
+        <ProtectedRoute path="/search" element={<Search />} />
+        <ProtectedRoute path="/categories" element={<Categories />} />
+        <ProtectedRoute path="/favorites" element={<Favorites />} />
+        <ProtectedRoute path="/myProfile" element={<MyProfile />} />
+        <ProtectedRoute path="/product" element={<Product />} />
+        <ProtectedRoute path="/cart" element={<Cart />} />
+        <ProtectedRoute path="/orders" element={<Orders />} /> */}
+      </RoutesPath>
     </BrowserRouter>
   );
 }
 
-const ProtectedRoute = ({ component: Component, ...rest }: any) => {
-  return (
-    <Route
-      {...rest}
-      render={props => {
-        let user = verifyLoggedUser();
-        if (user) {
-          return <Component {...props} />;
-        } else {
-          return <Redirect to="/prelogin" />;
-        }
-      }}
-    />
-  );
+const ProtectedRoute = ({ element, ...rest }: RouteProps) => {
+  const user = verifyLoggedUser();
+  const el = !!user ? element : <Navigate to="/prelogin" />;
+
+  return <Route {...rest} element={el} />;
 };
 
 export default Routes;
