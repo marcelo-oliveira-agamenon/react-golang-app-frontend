@@ -1,11 +1,19 @@
 import { useRouter } from 'next/navigation';
+import { useRouter as useRouterNext } from 'next/router';
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
+import { ZodError, z } from 'zod';
+import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
-import { Container, Card, InputCont, ImgContainer } from './styles';
+import { phoneMask, genderValues, getBase64ImageFromUrl } from '@/util';
+import { useAuth } from '@/services';
+import { RootState } from '@/store/store';
 import ModalSuccess from './modal-signup';
-import ImageAvatar from 'assets/avatar/avataaars.png';
+import { Input, Select } from '@/components';
+import { Container, Card, ImgContainer } from './styles';
 
 interface facebookData {
   email: string;
@@ -20,10 +28,24 @@ interface facebookData {
   };
 }
 
+const signupSchema = z.object({
+  email: z.string().min(1),
+  password: z.string().min(1),
+  name: z.string().min(1),
+  date: z.string().min(1),
+  phone: z.string().min(1),
+  gender: z.string().min(1),
+  address: z.string().min(1),
+  avatar: z.string().min(1),
+});
+
 export default function SignUp() {
-  const { state } = useLocation<facebookData>();
+  const router = useRouter();
+  const { query } = useRouterNext();
+  const loading = useSelector((state: RootState) => state.user.loading);
+  const { signup } = useAuth();
   const [email, setEmail] = useState<string>('');
-  const [pass, setPass] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
@@ -31,16 +53,12 @@ export default function SignUp() {
   const [address, setAddress] = useState<string>('');
   const [avatar, setAvatar] = useState<string>('');
   const [file, setFile] = useState<any>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [show, setShow] = useState<boolean>(false);
 
   useEffect(() => {
-    if (state !== undefined) {
-      handleFacebookSignUp(state);
+    if (query !== undefined) {
+      handleFacebookSignUp(query as any);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state]);
+  }, [query]);
 
   const handleFacebookSignUp = (state: facebookData) => {
     setEmail(state.email);
@@ -51,57 +69,14 @@ export default function SignUp() {
         setAvatar(state.picture.data.url);
       })
       .catch(() => {
-        addToast('Falha ao carregar imagem do Facebook', {
-          appearance: 'error',
-          autoDismiss: true,
-        });
+        toast.error('Falha ao carregar imagem do Facebook');
       });
   };
 
-  async function getBase64ImageFromUrl(imageUrl: string) {
-    let res = await fetch(imageUrl);
-    let blob = await res.blob();
-
-    return new Promise((resolve, reject) => {
-      let reader = new FileReader();
-      reader.addEventListener(
-        'load',
-        () => {
-          resolve(reader.result);
-        },
-        false,
-      );
-
-      reader.onerror = () => {
-        return reject('');
-      };
-      reader.readAsDataURL(blob);
-    });
-  }
-
   const handleSubmit = () => {
-    setLoading(true);
-    if (
-      email === '' ||
-      pass === '' ||
-      name === '' ||
-      date === '' ||
-      phone === '' ||
-      gender === '' ||
-      address === '' ||
-      avatar === ''
-    ) {
-      addToast('Preencha os campos!', {
-        appearance: 'error',
-        autoDismiss: true,
-      });
-      setLoading(false);
-      return;
-    }
-
     let form = new FormData();
     form.set('email', email);
-    form.set('password', pass);
+    form.set('password', password);
     form.set('name', name);
     form.set('birthday', date);
     form.set('phone', phone);
@@ -111,30 +86,18 @@ export default function SignUp() {
       form.append('avatar', file);
     }
 
-    props
-      .signup(form)
-      .then(() => {
-        setLoading(false);
-        setShow(true);
-      })
-      .catch(err => {
-        addToast(err, {
-          appearance: 'error',
-          autoDismiss: true,
-        });
-        setLoading(false);
-      });
+    try {
+      signupSchema.parse({});
+      signup(form);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        toast.error('Preencha os campos corretamente');
+      }
+    }
   };
 
-  const phoneMask = (value: string) => {
-    return value
-      .replace(/\D/g, '')
-      .replace(/(\d{2})(\d)/, '($1) $2')
-      .replace(/(\d{5})(\d)/, '$1-$2');
-  };
-
-  const handleImage = (event: any) => {
-    if (event.target.files.length > 0) {
+  const handleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
       setFile(event.target.files[0]);
       let image = URL.createObjectURL(event.target.files[0]);
       setAvatar(image);
@@ -144,90 +107,79 @@ export default function SignUp() {
   return (
     <Container>
       <Card>
-        <ModalSuccess visible={show} {...props} />
+        <ModalSuccess />
         <section>
           <div>
-            <InputCont>
-              <label htmlFor="name">nome</label>
-              <input
-                id="name"
-                type="text"
-                value={name}
-                onChange={e => setName(e.target.value)}
-              />
-            </InputCont>
+            <Input
+              labelInput="nome"
+              valueInput={name}
+              onChangeValue={e => setName(e)}
+              required
+            />
 
-            <InputCont>
-              <label htmlFor="email">email</label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
-            </InputCont>
+            <Input
+              labelInput="email"
+              valueInput={email}
+              onChangeValue={e => setEmail(e)}
+              type="email"
+              required
+            />
 
-            <InputCont>
-              <label htmlFor="password">senha</label>
-              <input
-                id="password"
-                type="password"
-                value={pass}
-                onChange={e => setPass(e.target.value)}
-              />
-            </InputCont>
+            <Input
+              labelInput="senha"
+              valueInput={password}
+              onChangeValue={e => setPassword(e)}
+              required
+            />
 
-            <InputCont>
-              <label htmlFor="phone">telefone</label>
-              <input
-                id="phone"
-                type="text"
-                value={phone}
-                maxLength={15}
-                onChange={e => setPhone(phoneMask(e.target.value))}
-              />
-            </InputCont>
+            <Input
+              labelInput="telefone"
+              valueInput={phone}
+              maxLength={15}
+              onChangeValue={e => setPhone(phoneMask(e))}
+              required
+            />
 
-            <InputCont>
-              <label htmlFor="date">data de nascimento</label>
-              <input
-                id="date"
-                min={Date()}
-                type="date"
-                value={date}
-                onChange={e => setDate(e.target.value)}
-              />
-            </InputCont>
+            <Input
+              labelInput="data de nascimento"
+              valueInput={date}
+              min={Date()}
+              type="date"
+              onChangeValue={e => setDate(e)}
+              required
+            />
 
-            <InputCont>
-              <label htmlFor="gender">gênero</label>
-              <select id="gender" onChange={e => setGender(e.target.value)}>
-                <option value=""></option>
-                <option value="masc">Masculino</option>
-                <option value="fem">Feminino</option>
-                <option value="other">Outro</option>
-              </select>
-            </InputCont>
+            <Select
+              options={genderValues}
+              labelInput="gênero"
+              valueInput={gender}
+              onChangeValue={e => setGender(e)}
+              required
+            />
 
-            <InputCont>
-              <label htmlFor="address">endereço</label>
-              <input
-                id="address"
-                type="text"
-                value={address}
-                onChange={e => setAddress(e.target.value)}
-              />
-            </InputCont>
+            <Input
+              labelInput="endereço"
+              valueInput={address}
+              onChangeValue={e => setAddress(e)}
+              required
+            />
           </div>
 
           <ImgContainer>
             <section>
-              <img src={avatar !== '' ? avatar : ImageAvatar} alt="avatar" />
+              <Image
+                src={avatar !== '' ? avatar : '/avatar/avataaars.png'}
+                width={160}
+                height={160}
+                alt="avatar"
+                priority
+              />
               <input
                 type="file"
                 id="fileHandle"
                 accept="image/jpg/png/jpeg"
                 onChange={e => handleImage(e)}
+                required
               />
             </section>
             <div>
@@ -246,11 +198,11 @@ export default function SignUp() {
         <div className="btn-main">
           <button
             className="remove-btn"
-            onClick={() => props.history.push('/prelogin')}
+            onClick={() => router.push('/prelogin')}
           >
             cancelar
           </button>
-          <button disabled={loading} onClick={() => handleSubmit()}>
+          <button disabled={loading} onClick={handleSubmit}>
             {loading ? (
               <Spin
                 indicator={

@@ -3,19 +3,25 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import React from 'react';
 import { Modal } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from '@/store/store';
+import { toggleModal } from '@/store/reducer/user';
 import { Container } from './styles';
 
-interface ModalSuccessProps {
-  visible: boolean;
-}
-
-const ModalSuccessSignup: React.FC<ModalSuccessProps> = ({ visible }) => {
+const ModalSuccessSignup = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
+  const showModal = useSelector((state: RootState) => state.user.showModal);
+
+  const handleClick = () => {
+    dispatch(toggleModal(false));
+    router.push('/login');
+  };
 
   return (
     <Modal
-      open={visible}
+      open={showModal}
       centered
       closable={false}
       footer={null}
@@ -37,7 +43,7 @@ const ModalSuccessSignup: React.FC<ModalSuccessProps> = ({ visible }) => {
           />
           <div className="content-modal-ant">
             <h1>usuário criado com sucesso!</h1>
-            <button onClick={() => router.push('/login')}>Acessar conta</button>
+            <button onClick={handleClick}>Acessar conta</button>
           </div>
         </div>
       </Container>

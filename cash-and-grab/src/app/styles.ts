@@ -95,7 +95,7 @@ export const Box = styled.div`
       color: black;
     }
 
-    :hover {
+    &:hover {
       animation: hover 3s;
     }
 
@@ -138,7 +138,7 @@ export const Box = styled.div`
     font-weight: 600;
     cursor: pointer;
 
-    :hover {
+    &:hover {
       text-decoration: underline;
     }
   }
@@ -209,7 +209,7 @@ export const Btncomp = styled.div`
     width: 90%;
   }
 
-  :hover {
+  &:hover {
     animation: hover 3s;
     text-decoration: underline;
   }

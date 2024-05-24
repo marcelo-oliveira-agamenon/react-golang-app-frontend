@@ -1,10 +1,10 @@
 import { redirect } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
-import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { saveUser, toggleLoading } from '@/store/reducer/user';
+import { useLocalStorage } from '@/hooks';
+import { saveUser, toggleLoading, toggleModal } from '@/store';
 import api from '@/config/axiosConfig';
-import { axiosErrorHandler } from '@/util/error-toast-request';
+import { axiosErrorHandler } from '@/util';
 
 const useAuth = () => {
   const dispatch = useDispatch();
@@ -52,6 +52,7 @@ const useAuth = () => {
       });
 
       dispatch(saveUser(response.data));
+      dispatch(toggleModal(true));
     } catch (error) {
       axiosErrorHandler(error);
     }

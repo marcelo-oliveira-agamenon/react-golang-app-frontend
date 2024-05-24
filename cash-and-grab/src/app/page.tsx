@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FacebookOutlined, MailOutlined } from '@ant-design/icons';
 
-import { useAuth } from '@/services/auth';
+import { useAuth } from '@/services';
 import { Container, Overlay, Card, Box, Btncomp } from './styles';
 
 export default function PreLogin() {

@@ -4,11 +4,13 @@ import { User } from '@/models/auth';
 export interface UserState {
   user: User;
   loading: boolean;
+  showModal: boolean;
 }
 
 const initialState: UserState = {
   user: {} as User,
   loading: false,
+  showModal: false,
 };
 
 const userSlice = createSlice({
@@ -24,8 +26,12 @@ const userSlice = createSlice({
     toggleLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
+    toggleModal: (state, action: PayloadAction<boolean>) => {
+      state.showModal = action.payload;
+    },
   },
 });
 
-export const { saveUser, cleanUser, toggleLoading } = userSlice.actions;
+export const { saveUser, cleanUser, toggleLoading, toggleModal } =
+  userSlice.actions;
 export default userSlice.reducer;

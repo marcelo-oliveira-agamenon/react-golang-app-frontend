@@ -1,16 +1,17 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ZodError, z } from 'zod';
 import { Checkbox, Spin } from 'antd';
 import { toast } from 'react-toastify';
 import { LoadingOutlined } from '@ant-design/icons';
 
-import { useAuth } from '@/services/auth';
-import { Container, Overlay, Card, Box, Inputcomp, BtnLogin } from './styles';
+import { useAuth } from '@/services';
 import { RootState } from '@/store/store';
+import { Input } from '@/components';
+import { Container, Overlay, Card, Box, Inputcomp, BtnLogin } from './styles';
 
 const loginSchema = z.object({
   email: z.string().min(1),
@@ -23,19 +24,19 @@ export default function Login() {
   const { login } = useAuth();
 
   const [email, setEmail] = useState<string>('');
-  const [pass, setPass] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [show, setShow] = useState<boolean>(false);
 
-  const handleLogin = useCallback(() => {
+  const handleLogin = () => {
     try {
-      loginSchema.parse({ email, password: pass });
-      login(email, pass);
+      loginSchema.parse({ email, password });
+      login(email, password);
     } catch (error) {
       if (error instanceof ZodError) {
         toast.error('Insira o email ou senha corretamente');
       }
     }
-  }, [email, pass, login]);
+  };
 
   return (
     <Container>
@@ -50,16 +51,13 @@ export default function Login() {
           />
           <Box>
             <h1>faça login para continuar</h1>
-            <Inputcomp>
-              <label htmlFor="email">email</label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                required
-                onChange={e => setEmail(e.target.value)}
-              />
-            </Inputcomp>
+            <Input
+              labelInput="email"
+              type="email"
+              valueInput={email}
+              onChangeValue={e => setEmail(e)}
+              required
+            />
 
             <Inputcomp>
               <div className="input-component">
@@ -75,9 +73,9 @@ export default function Login() {
               <input
                 id="password"
                 type={show ? 'text' : 'password'}
-                value={pass}
+                value={password}
                 required
-                onChange={e => setPass(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 onKeyDown={event => {
                   if (event.key === 'Enter') {
                     handleLogin();
@@ -108,7 +106,7 @@ export default function Login() {
             </BtnLogin>
 
             <p>
-              Não possui cadastro?{' '}
+              Não possui cadastro?
               <span onClick={() => router.push('/signup')}>Cadastre-se</span>
             </p>
           </Box>
