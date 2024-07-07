@@ -4,11 +4,18 @@ import Image from 'next/image';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 
-import { Header, Searchbar, Footer } from '@/components';
+import {
+  Header,
+  Searchbar,
+  Footer,
+  CategoryCard,
+  ProductCard,
+} from '@/components';
 import { RootState } from '@/store';
-import { Container, Banner, ContSearch, Section } from './styles';
 import { useCategory, useProduct } from '@/services';
 import { Category, Product } from '@/models';
+import { cardsHomePage, query } from '@/util';
+import { Container, Banner, ContSearch, Section } from './styles';
 
 export default function Home() {
   const loading = useSelector((state: RootState) => state.user.loading);
@@ -23,31 +30,21 @@ export default function Home() {
   }, []);
 
   const getInfo = useCallback(async () => {
-    const [categories, promotions] = await Promise.all([
+    const [categories, promotions, recents] = await Promise.all([
       getCategories(),
-      getAllProducts(),
+      getAllProducts({
+        ...query,
+        promotion: 'true',
+      }),
+      getAllProducts({
+        ...query,
+        recent: 'true',
+      }),
     ]);
     setCategories(categories);
     setPromotions(promotions);
+    setRecents(recents);
   }, []);
-
-  const aa = [
-    {
-      id: 1,
-      type: 'category',
-      title: 'categorias',
-    },
-    {
-      id: 2,
-      type: 'product',
-      title: 'em promoção',
-    },
-    {
-      id: 3,
-      type: 'product',
-      title: 'recentes',
-    },
-  ];
 
   return (
     <Container>
@@ -66,7 +63,7 @@ export default function Home() {
         <Searchbar />
       </ContSearch>
 
-      {aa.map(value => (
+      {cardsHomePage.map(value => (
         <Section key={value.id}>
           <div className="component">
             <h1>{value.title}</h1>
@@ -78,17 +75,13 @@ export default function Home() {
                   {value.type === 'category' ? (
                     <>
                       {categories?.map(category => {
-                        return (
-                          <CategoryCard key={category.ID} category={category} />
-                        );
+                        return <CategoryCard key={category.ID} {...category} />;
                       })}
                     </>
                   ) : (
                     <>
                       {promotions?.map(product => {
-                        return (
-                          <ProductCard key={product.ID} product={product} />
-                        );
+                        return <ProductCard key={product.ID} {...product} />;
                       })}
                     </>
                   )}

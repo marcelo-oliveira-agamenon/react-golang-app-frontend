@@ -54,6 +54,7 @@ export default function Login() {
             <Input
               labelInput="email"
               type="email"
+              id="email"
               valueInput={email}
               onChangeValue={e => setEmail(e)}
               required

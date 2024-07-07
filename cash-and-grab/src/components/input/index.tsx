@@ -22,6 +22,7 @@ export const Input = ({
       <label htmlFor={id}>{labelInput}</label>
       <input
         {...props}
+        id={id}
         value={valueInput}
         onChange={e => onChangeValue(e.target.value)}
       />

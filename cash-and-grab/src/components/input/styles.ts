@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const InputCont = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  gap: 10px;
 
   label {
     font-family: 'Montserrat Regular';
@@ -10,7 +12,6 @@ export const InputCont = styled.div`
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-left: 10px;
-    margin-bottom: 10px;
   }
 
   input {
@@ -18,11 +19,10 @@ export const InputCont = styled.div`
     border-style: none;
     padding: 0 10px;
     border-radius: 8px;
-    width: 300px;
-    height: 22px;
     border: 1px solid #7c7c7c;
     background-color: #efefef;
-    margin-bottom: 20px;
+    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
+    font-family: 'Montserrat Regular';
 
     &:focus {
       box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);

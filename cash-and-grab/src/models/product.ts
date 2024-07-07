@@ -31,3 +31,12 @@ export type Product = {
   TecnicalDetails: string;
   Typeunit: string;
 };
+
+export type QueryParamsProducts = {
+  limit: string;
+  offset: string;
+  category?: string;
+  promotion?: string;
+  name?: string;
+  recent?: string;
+};

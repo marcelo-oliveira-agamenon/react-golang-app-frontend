@@ -55,6 +55,107 @@ export const Box = styled.div`
   width: 80%;
   height: 100%;
 
+  p {
+    font-family: 'Montserrat Light';
+    font-size: 10px;
+    margin: 0;
+    margin-right: -25px;
+    text-transform: uppercase;
+  }
+
+  .input-component {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+
+    span {
+      margin-bottom: 0;
+      margin-left: -10px;
+    }
+
+    .show-password {
+      display: flex;
+      align-items: baseline;
+
+      @media (max-width: 400px) {
+        flex-direction: column;
+        justify-content: center;
+
+        p {
+          padding: 0;
+          margin: 0;
+          margin-top: -10px;
+        }
+
+        span {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  label {
+    font-size: 14px;
+    font-family: 'Montserrat SemiBold';
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+  }
+
+  input[type='email'] {
+    padding: 0 12px;
+    font-size: 16px;
+    outline: none;
+    border-style: none;
+    font-family: 'Montserrat Regular';
+    width: 375px;
+    height: 35px;
+    border-radius: 30px;
+    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
+    margin-bottom: 30px;
+
+    @media (max-width: 400px) {
+      width: 100%;
+    }
+  }
+
+  input[type='password'],
+  input[type='text'] {
+    padding: 0 12px;
+    font-size: 16px;
+    outline: none;
+    border-style: none;
+    font-family: 'Montserrat Regular';
+    width: 375px;
+    height: 35px;
+    border-radius: 30px;
+    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
+    margin-bottom: 15px;
+
+    @media (max-width: 400px) {
+      width: 100%;
+    }
+  }
+
+  input:focus {
+    box-shadow: 3px 3px 10px rgb(0, 0, 0, 0.25);
+  }
+
+  span {
+    font-family: 'Montserrat SemiBold';
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-left: 17px;
+
+    :hover {
+      text-decoration: underline;
+    }
+  }
+
   h1 {
     font-family: 'Montserrat SemiBold';
     text-transform: uppercase;

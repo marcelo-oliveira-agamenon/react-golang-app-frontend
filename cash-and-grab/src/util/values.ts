@@ -4,4 +4,27 @@ const genderValues = [
   { id: 3, label: 'Outro', value: 'other' },
 ];
 
-export { genderValues };
+const cardsHomePage = [
+  {
+    id: 1,
+    type: 'category',
+    title: 'categorias',
+  },
+  {
+    id: 2,
+    type: 'product',
+    title: 'em promoção',
+  },
+  {
+    id: 3,
+    type: 'product',
+    title: 'recentes',
+  },
+];
+
+const query = {
+  limit: '5',
+  offset: '0',
+};
+
+export { genderValues, cardsHomePage, query };
