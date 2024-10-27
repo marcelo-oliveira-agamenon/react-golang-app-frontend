@@ -52,149 +52,7 @@ export const Box = styled.div`
   align-items: center;
   flex-direction: column;
   background-color: #7dbef9;
-  width: 80%;
   height: 100%;
-
-  p {
-    font-family: 'Montserrat Light';
-    font-size: 10px;
-    margin: 0;
-    margin-right: -25px;
-    text-transform: uppercase;
-  }
-
-  .input-component {
-    height: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-
-    span {
-      margin-bottom: 0;
-      margin-left: -10px;
-    }
-
-    .show-password {
-      display: flex;
-      align-items: baseline;
-
-      @media (max-width: 400px) {
-        flex-direction: column;
-        justify-content: center;
-
-        p {
-          padding: 0;
-          margin: 0;
-          margin-top: -10px;
-        }
-
-        span {
-          margin-left: 0;
-        }
-      }
-    }
-  }
-
-  label {
-    font-size: 14px;
-    font-family: 'Montserrat SemiBold';
-    text-transform: uppercase;
-    color: white;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-    margin-left: 15px;
-  }
-
-  input[type='email'] {
-    padding: 0 12px;
-    font-size: 16px;
-    outline: none;
-    border-style: none;
-    font-family: 'Montserrat Regular';
-    width: 375px;
-    height: 35px;
-    border-radius: 30px;
-    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
-    margin-bottom: 30px;
-
-    @media (max-width: 400px) {
-      width: 100%;
-    }
-  }
-
-  input[type='password'],
-  input[type='text'] {
-    padding: 0 12px;
-    font-size: 16px;
-    outline: none;
-    border-style: none;
-    font-family: 'Montserrat Regular';
-    width: 375px;
-    height: 35px;
-    border-radius: 30px;
-    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
-    margin-bottom: 15px;
-
-    @media (max-width: 400px) {
-      width: 100%;
-    }
-  }
-
-  input:focus {
-    box-shadow: 3px 3px 10px rgb(0, 0, 0, 0.25);
-  }
-
-  span {
-    font-family: 'Montserrat SemiBold';
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-left: 17px;
-
-    :hover {
-      text-decoration: underline;
-    }
-  }
-
-  h1 {
-    font-family: 'Montserrat SemiBold';
-    text-transform: uppercase;
-    font-size: 30px;
-    padding: 0 60px;
-    text-align: center;
-    color: white;
-    margin-top: 20px;
-    font-weight: 200;
-    margin-bottom: 60px;
-    letter-spacing: 1px;
-  }
-
-  p {
-    font-family: 'Montserrat Regular';
-    font-size: 16px;
-    margin-top: 32px;
-    color: white;
-    font-weight: 200;
-    letter-spacing: 1px;
-  }
-
-  span {
-    font-family: 'Montserrat SemiBold';
-    color: #312f92;
-    font-weight: 600;
-    margin-bottom: 100px;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  @media (max-width: 1000px) {
-    p {
-      font-size: 15px;
-    }
-  }
 
   @media (max-width: 750px) {
     width: 100%;
@@ -208,126 +66,56 @@ export const Box = styled.div`
         margin-left: 0;
       }
     }
-
-    h1 {
-      font-size: 28px;
-      padding: 0 70px;
-      margin-top: 40px;
-      margin-bottom: 60px;
-    }
-  }
-
-  @media (max-width: 400px) {
-    p {
-      padding: 0 30px;
-      text-align: center;
-    }
   }
 `;
 
-export const Inputcomp = styled.div`
+export const BoxInput = styled.div`
   display: flex;
   flex-direction: column;
+  width: 85%;
+  gap: 40px;
+`;
 
-  p {
-    font-family: 'Montserrat Light';
-    font-size: 10px;
-    margin: 0;
-    margin-right: -25px;
-    text-transform: uppercase;
+export const TitleBox = styled.h1`
+  font-family: 'Montserrat SemiBold';
+  text-transform: uppercase;
+  font-size: 30px;
+  padding: 0 60px;
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+  font-weight: 200;
+  margin-bottom: 60px;
+  letter-spacing: 1px;
+
+  @media (max-width: 750px) {
+    font-size: 28px;
+    padding: 0 70px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+  }
+`;
+
+export const SignupLink = styled.p`
+  font-family: 'Montserrat Light';
+  font-size: 10px;
+  margin: 0;
+  margin-right: -25px;
+  text-transform: uppercase;
+  font-family: 'Montserrat Regular';
+  font-size: 16px;
+  margin-top: 25px;
+  color: white;
+  font-weight: 200;
+  letter-spacing: 1px;
+
+  @media (max-width: 1000px) {
+    font-size: 15px;
   }
 
-  .input-component {
-    height: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-
-    span {
-      margin-bottom: 0;
-      margin-left: -10px;
-    }
-
-    .show-password {
-      display: flex;
-      align-items: baseline;
-
-      @media (max-width: 400px) {
-        flex-direction: column;
-        justify-content: center;
-
-        p {
-          padding: 0;
-          margin: 0;
-          margin-top: -10px;
-        }
-
-        span {
-          margin-left: 0;
-        }
-      }
-    }
-  }
-
-  label {
-    font-size: 14px;
-    font-family: 'Montserrat SemiBold';
-    text-transform: uppercase;
-    color: white;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-    margin-left: 15px;
-  }
-
-  input[type='email'] {
-    padding: 0 12px;
-    font-size: 16px;
-    outline: none;
-    border-style: none;
-    font-family: 'Montserrat Regular';
-    width: 375px;
-    height: 35px;
-    border-radius: 30px;
-    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
-    margin-bottom: 30px;
-
-    @media (max-width: 400px) {
-      width: 100%;
-    }
-  }
-
-  input[type='password'],
-  input[type='text'] {
-    padding: 0 12px;
-    font-size: 16px;
-    outline: none;
-    border-style: none;
-    font-family: 'Montserrat Regular';
-    width: 375px;
-    height: 35px;
-    border-radius: 30px;
-    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
-    margin-bottom: 15px;
-
-    @media (max-width: 400px) {
-      width: 100%;
-    }
-  }
-
-  input:focus {
-    box-shadow: 3px 3px 10px rgb(0, 0, 0, 0.25);
-  }
-
-  span {
-    font-family: 'Montserrat SemiBold';
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-left: 17px;
-
-    :hover {
-      text-decoration: underline;
-    }
+  @media (max-width: 400px) {
+    padding: 0 30px;
+    text-align: center;
   }
 `;
 
@@ -344,6 +132,7 @@ export const BtnLogin = styled.button`
   letter-spacing: 1px;
   border-style: none;
   outline: none;
+  margin-top: 60px;
 
   &:hover {
     transition-duration: 1s;
@@ -352,5 +141,35 @@ export const BtnLogin = styled.button`
 
   @media (max-width: 400px) {
     width: 95%;
+  }
+`;
+
+export const Link = styled.a`
+  font-family: 'Montserrat SemiBold';
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-left: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const ForgotPassword = styled.a`
+  font-family: 'Montserrat SemiBold';
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #312f92;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
   }
 `;

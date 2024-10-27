@@ -5,45 +5,74 @@ export const InputCont = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 10px;
+`;
 
-  label {
-    font-family: 'Montserrat Regular';
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-left: 10px;
+export const LabelCont = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+
+  span {
+    margin-bottom: 0;
+    margin-left: -1px;
   }
+`;
 
-  input {
-    outline: none;
-    border-style: none;
-    padding: 0 10px;
-    border-radius: 8px;
-    border: 1px solid #7c7c7c;
-    background-color: #efefef;
-    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
-    font-family: 'Montserrat Regular';
+export const ShowPassword = styled.div`
+  display: flex;
+  align-items: baseline;
+  color: white;
+  text-transform: uppercase;
+  gap: 8px;
+`;
 
-    &:focus {
-      box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
-    }
+export const ShowPasswordLabel = styled.p`
+  font-family: 'Montserrat Regular';
+  font-size: 14px;
+
+  @media (max-width: 400px) {
+    padding: 0;
+    margin: 0;
+    margin-top: -10px;
   }
+`;
+
+export const Label = styled.label`
+  font-family: 'Montserrat Regular';
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-left: 15px;
+  color: white;
 
   @media (max-width: 850px) {
-    label {
-      font-size: 14px;
-    }
+    font-size: 14px;
   }
 
   @media (max-width: 370px) {
-    align-items: center;
+    font-size: 15px;
+  }
+`;
 
-    label {
-      font-size: 15px;
-    }
+export const Input = styled.input`
+  padding: 0 12px;
+  font-size: 16px;
+  outline: none;
+  border-style: none;
+  font-family: 'Montserrat Regular';
+  height: 35px;
+  border-radius: 30px;
+  box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
 
-    input {
-      width: 90%;
-    }
+  @media (max-width: 400px) {
+    width: 100%;
+  }
+
+  &:focus {
+    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
+  }
+
+  @media (max-width: 370px) {
+    width: 90%;
   }
 `;

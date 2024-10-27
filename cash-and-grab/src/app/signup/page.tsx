@@ -1,10 +1,10 @@
+'use client';
 import { useRouter } from 'next/navigation';
-import { useRouter as useRouterNext } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
-import { ZodError, z } from 'zod';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 
@@ -13,7 +13,18 @@ import { useAuth } from '@/services';
 import { RootState } from '@/store/store';
 import ModalSuccess from './modal-signup';
 import { Input, Select } from '@/components';
-import { Container, Card, ImgContainer } from './styles';
+import {
+  Container,
+  Card,
+  ImgContainer,
+  BtnCancel,
+  Section,
+  BtnSubmit,
+  BtnContainer,
+  ImgSection,
+  InputContainer,
+  BtnContImage,
+} from './styles';
 
 interface facebookData {
   email: string;
@@ -28,20 +39,9 @@ interface facebookData {
   };
 }
 
-const signupSchema = z.object({
-  email: z.string().min(1),
-  password: z.string().min(1),
-  name: z.string().min(1),
-  date: z.string().min(1),
-  phone: z.string().min(1),
-  gender: z.string().min(1),
-  address: z.string().min(1),
-  avatar: z.string().min(1),
-});
-
 export default function SignUp() {
   const router = useRouter();
-  const { query } = useRouterNext();
+  const searchParams = useSearchParams();
   const loading = useSelector((state: RootState) => state.user.loading);
   const { signup } = useAuth();
   const [email, setEmail] = useState<string>('');
@@ -54,11 +54,11 @@ export default function SignUp() {
   const [avatar, setAvatar] = useState<string>('');
   const [file, setFile] = useState<any>();
 
-  useEffect(() => {
-    if (query !== undefined) {
-      handleFacebookSignUp(query as any);
-    }
-  }, [query]);
+  // useEffect(() => {
+  //   if (query !== undefined) {
+  //     handleFacebookSignUp(query as any);
+  //   }
+  // }, [query]);
 
   const handleFacebookSignUp = (state: facebookData) => {
     setEmail(state.email);
@@ -73,28 +73,18 @@ export default function SignUp() {
       });
   };
 
-  const handleSubmit = () => {
-    let form = new FormData();
-    form.set('email', email);
-    form.set('password', password);
-    form.set('name', name);
-    form.set('birthday', date);
-    form.set('phone', phone);
-    form.set('gender', gender);
-    form.set('address', address);
-    if (avatar !== '') {
-      form.append('avatar', file);
-    }
-
-    try {
-      signupSchema.parse({});
-      signup(form);
-    } catch (error) {
-      if (error instanceof ZodError) {
-        toast.error('Preencha os campos corretamente');
-      }
-    }
-  };
+  const handleSubmit = () =>
+    signup({
+      email,
+      password,
+      name,
+      date,
+      phone,
+      gender,
+      address,
+      file,
+      avatar,
+    });
 
   const handleImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -108,15 +98,14 @@ export default function SignUp() {
     <Container>
       <Card>
         <ModalSuccess />
-        <section>
-          <div>
+        <Section>
+          <InputContainer>
             <Input
               labelInput="nome"
               valueInput={name}
               onChangeValue={e => setName(e)}
               required
             />
-
             <Input
               labelInput="email"
               valueInput={email}
@@ -124,14 +113,12 @@ export default function SignUp() {
               type="email"
               required
             />
-
             <Input
               labelInput="senha"
               valueInput={password}
               onChangeValue={e => setPassword(e)}
               required
             />
-
             <Input
               labelInput="telefone"
               valueInput={phone}
@@ -139,7 +126,6 @@ export default function SignUp() {
               onChangeValue={e => setPhone(phoneMask(e))}
               required
             />
-
             <Input
               labelInput="data de nascimento"
               valueInput={date}
@@ -148,7 +134,6 @@ export default function SignUp() {
               onChangeValue={e => setDate(e)}
               required
             />
-
             <Select
               options={genderValues}
               labelInput="gênero"
@@ -156,17 +141,15 @@ export default function SignUp() {
               onChangeValue={e => setGender(e)}
               required
             />
-
             <Input
               labelInput="endereço"
               valueInput={address}
               onChangeValue={e => setAddress(e)}
               required
             />
-          </div>
-
+          </InputContainer>
           <ImgContainer>
-            <section>
+            <ImgSection>
               <Image
                 src={avatar !== '' ? avatar : '/avatar/avataaars.png'}
                 width={160}
@@ -181,28 +164,22 @@ export default function SignUp() {
                 onChange={e => handleImage(e)}
                 required
               />
-            </section>
-            <div>
-              <button
+            </ImgSection>
+            <BtnContImage>
+              <BtnSubmit
                 onClick={() => document.getElementById('fileHandle')?.click()}
               >
                 adicionar imagem
-              </button>
-              <button className="remove-btn" onClick={() => setAvatar('')}>
+              </BtnSubmit>
+              <BtnSubmit className="remove-btn" onClick={() => setAvatar('')}>
                 remover imagem
-              </button>
-            </div>
+              </BtnSubmit>
+            </BtnContImage>
           </ImgContainer>
-        </section>
-
-        <div className="btn-main">
-          <button
-            className="remove-btn"
-            onClick={() => router.push('/prelogin')}
-          >
-            cancelar
-          </button>
-          <button disabled={loading} onClick={handleSubmit}>
+        </Section>
+        <BtnContainer>
+          <BtnCancel href="/">cancelar</BtnCancel>
+          <BtnSubmit disabled={loading} onClick={handleSubmit}>
             {loading ? (
               <Spin
                 indicator={
@@ -217,8 +194,8 @@ export default function SignUp() {
             ) : (
               'cadastrar'
             )}
-          </button>
-        </div>
+          </BtnSubmit>
+        </BtnContainer>
       </Card>
     </Container>
   );

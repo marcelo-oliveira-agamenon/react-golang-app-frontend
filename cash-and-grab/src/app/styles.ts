@@ -110,49 +110,6 @@ export const Box = styled.div`
     display: none;
   }
 
-  h1 {
-    font-family: 'Montserrat SemiBold';
-    text-transform: uppercase;
-    font-size: 42px;
-    text-align: center;
-    color: white;
-    margin-top: 20px;
-    font-weight: 200;
-    margin-bottom: 100px;
-    letter-spacing: 1px;
-  }
-
-  p {
-    font-family: 'Montserrat Regular';
-    font-size: 20px;
-    margin-top: 120px;
-    color: white;
-    font-weight: 200;
-    text-transform: capitalize;
-    letter-spacing: 1px;
-  }
-
-  span {
-    font-family: 'Montserrat SemiBold';
-    color: #312f92;
-    font-weight: 600;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  @media (max-width: 1000px) {
-    h1 {
-      font-size: 35px;
-    }
-
-    p {
-      font-size: 15px;
-    }
-  }
-
   @media (max-width: 750px) {
     width: 100%;
 
@@ -171,25 +128,65 @@ export const Box = styled.div`
       width: auto;
       height: 30%;
     }
+  }
+`;
 
-    h1 {
-      font-size: 28px;
-      padding: 0 70px;
-      margin-top: 40px;
-      margin-bottom: 30px;
-    }
+export const SignupLink = styled.p`
+  font-family: 'Montserrat Regular';
+  font-size: 20px;
+  margin-top: 120px;
+  color: white;
+  font-weight: 200;
+  text-transform: capitalize;
+  letter-spacing: 1px;
 
-    p {
-      margin-top: 50px;
-    }
+  @media (max-width: 1000px) {
+    font-size: 15px;
+  }
+
+  @media (max-width: 750px) {
+    margin-top: 50px;
+  }
+`;
+
+export const Link = styled.a`
+  font-family: 'Montserrat SemiBold';
+  color: #312f92;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const BoxTitle = styled.h1`
+  font-family: 'Montserrat SemiBold';
+  text-transform: uppercase;
+  font-size: 42px;
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+  font-weight: 200;
+  margin-bottom: 100px;
+  letter-spacing: 1px;
+
+  @media (max-width: 1000px) {
+    font-size: 35px;
+  }
+
+  @media (max-width: 750px) {
+    font-size: 28px;
+    padding: 0 70px;
+    margin-top: 40px;
+    margin-bottom: 30px;
   }
 
   @media (max-width: 400px) {
-    h1 {
-      margin-left: 0;
-      margin-right: 0;
-      padding: 0;
-    }
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
   }
 `;
 
@@ -220,15 +217,6 @@ export const Btncomp = styled.div`
     }
   }
 
-  h4 {
-    font-family: 'Montserrat Regular';
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 300;
-    letter-spacing: 1px;
-    margin-top: 6px;
-  }
-
   svg {
     width: 30px;
     height: 30px;
@@ -237,4 +225,13 @@ export const Btncomp = styled.div`
   path {
     color: black;
   }
+`;
+
+export const BtnLabel = styled.h4`
+  font-family: 'Montserrat Regular';
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin-top: 6px;
 `;

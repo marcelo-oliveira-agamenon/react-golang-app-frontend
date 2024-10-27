@@ -1,42 +1,34 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ZodError, z } from 'zod';
-import { Checkbox, Spin } from 'antd';
-import { toast } from 'react-toastify';
+import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
 import { useAuth } from '@/services';
 import { RootState } from '@/store/store';
 import { Input } from '@/components';
-import { Container, Overlay, Card, Box, Inputcomp, BtnLogin } from './styles';
-
-const loginSchema = z.object({
-  email: z.string().min(1),
-  password: z.string().min(1),
-});
+import {
+  Container,
+  Overlay,
+  Card,
+  Box,
+  BoxInput,
+  BtnLogin,
+  ForgotPassword,
+  TitleBox,
+  SignupLink,
+  Link,
+} from './styles';
 
 export default function Login() {
-  const router = useRouter();
   const loading = useSelector((state: RootState) => state.user.loading);
   const { login } = useAuth();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [show, setShow] = useState<boolean>(false);
 
-  const handleLogin = () => {
-    try {
-      loginSchema.parse({ email, password });
-      login(email, password);
-    } catch (error) {
-      if (error instanceof ZodError) {
-        toast.error('Insira o email ou senha corretamente');
-      }
-    }
-  };
+  const handleLogin = () => login(email, password);
 
   return (
     <Container>
@@ -50,44 +42,35 @@ export default function Login() {
             priority
           />
           <Box>
-            <h1>faça login para continuar</h1>
-            <Input
-              labelInput="email"
-              type="email"
-              id="email"
-              valueInput={email}
-              onChangeValue={e => setEmail(e)}
-              required
-            />
-
-            <Inputcomp>
-              <div className="input-component">
-                <label htmlFor="password">Senha</label>
-                <div className="show-password">
-                  <Checkbox
-                    checked={show}
-                    onChange={() => setShow(show => !show)}
-                  />
-                  <p>exibir senha</p>
-                </div>
-              </div>
-              <input
-                id="password"
-                type={show ? 'text' : 'password'}
-                value={password}
+            <TitleBox>faça login para continuar</TitleBox>
+            <BoxInput>
+              <Input
+                labelInput="email"
+                type="email"
+                id="email"
+                valueInput={email}
+                onChangeValue={e => setEmail(e)}
                 required
-                onChange={e => setPassword(e.target.value)}
+              />
+              <Input
+                children={
+                  <ForgotPassword href="/resetPassword">
+                    esqueceu sua senha?
+                  </ForgotPassword>
+                }
+                labelInput="password"
+                type="password"
+                id="password"
+                valueInput={password}
+                onChangeValue={e => setPassword(e)}
                 onKeyDown={event => {
                   if (event.key === 'Enter') {
                     handleLogin();
                   }
                 }}
+                required
               />
-              <span onClick={() => router.push('/resetPassword')}>
-                esqueceu sua senha?
-              </span>
-            </Inputcomp>
-
+            </BoxInput>
             <BtnLogin onClick={() => handleLogin()} disabled={loading}>
               {loading ? (
                 <Spin
@@ -105,11 +88,10 @@ export default function Login() {
                 'entrar'
               )}
             </BtnLogin>
-
-            <p>
+            <SignupLink>
               Não possui cadastro?
-              <span onClick={() => router.push('/signup')}>Cadastre-se</span>
-            </p>
+              <Link href="/signup">Cadastre-se</Link>
+            </SignupLink>
           </Box>
         </Card>
       </Overlay>

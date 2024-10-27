@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SelectCont } from './styles';
+import { SelectCont, Label, Select as SelectInput, Option } from './styles';
 
 export const Select = ({
   options,
@@ -23,13 +23,19 @@ export const Select = ({
 }) => {
   return (
     <SelectCont>
-      <label htmlFor={id}>{labelInput}</label>
-      <select {...props} id={id} onChange={e => onChangeValue(e.target.value)}>
-        <option value=""></option>
+      <Label htmlFor={id}>{labelInput}</Label>
+      <SelectInput
+        {...props}
+        id={id}
+        onChange={e => onChangeValue(e.target.value)}
+      >
+        <Option value=""></Option>
         {options.map(option => (
-          <option value={option.value}>{option.label}</option>
+          <Option key={option.value} value={option.value}>
+            {option.label}
+          </Option>
         ))}
-      </select>
+      </SelectInput>
     </SelectCont>
   );
 };
