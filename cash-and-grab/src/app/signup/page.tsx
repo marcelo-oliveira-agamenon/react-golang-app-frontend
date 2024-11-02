@@ -1,6 +1,4 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -40,8 +38,6 @@ interface facebookData {
 }
 
 export default function SignUp() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
   const loading = useSelector((state: RootState) => state.user.loading);
   const { signup } = useAuth();
   const [email, setEmail] = useState<string>('');

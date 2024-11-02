@@ -1,8 +1,9 @@
+'use client';
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { SearchOutlined } from '@ant-design/icons';
 
-import { Container } from './styles';
+import { Container, InputSearch, TitleSearch, InputContainer } from './styles';
 
 export const Searchbar = () => {
   const router = useRouter();
@@ -16,10 +17,10 @@ export const Searchbar = () => {
 
   return (
     <Container>
-      <h1>busque pelos melhores produtos!</h1>
-      <div>
+      <TitleSearch>busque pelos melhores produtos!</TitleSearch>
+      <InputContainer>
         <SearchOutlined onClick={handleChange} />
-        <input
+        <InputSearch
           value={search}
           onChange={event => setSearch(event.target.value)}
           onKeyDown={event => {
@@ -28,7 +29,7 @@ export const Searchbar = () => {
             }
           }}
         />
-      </div>
+      </InputContainer>
     </Container>
   );
 };

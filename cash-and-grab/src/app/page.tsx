@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { FacebookOutlined, MailOutlined } from '@ant-design/icons';
 
 import { useAuth } from '@/services';
@@ -9,7 +8,7 @@ import {
   Overlay,
   Card,
   Box,
-  Btncomp,
+  LoginEmail,
   BoxTitle,
   BtnLabel,
   SignupLink,
@@ -17,7 +16,6 @@ import {
 } from './styles';
 
 export default function PreLogin() {
-  const router = useRouter();
   const { loginFacebook } = useAuth();
 
   const responseFacebook = (response: any) => {
@@ -54,10 +52,10 @@ export default function PreLogin() {
               icon={<FacebookOutlined />}
             /> */}
 
-            <Btncomp onClick={() => router.push('/login')}>
+            <LoginEmail href="/login">
               <MailOutlined />
               <BtnLabel>entrar com email</BtnLabel>
-            </Btncomp>
+            </LoginEmail>
 
             <SignupLink>
               não possui cadastro? <Link href="/signup">cadastre-se</Link>

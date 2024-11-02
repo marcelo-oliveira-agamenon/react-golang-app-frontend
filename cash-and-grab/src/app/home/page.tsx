@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, ReactNode } from 'react';
 import Image from 'next/image';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
@@ -15,7 +15,17 @@ import { RootState } from '@/store';
 import { useCategory, useProduct } from '@/services';
 import { Category, Product } from '@/models';
 import { cardsHomePage, query } from '@/util';
-import { Container, Banner, ContSearch, Section } from './styles';
+import {
+  Container,
+  Banner,
+  ContSearch,
+  Section,
+  SectionTitle,
+  SectionTwo,
+  SectionCategory,
+  SectionProduct,
+  SpacingBanner,
+} from './styles';
 
 export default function Home() {
   const loading = useSelector((state: RootState) => state.user.loading);
@@ -31,7 +41,7 @@ export default function Home() {
 
   const getInfo = useCallback(async () => {
     const [categories, promotions, recents] = await Promise.all([
-      getCategories(),
+      getCategories(query),
       getAllProducts({
         ...query,
         promotion: 'true',
@@ -50,7 +60,7 @@ export default function Home() {
     <Container>
       <Header />
       <Banner>
-        <div></div>
+        <SpacingBanner />
         <Image
           src="/image/banner_home.jpg"
           width={160}
@@ -62,37 +72,39 @@ export default function Home() {
       <ContSearch>
         <Searchbar />
       </ContSearch>
-
       {cardsHomePage.map(value => (
         <Section key={value.id}>
-          <div className="component">
-            <h1>{value.title}</h1>
-            <div className={value.type}>
-              {loading ? (
-                <LoadingOutlined />
-              ) : (
-                <>
-                  {value.type === 'category' ? (
-                    <>
-                      {categories?.map(category => {
-                        return <CategoryCard key={category.ID} {...category} />;
-                      })}
-                    </>
-                  ) : (
-                    <>
-                      {promotions?.map(product => {
-                        return <ProductCard key={product.ID} {...product} />;
-                      })}
-                    </>
-                  )}
-                </>
-              )}
-            </div>
-          </div>
+          <SectionTwo>
+            <SectionTitle>{value.title}</SectionTitle>
+            {value.type === 'category' ? (
+              <LoadingSection loading={loading}>
+                <SectionCategory>
+                  {categories?.map(category => {
+                    return <CategoryCard key={category.ID} {...category} />;
+                  })}
+                </SectionCategory>
+              </LoadingSection>
+            ) : (
+              <LoadingSection loading={loading}>
+                <SectionProduct>
+                  {promotions?.map(product => {
+                    return <ProductCard key={product.ID} {...product} />;
+                  })}
+                </SectionProduct>
+              </LoadingSection>
+            )}
+          </SectionTwo>
         </Section>
       ))}
-
       <Footer />
     </Container>
   );
 }
+
+const LoadingSection = ({
+  loading,
+  children,
+}: {
+  loading: boolean;
+  children: ReactNode;
+}) => (loading ? <LoadingOutlined /> : <>{children}</>);

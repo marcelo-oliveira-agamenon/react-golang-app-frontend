@@ -10,3 +10,8 @@ export type Category = {
     Valid: boolean;
   };
 };
+
+export type QueryParamsCategories = {
+  limit: string;
+  offset: string;
+};

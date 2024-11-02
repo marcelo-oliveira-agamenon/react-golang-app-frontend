@@ -1,10 +1,10 @@
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { ZodError, z } from 'zod';
 import { toast } from 'react-toastify';
 
 import { useLocalStorage } from '@/hooks';
-import { saveUser, toggleLoading, toggleModal } from '@/store';
+import { saveUser, toggleLoading, toggleModal, cleanUser } from '@/store';
 import api from '@/config/axiosConfig';
 import { axiosErrorHandler } from '@/util';
 
@@ -25,6 +25,7 @@ const loginSchema = z.object({
 });
 
 const useAuth = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { addToLocalStorage, clearLocalStorage } = useLocalStorage();
 
@@ -37,9 +38,9 @@ const useAuth = () => {
         password: password,
       });
 
-      dispatch(saveUser(response.data));
+      dispatch(saveUser(response.data.user));
       addToLocalStorage('token', response.data.token);
-      redirect('/home');
+      router.push('/home');
     } catch (error) {
       if (error instanceof ZodError) {
         return toast.error('Insira o email ou senha corretamente');
@@ -56,12 +57,12 @@ const useAuth = () => {
         token: token,
       });
 
-      dispatch(saveUser(response.data));
+      dispatch(saveUser(response.data.user));
       addToLocalStorage('token', response.data.token);
-      redirect('/home');
+      router.push('/home');
     } catch (error) {
       axiosErrorHandler(error);
-      redirect('/signup');
+      router.push('/signup');
     }
   };
 
@@ -117,8 +118,14 @@ const useAuth = () => {
   };
 
   const logout = async () => {
-    clearLocalStorage();
-    redirect('/');
+    try {
+      await api.post('/v1/logout');
+      clearLocalStorage();
+      dispatch(cleanUser());
+      router.push('/');
+    } catch (error) {
+      axiosErrorHandler(error);
+    }
   };
 
   return { login, loginFacebook, signup, logout };

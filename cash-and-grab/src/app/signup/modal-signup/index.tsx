@@ -7,7 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@/store/store';
 import { toggleModal } from '@/store/reducer/user';
-import { Container } from './styles';
+import {
+  Container,
+  ImageContainer,
+  BtnContainer,
+  ButtonSuccess,
+  Message,
+} from './styles';
 
 const ModalSuccessSignup = () => {
   const dispatch = useDispatch();
@@ -33,7 +39,7 @@ const ModalSuccessSignup = () => {
       }}
     >
       <Container>
-        <div className="main-container">
+        <ImageContainer>
           <Image
             src="/icons/logo.png"
             width={100}
@@ -41,11 +47,11 @@ const ModalSuccessSignup = () => {
             alt="grab and cash"
             priority
           />
-          <div className="content-modal-ant">
-            <h1>usuário criado com sucesso!</h1>
-            <button onClick={handleClick}>Acessar conta</button>
-          </div>
-        </div>
+          <BtnContainer>
+            <Message>usuário criado com sucesso!</Message>
+            <ButtonSuccess onClick={handleClick}>Acessar conta</ButtonSuccess>
+          </BtnContainer>
+        </ImageContainer>
       </Container>
     </Modal>
   );

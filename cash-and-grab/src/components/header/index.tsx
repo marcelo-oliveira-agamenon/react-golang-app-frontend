@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import {
   MenuOutlined,
   HomeOutlined,
@@ -15,13 +14,25 @@ import Image from 'next/image';
 
 import { RootState } from '@/store';
 import { useAuth } from '@/services';
-import { Container, Avatar as Icon, DrawerMenu } from './styles';
+import {
+  Container,
+  Avatar,
+  AvatarTitle,
+  HeaderIcon,
+  HeaderTitle,
+  HeaderTitleDiv,
+  DrawerMenu,
+  DrawerOptions,
+  LinkOption,
+  LinkOptionTitle,
+} from './styles';
 
 export const Header = () => {
-  const router = useRouter();
   const user = useSelector((state: RootState) => state.user.user);
   const { logout } = useAuth();
   const [showDrawer, setShow] = useState<boolean>(false);
+  const aa = useSelector((state: RootState) => state);
+  console.log('ww ', aa);
 
   return (
     <>
@@ -35,63 +46,61 @@ export const Header = () => {
           onClose={() => setShow(showDrawer => !showDrawer)}
           width={320}
         >
-          <div className="header">
-            <div>
-              <h1>BEM VINDO, {user.Name}</h1>
-              <h1>{user.Email}</h1>
-            </div>
+          <HeaderIcon>
+            <HeaderTitleDiv>
+              <HeaderTitle>BEM VINDO, {user.Name}</HeaderTitle>
+              <HeaderTitle>{user.Email}</HeaderTitle>
+            </HeaderTitleDiv>
             <Image
-              src={user.ImageURL}
+              src={user.ImageURL ? user.ImageURL : '/avatar/avataaars.png'}
               width={160}
               height={160}
               alt="avatar"
               priority
             />
-          </div>
+          </HeaderIcon>
 
-          <div className="options">
-            <div onClick={() => router.push('/home')}>
+          <DrawerOptions>
+            <LinkOption href="/home">
               <HomeOutlined />
-              <h1>home</h1>
-            </div>
-            <div onClick={() => router.push('/orders')}>
+              <LinkOptionTitle>home</LinkOptionTitle>
+            </LinkOption>
+            <LinkOption href="/orders">
               <ShoppingOutlined />
-              <h1>pedidos</h1>
-            </div>
-            <div onClick={() => router.push('/cart')}>
+              <LinkOptionTitle>pedidos</LinkOptionTitle>
+            </LinkOption>
+            <LinkOption href="/cart">
               <ShoppingCartOutlined />
-              <h1>carrinho</h1>
-            </div>
-            <div onClick={() => router.push('/myProfile')}>
+              <LinkOptionTitle>carrinho</LinkOptionTitle>
+            </LinkOption>
+            <LinkOption href="/myProfile">
               <UserOutlined />
-              <h1>meu perfil</h1>
-            </div>
-            <div onClick={() => router.push('/favorites')}>
+              <LinkOptionTitle>meu perfil</LinkOptionTitle>
+            </LinkOption>
+            <LinkOption href="/favorites">
               <HeartOutlined />
-              <h1>favoritos</h1>
-            </div>
-            <div onClick={logout}>
+              <LinkOptionTitle>favoritos</LinkOptionTitle>
+            </LinkOption>
+            <LinkOption href="#" role="button" onClick={logout}>
               <LogoutOutlined />
-              <h1>sair</h1>
-            </div>
-          </div>
+              <LinkOptionTitle>sair</LinkOptionTitle>
+            </LinkOption>
+          </DrawerOptions>
         </Drawer>
       </DrawerMenu>
       <Container>
-        <div>
-          <MenuOutlined onClick={() => setShow(showDrawer => !showDrawer)} />
-        </div>
+        <MenuOutlined onClick={() => setShow(showDrawer => !showDrawer)} />
 
-        <Icon>
-          <h1>bem vindo {user.Name}</h1>
+        <Avatar>
+          <AvatarTitle>bem vindo {user.Name}</AvatarTitle>
           <Image
-            src={user.ImageURL}
+            src={user.ImageURL ? user.ImageURL : '/avatar/avataaars.png'}
             width={160}
             height={160}
             alt="avatar"
             priority
           />
-        </Icon>
+        </Avatar>
       </Container>
     </>
   );
