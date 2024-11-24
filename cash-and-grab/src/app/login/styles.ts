@@ -15,7 +15,7 @@ export const Overlay = styled.div`
   align-items: center;
 `;
 
-export const Card = styled.div`
+export const CardForm = styled.form`
   display: flex;
   width: 1100px;
   height: 590px;

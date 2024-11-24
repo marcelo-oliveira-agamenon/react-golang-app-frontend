@@ -10,9 +10,7 @@ export const Searchbar = () => {
   const [search, setSearch] = useState<string>('');
 
   const handleChange = () => {
-    router.push('/search', {
-      search: search,
-    });
+    router.push(`/search?query=${search}`);
   };
 
   return (

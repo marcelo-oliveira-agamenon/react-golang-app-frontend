@@ -18,7 +18,8 @@ const useProduct = () => {
         params,
       });
 
-      return response.data;
+      dispatch(toggleLoading(false));
+      return response.data.products;
     } catch (error) {
       axiosErrorHandler(error);
     }

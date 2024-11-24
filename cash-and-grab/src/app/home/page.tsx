@@ -10,6 +10,7 @@ import {
   Footer,
   CategoryCard,
   ProductCard,
+  authorization,
 } from '@/components';
 import { RootState } from '@/store';
 import { useCategory, useProduct } from '@/services';
@@ -27,7 +28,15 @@ import {
   SpacingBanner,
 } from './styles';
 
-export default function Home() {
+const LoadingSection = ({
+  loading,
+  children,
+}: {
+  loading: boolean;
+  children: ReactNode;
+}) => (loading ? <LoadingOutlined /> : <>{children}</>);
+
+function Home() {
   const loading = useSelector((state: RootState) => state.user.loading);
   const { getCategories } = useCategory();
   const { getAllProducts } = useProduct();
@@ -72,39 +81,41 @@ export default function Home() {
       <ContSearch>
         <Searchbar />
       </ContSearch>
-      {cardsHomePage.map(value => (
-        <Section key={value.id}>
-          <SectionTwo>
-            <SectionTitle>{value.title}</SectionTitle>
-            {value.type === 'category' ? (
-              <LoadingSection loading={loading}>
-                <SectionCategory>
-                  {categories?.map(category => {
-                    return <CategoryCard key={category.ID} {...category} />;
-                  })}
-                </SectionCategory>
-              </LoadingSection>
-            ) : (
-              <LoadingSection loading={loading}>
-                <SectionProduct>
-                  {promotions?.map(product => {
-                    return <ProductCard key={product.ID} {...product} />;
-                  })}
-                </SectionProduct>
-              </LoadingSection>
-            )}
-          </SectionTwo>
-        </Section>
-      ))}
+      {cardsHomePage.map(value => {
+        const products = value.type === 'promotion' ? promotions : recents;
+
+        return (
+          <Section key={value.id}>
+            <SectionTwo>
+              <SectionTitle>{value.title}</SectionTitle>
+              {value.type === 'category' ? (
+                <LoadingSection loading={loading}>
+                  <SectionCategory>
+                    {categories.length
+                      ? categories?.map(category => (
+                          <CategoryCard key={category.ID} {...category} />
+                        ))
+                      : null}
+                  </SectionCategory>
+                </LoadingSection>
+              ) : (
+                <LoadingSection loading={loading}>
+                  <SectionProduct>
+                    {products.length
+                      ? products?.map(product => (
+                          <ProductCard key={product.ID} {...product} />
+                        ))
+                      : null}
+                  </SectionProduct>
+                </LoadingSection>
+              )}
+            </SectionTwo>
+          </Section>
+        );
+      })}
       <Footer />
     </Container>
   );
 }
 
-const LoadingSection = ({
-  loading,
-  children,
-}: {
-  loading: boolean;
-  children: ReactNode;
-}) => (loading ? <LoadingOutlined /> : <>{children}</>);
+export default authorization(Home);

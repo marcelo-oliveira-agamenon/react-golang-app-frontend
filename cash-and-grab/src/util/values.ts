@@ -12,12 +12,12 @@ const cardsHomePage = [
   },
   {
     id: 2,
-    type: 'product',
+    type: 'promotion',
     title: 'em promoção',
   },
   {
     id: 3,
-    type: 'product',
+    type: 'recent',
     title: 'recentes',
   },
 ];

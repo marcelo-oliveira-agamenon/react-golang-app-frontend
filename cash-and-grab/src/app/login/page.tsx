@@ -11,7 +11,7 @@ import { Input } from '@/components';
 import {
   Container,
   Overlay,
-  Card,
+  CardForm,
   Box,
   BoxInput,
   BtnLogin,
@@ -33,7 +33,7 @@ export default function Login() {
   return (
     <Container>
       <Overlay>
-        <Card>
+        <CardForm onSubmit={handleLogin}>
           <Image
             src="/icons/logo.png"
             width={200}
@@ -49,6 +49,7 @@ export default function Login() {
                 type="email"
                 id="email"
                 valueInput={email}
+                autoComplete="on"
                 onChangeValue={e => setEmail(e)}
                 required
               />
@@ -63,6 +64,7 @@ export default function Login() {
                 id="password"
                 valueInput={password}
                 onChangeValue={e => setPassword(e)}
+                autoComplete="on"
                 onKeyDown={event => {
                   if (event.key === 'Enter') {
                     handleLogin();
@@ -71,7 +73,7 @@ export default function Login() {
                 required
               />
             </BoxInput>
-            <BtnLogin onClick={() => handleLogin()} disabled={loading}>
+            <BtnLogin type="submit" disabled={loading}>
               {loading ? (
                 <Spin
                   indicator={
@@ -93,7 +95,7 @@ export default function Login() {
               <Link href="/signup">Cadastre-se</Link>
             </SignupLink>
           </Box>
-        </Card>
+        </CardForm>
       </Overlay>
     </Container>
   );

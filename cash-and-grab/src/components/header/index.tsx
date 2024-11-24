@@ -31,8 +31,6 @@ export const Header = () => {
   const user = useSelector((state: RootState) => state.user.user);
   const { logout } = useAuth();
   const [showDrawer, setShow] = useState<boolean>(false);
-  const aa = useSelector((state: RootState) => state);
-  console.log('ww ', aa);
 
   return (
     <>

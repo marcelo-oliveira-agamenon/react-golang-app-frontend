@@ -1,8 +1,9 @@
+'use client';
 import React from 'react';
-import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 import { Product } from '@/models';
-import { Container } from './styles';
+import { Link, Section, SubTitle, Title } from './styles';
 
 export const ProductCard = ({
   ID,
@@ -10,17 +11,21 @@ export const ProductCard = ({
   ProductImage,
   Value,
   Description,
-}: Product) => {
-  const router = useRouter();
-
-  return (
-    <Container onClick={() => router.push(`/product/${ID}`)}>
-      <img src={ProductImage[0].ImageURL} alt="product" />
-      <section>
-        <h2>{Name}</h2>
-        <h2>R$ {Value.toFixed(2).replace('.', ',')}</h2>
-      </section>
-      <p>{Description}</p>
-    </Container>
-  );
-};
+}: Product) => (
+  <Link href={`/product/${ID}`}>
+    <Image
+      src={
+        ProductImage.length ? ProductImage[0].ImageURL : '/avatar/avataaars.png'
+      }
+      width={80}
+      height={80}
+      alt="product"
+      priority
+    />
+    <Section>
+      <Title>{Name}</Title>
+      <Title>R$ {Value.toFixed(2).replace('.', ',')}</Title>
+    </Section>
+    <SubTitle>{Description}</SubTitle>
+  </Link>
+);

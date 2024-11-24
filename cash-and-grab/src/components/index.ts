@@ -5,3 +5,4 @@ export * from './search-bar';
 export * from './footer';
 export * from './category';
 export * from './product';
+export * from './auth';

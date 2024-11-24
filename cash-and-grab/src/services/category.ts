@@ -16,6 +16,7 @@ const useCategory = () => {
       const params = new URLSearchParams(queryParams);
       const response = await api.get('/v1/category', { params });
 
+      dispatch(toggleLoading(false));
       return response.data;
     } catch (error) {
       axiosErrorHandler(error);
