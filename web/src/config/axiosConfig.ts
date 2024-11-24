@@ -2,8 +2,7 @@ import axios from 'axios';
 import { store } from 'store/store';
 
 const api = axios.create({
-  baseURL: 'https://ecommerce-go.herokuapp.com',
-  //baseURL: 'http://localhost:4000',
+  baseURL: process.env.REACT_APP_API,
 });
 
 api.interceptors.request.use(async config => {

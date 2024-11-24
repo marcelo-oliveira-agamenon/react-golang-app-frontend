@@ -1,15 +1,12 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-import rootReducer, { types } from './reducer';
-import thunk from 'redux-thunk';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from './reducer/cart'; //TODO: abs path not working
+import userReducer from './reducer/user';
 
-const persistConfig = {
-  key: 'authInfo',
-  storage: storage,
-  whitelist: [types.API_TOKEN, types.LOGGED_USER, types.CART],
-};
-const pReducer: any = persistReducer(persistConfig, rootReducer);
-
-export const store = createStore(pReducer, compose(applyMiddleware(thunk)));
-export const pStore = persistStore(store);
+export const store = configureStore({
+  reducer: {
+    cart: cartReducer,
+    user: userReducer,
+  },
+});
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

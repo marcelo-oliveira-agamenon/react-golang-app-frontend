@@ -1,7 +1,8 @@
 !/.gitignore
 
 # dependencies
-/web/node_modules
+web/node_modules
+web/.env
 
 #android
 mobile/node_modules
@@ -9,3 +10,4 @@ mobile/android/.idea
 mobile/yarn.lock
 mobile/android/.gradle
 mobile/android/app/build
+web/.env
