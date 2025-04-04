@@ -1,18 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
-import {
-  TwitterOutlined,
-  FacebookOutlined,
-  InstagramOutlined,
-} from '@ant-design/icons';
+import Link from 'next/link';
 import { format } from 'date-fns';
 
-import { Container } from './styles';
+import { socialLinks } from '@/util';
+import { Container, CopyrightText, ImageContainer, Socials } from './styles';
 
 export const Footer = () => {
   return (
     <Container>
-      <div className="icon">
+      <ImageContainer>
         <Image
           src="/icons/logo.png"
           width={160}
@@ -20,16 +17,27 @@ export const Footer = () => {
           alt="grab and cash"
           priority
         />
-        <h1>
+        <CopyrightText>
           Copyright © {format(new Date(), 'yyyy')} Grab and cash - Todos os
           direitos reservados
-        </h1>
-      </div>
-      <div className="socials">
-        <TwitterOutlined />
-        <InstagramOutlined />
-        <FacebookOutlined />
-      </div>
+        </CopyrightText>
+      </ImageContainer>
+      <Socials>
+        {socialLinks.map(social => {
+          const IconComponent = social.icon;
+
+          return (
+            <Link
+              key={social.id}
+              href={social.mediaLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <IconComponent />
+            </Link>
+          );
+        })}
+      </Socials>
     </Container>
   );
 };

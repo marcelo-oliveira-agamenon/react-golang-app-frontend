@@ -25,7 +25,21 @@ const useCategory = () => {
     return [];
   };
 
-  return { getCategories };
+  const getCategory = async (categoryID: string): Promise<Category> => {
+    dispatch(toggleLoading(true));
+    try {
+      const response = await api.get(`/v1/category/${categoryID}`);
+
+      dispatch(toggleLoading(false));
+      return response.data;
+    } catch (error) {
+      axiosErrorHandler(error);
+    }
+    dispatch(toggleLoading(false));
+    return {} as Category;
+  };
+
+  return { getCategories, getCategory };
 };
 
 export { useCategory };

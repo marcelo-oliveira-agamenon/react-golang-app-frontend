@@ -24,6 +24,8 @@ import {
   SearchContent,
 } from './styles';
 
+//TODO: add a loading state there
+
 function SearchPage() {
   const loading = useSelector((state: RootState) => state.user.loading);
   const { getAllProducts } = useProduct();

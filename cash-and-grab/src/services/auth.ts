@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { ZodError, z } from 'zod';
 import { toast } from 'react-toastify';
+import { format, parseISO } from 'date-fns';
 
 import { useLocalStorage } from '@/hooks';
 import { saveUser, toggleLoading, toggleModal, cleanUser } from '@/store';
@@ -87,12 +88,30 @@ const useAuth = () => {
     file: any;
     avatar: string | null;
   }) => {
+    try {
+      const data = {
+        email,
+        password,
+        name,
+        date,
+        phone,
+        gender,
+        address,
+        avatar,
+      };
+      signupSchema.parse(data);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return toast.error('Preencha os campos corretamente');
+      }
+    }
+
     const form = new FormData();
     form.set('email', email);
     form.set('password', password);
     form.set('name', name);
-    form.set('birthday', date);
-    form.set('phone', phone);
+    form.set('birthday', format(parseISO(date), 'dd/MM/yyyy'));
+    form.set('phone', phone.replace('-', '').replaceAll(' ', ''));
     form.set('gender', gender);
     form.set('address', address);
     if (avatar !== '') {
@@ -100,7 +119,6 @@ const useAuth = () => {
     }
 
     try {
-      signupSchema.parse({});
       const response = await api.post('/v1/signUp', form, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -110,9 +128,6 @@ const useAuth = () => {
       dispatch(saveUser(response.data));
       dispatch(toggleModal(true));
     } catch (error) {
-      if (error instanceof ZodError) {
-        return toast.error('Preencha os campos corretamente');
-      }
       axiosErrorHandler(error);
     }
   };

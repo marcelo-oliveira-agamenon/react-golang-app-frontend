@@ -9,32 +9,32 @@ export default createGlobalStyle`
 
      @font-face {
         font-family: "Montserrat Regular";        
-        src:local("Montserrat Regular"), url('fonts/Montserrat/Montserrat-Regular.ttf') format("truetype");
+        src:url('/fonts/Montserrat/Montserrat-Regular.ttf') format("truetype");
     }
     
     @font-face {
         font-family: "Montserrat Medium";
-        src: url('fonts/Montserrat/Montserrat-Medium.ttf');
+        src: url('/fonts/Montserrat/Montserrat-Medium.ttf') format("truetype");
     }
 
     @font-face {
         font-family: "Montserrat Bold";
-        src: url('fonts/Montserrat/Montserrat-Bold.ttf');
+        src: url('/fonts/Montserrat/Montserrat-Bold.ttf') format("truetype");
     }
 
     @font-face {
         font-family: "Montserrat Light";
-        src: url('fonts/Montserrat/Montserrat-Light.ttf');
+        src: url('/fonts/Montserrat/Montserrat-Light.ttf') format("truetype");
     }
 
     @font-face {
         font-family: "Montserrat Thin";
-        src: url('fonts/Montserrat/Montserrat-Thin.ttf');
+        src: url('/fonts/Montserrat/Montserrat-Thin.ttf') format("truetype");
     }
 
     @font-face {
         font-family: "Montserrat SemiBold";
-        src: url('fonts/Montserrat/Montserrat-SemiBold.ttf');
+        src: url('/fonts/Montserrat/Montserrat-SemiBold.ttf') format("truetype");
     }
 
     body {

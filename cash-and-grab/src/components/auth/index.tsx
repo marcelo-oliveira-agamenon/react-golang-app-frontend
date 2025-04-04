@@ -1,24 +1,36 @@
 'use client';
-import { useEffect } from 'react';
-import { redirect } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useLocalStorage } from '@/hooks';
 
-export const authorization = (Component: any) => {
-  return function IsAuth(props: any) {
-    let token = null;
-    if (typeof window !== 'undefined') {
-      const { getLocalStorageKey } = useLocalStorage();
-      token = getLocalStorageKey('token');
-    }
+interface CommonProps {
+  params: {};
+  searchParams: {};
+}
+
+// TODO: loading here maybe?
+export const authorization = (Component: React.ComponentType<any>) => {
+  return function IsAuth(props: CommonProps) {
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState(true);
+
+    let token: string | null = null;
 
     useEffect(() => {
-      if (!token) {
-        return redirect('/');
+      if (typeof window !== 'undefined') {
+        const { getLocalStorageKey } = useLocalStorage();
+        token = getLocalStorageKey('token');
       }
-    }, []);
 
-    if (!token) {
-      return null;
+      if (!token) {
+        router.push('/');
+      } else {
+        setIsLoading(false);
+      }
+    }, [Component]);
+
+    if (isLoading) {
+      return <div></div>;
     }
 
     return <Component {...props} />;

@@ -7,7 +7,7 @@ export const SelectCont = styled.div`
 
 export const Label = styled.label`
   font-family: 'Montserrat Regular';
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-left: 10px;
@@ -26,7 +26,6 @@ export const Select = styled.select`
   border-radius: 8px;
   height: 30px;
   border: 1px solid #7c7c7c;
-  margin-bottom: 20px;
   box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.25);
   border-style: none;
   padding: 0 12px;

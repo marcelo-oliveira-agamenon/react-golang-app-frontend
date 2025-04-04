@@ -118,14 +118,13 @@ export default function SignUp() {
             <Input
               labelInput="telefone"
               valueInput={phone}
-              maxLength={15}
+              maxLength={14}
               onChangeValue={e => setPhone(phoneMask(e))}
               required
             />
             <Input
               labelInput="data de nascimento"
               valueInput={date}
-              min={Date()}
               type="date"
               onChangeValue={e => setDate(e)}
               required
