@@ -28,6 +28,7 @@ export const Select = ({
         {...props}
         id={id}
         onChange={e => onChangeValue(e.target.value)}
+        defaultValue={valueInput}
       >
         <Option value=""></Option>
         {options.map(option => (

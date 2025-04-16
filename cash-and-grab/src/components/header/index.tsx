@@ -71,7 +71,7 @@ export const Header = () => {
               <ShoppingCartOutlined />
               <LinkOptionTitle>carrinho</LinkOptionTitle>
             </LinkOption>
-            <LinkOption href="/myProfile">
+            <LinkOption href="/profile">
               <UserOutlined />
               <LinkOptionTitle>meu perfil</LinkOptionTitle>
             </LinkOption>

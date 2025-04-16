@@ -21,8 +21,24 @@ const signupSchema = z.object({
 });
 
 const loginSchema = z.object({
-  email: z.string().min(1),
+  email: z.string().min(1).email('Preencha o email'),
   password: z.string().min(1),
+});
+
+const resetPasswordSchema = z
+  .object({
+    email: z.string().min(1).email('Preencha o email'),
+    newPassword: z.string().min(3),
+    repeatPassword: z.string().min(3),
+    hash: z.string().min(1),
+  })
+  .refine(data => data.newPassword === data.repeatPassword, {
+    message: 'Senhas não coincidem',
+    path: ['repeatPassword'],
+  });
+
+const resetPasswordLinkSchema = z.object({
+  email: z.string().min(1).email('Preencha o email'),
 });
 
 const useAuth = () => {
@@ -132,6 +148,81 @@ const useAuth = () => {
     }
   };
 
+  const sendEmailResetPassword = async (email: string) => {
+    try {
+      const data = {
+        email,
+      };
+      resetPasswordLinkSchema.parse(data);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return toast.error('Preencha o email');
+      }
+    }
+
+    dispatch(toggleLoading(true));
+    try {
+      const response = await api.post(
+        '/v1/resetPasswordLink',
+        {},
+        {
+          params: {
+            email,
+          },
+        },
+      );
+
+      if (response) {
+        toast.success('Código de verificação enviado com sucesso');
+        router.push('/home');
+      }
+    } catch (error) {
+      axiosErrorHandler(error);
+      toast.error('Erro ao enviar o código de verificação');
+    }
+    dispatch(toggleLoading(false));
+  };
+
+  const resetPassword = async (
+    email: string,
+    newPassword: string,
+    repeatPassword: string,
+  ) => {
+    try {
+      const data = {
+        email,
+        newPassword,
+        repeatPassword,
+        hash: '',
+      };
+      resetPasswordSchema.parse(data);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return toast.error('Preencha os campos corretamente');
+      }
+    }
+
+    dispatch(toggleLoading(true));
+
+    const form = new FormData();
+    form.set('email', email);
+    form.set('password', newPassword);
+    form.set('reset', repeatPassword);
+
+    try {
+      const response = await api.patch('/v1/resetPassword', form);
+
+      if (response) {
+        toast.success('Senha alterada com sucesso');
+        router.push('/login');
+      }
+    } catch (error) {
+      axiosErrorHandler(error);
+      toast.error('Erro ao alterar sua senha');
+    }
+    dispatch(toggleLoading(false));
+  };
+
   const logout = async () => {
     try {
       await api.post('/v1/logout');
@@ -143,7 +234,14 @@ const useAuth = () => {
     }
   };
 
-  return { login, loginFacebook, signup, logout };
+  return {
+    login,
+    loginFacebook,
+    signup,
+    sendEmailResetPassword,
+    resetPassword,
+    logout,
+  };
 };
 
 export { useAuth };
